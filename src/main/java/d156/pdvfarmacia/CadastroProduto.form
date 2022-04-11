@@ -83,7 +83,7 @@
             <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="30">
+                  <Table columnCount="4" rowCount="24">
                     <Column editable="true" title="C&#xf3;digo" type="java.lang.Object">
                       <Data value="0001"/>
                       <Data value="0002"/>
@@ -109,12 +109,6 @@
                       <Data value="0022"/>
                       <Data value="0023"/>
                       <Data value="0024"/>
-                      <Data value="0025"/>
-                      <Data value="0026"/>
-                      <Data value="0027"/>
-                      <Data value="0028"/>
-                      <Data value="0029"/>
-                      <Data value="0030"/>
                     </Column>
                     <Column editable="true" title="Nome" type="java.lang.Object">
                       <Data value="Advil"/>
@@ -128,13 +122,12 @@
                       <Data value="Epocler"/>
                       <Data value="Escova de Dente"/>
                       <Data value="Esmalte"/>
-                      <Data value="Esmalte"/>
                       <Data value="Fini"/>
                       <Data value="Fralda"/>
                       <Data value="Halls"/>
                       <Data value="Len&#xe7;o Umedecido"/>
                       <Data value="Manteiga de Cacau"/>
-                      <Data value="M&#xe1;scata para C&#xed;lios"/>
+                      <Data value="M&#xe1;scara para C&#xed;lios"/>
                       <Data value="Merthiolate"/>
                       <Data value="Monster"/>
                       <Data value="Novalgina"/>
@@ -142,11 +135,6 @@
                       <Data value="Sabonete"/>
                       <Data value="Shampoo"/>
                       <Data value="Trident"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
                     </Column>
                     <Column editable="true" title="Quantidade" type="java.lang.Object">
                       <Data value="20"/>
@@ -161,7 +149,6 @@
                       <Data value="15"/>
                       <Data value="10"/>
                       <Data value="14"/>
-                      <Data value="14"/>
                       <Data value="30"/>
                       <Data value="20"/>
                       <Data value="15"/>
@@ -174,11 +161,6 @@
                       <Data value="25"/>
                       <Data value="20"/>
                       <Data value="36"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
                     </Column>
                     <Column editable="true" title="Pre&#xe7;o" type="java.lang.Object">
                       <Data value="R$"/>
@@ -205,12 +187,6 @@
                       <Data value="R$"/>
                       <Data value="R$"/>
                       <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="null"/>
                     </Column>
                   </Table>
                 </Property>
