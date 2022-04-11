@@ -242,8 +242,6 @@ public class CadastroCliente extends javax.swing.JFrame {
                       ,"Selecione uma opção!");
           }
           
-          
-     
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
