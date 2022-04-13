@@ -45,33 +45,33 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0001", "Advil", "R$"},
-                {"0002", "Allegra", "R$"},
-                {"0003", "Barra de Cereal", "R$"},
-                {"0004", "Chocolate Zero", "R$"},
-                {"0005", "Condicionador", "R$"},
-                {"0006", "Creme Hidratante", "R$"},
-                {"0007", "Delineador Preto", "R$"},
-                {"0008", "Dipirona", "R$"},
-                {"0009", "Epocler", "R$"},
-                {"0010", "Escova de Dente", "R$"},
-                {"0011", "Esmalte", "R$"},
-                {"0012", "Fini", "R$"},
-                {"0013", "Fralda", "R$"},
-                {"0014", "Halls", "R$"},
-                {"0015", "Lenço Umedecido", "R$"},
-                {"0016", "Manteiga de Cacau", "R$"},
-                {"0017", "Máscara para Cílios", "R$"},
-                {"0018", "Merthiolate", "R$"},
-                {"0019", "Monster", "R$"},
-                {"0020", "Novalgina", "R$"},
-                {"0021", "Óleo para Cabelo", "R$"},
-                {"0022", "Sabonete", "R$"},
-                {"0023", "Shampoo", "R$"},
-                {"0024", "Trident", "R$"}
+                {"0001", "Advil", "10", "R$"},
+                {"0002", "Allegra", "10", "R$"},
+                {"0003", "Barra de Cereal", "10", "R$"},
+                {"0004", "Chocolate Zero", "10", "R$"},
+                {"0005", "Condicionador", "10", "R$"},
+                {"0006", "Creme Hidratante", "1", "R$"},
+                {"0007", "Delineador Preto", "1", "R$"},
+                {"0008", "Dipirona", "21", "R$"},
+                {"0009", "Epocler", "2", "R$"},
+                {"0010", "Escova de Dente", "21", "R$"},
+                {"0011", "Esmalte", "212", "R$"},
+                {"0012", "Fini", "21", "R$"},
+                {"0013", "Fralda", "32", "R$"},
+                {"0014", "Halls", "21", "R$"},
+                {"0015", "Lenço Umedecido", "21", "R$"},
+                {"0016", "Manteiga de Cacau", "21", "R$"},
+                {"0017", "Máscara para Cílios", "21", "R$"},
+                {"0018", "Merthiolate", "21", "R$"},
+                {"0019", "Monster", "21", "R$"},
+                {"0020", "Novalgina", "21", "R$"},
+                {"0021", "Óleo para Cabelo", "21", "R$"},
+                {"0022", "Sabonete", "21", "R$"},
+                {"0023", "Shampoo", "21", "R$"},
+                {"0024", "Trident", "22", "R$"}
             },
             new String [] {
-                "Código", "Nome", "Preço"
+                "Código", "Nome", "Quantidade", "Preço"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
