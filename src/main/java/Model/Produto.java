@@ -15,6 +15,7 @@ public class Produto {
     String nome;
     double preco;
     
+    //getters and setters
     public String getNome(){
         return this.nome;
     }

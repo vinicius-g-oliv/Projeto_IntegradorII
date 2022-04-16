@@ -10,13 +10,14 @@ package Model;
  */
 public class Venda {
     
-    
+    //atributos
     String nomeProduto;
-    String codigo;
+    String codigoCliente;
     String dataVenda;
     int quantidade;
     double valor;
     
+    //getters and setters
      public String getNomeProduto(){
         return this.nomeProduto;
     }
@@ -25,12 +26,12 @@ public class Venda {
         this.nomeProduto = novoNome;
     }
     
-    public String getCodigo(){
-        return this.codigo;
+    public String getCodigoCliente(){
+        return this.codigoCliente;
     }
     
-    public void setCodigo(String novoCodigo){
-        this.codigo = novoCodigo;
+    public void setCodigoCliente(String novoCodigo){
+        this.codigoCliente = novoCodigo;
     }
     
     public int getQuantidade(){
