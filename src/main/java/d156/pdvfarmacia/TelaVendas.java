@@ -4,6 +4,7 @@
         jTable1 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+<<<<<<< HEAD
         jTxtCodigo = new javax.swing.JTextField();
         jlbMoeda = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -19,6 +20,8 @@
         jBtnConfirmar = new javax.swing.JButton();
         jBtnBuscarCPF = new javax.swing.JButton();
         jBtnBuscarCodProduto = new javax.swing.JButton();
+=======
+>>>>>>> parent of 88c1aa4 (Adicionado campos na tela de venda)
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -28,6 +31,7 @@
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel1.setText("Digite o código do produto:");
+<<<<<<< HEAD
         jlbMoeda.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jlbMoeda.setText("R$");
 
@@ -68,6 +72,8 @@
         jBtnBuscarCPF.setText("Buscar");
 
         jBtnBuscarCodProduto.setText("Buscar");
+=======
+>>>>>>> parent of 88c1aa4 (Adicionado campos na tela de venda)
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,6 +87,7 @@
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+<<<<<<< HEAD
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -114,13 +121,18 @@
                         .addGap(18, 18, 18)
                         .addComponent(jBtnCancelarEdicao)))
                 .addGap(0, 15, Short.MAX_VALUE))
+=======
+>>>>>>> parent of 88c1aa4 (Adicionado campos na tela de venda)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
+<<<<<<< HEAD
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+=======
+>>>>>>> parent of 88c1aa4 (Adicionado campos na tela de venda)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -130,6 +142,7 @@
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(188, 188, 188))))
+<<<<<<< HEAD
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -159,6 +172,8 @@
                         .addComponent(jBtnCancelarEdicao)
                         .addComponent(jBtnEditar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+>>>>>>> parent of 88c1aa4 (Adicionado campos na tela de venda)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,6 +201,7 @@
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+<<<<<<< HEAD
     private javax.swing.JButton jBtnBuscarCPF;
     private javax.swing.JButton jBtnBuscarCodProduto;
     private javax.swing.JButton jBtnCancelar;
@@ -197,13 +213,18 @@
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+=======
+>>>>>>> parent of 88c1aa4 (Adicionado campos na tela de venda)
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+<<<<<<< HEAD
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JLabel jlbMoeda;
     private javax.swing.JLabel jlbPreçoTotal;
     private javax.swing.JLabel jlbTOTAL;
+=======
+>>>>>>> parent of 88c1aa4 (Adicionado campos na tela de venda)
     // End of variables declaration//GEN-END:variables
 }
