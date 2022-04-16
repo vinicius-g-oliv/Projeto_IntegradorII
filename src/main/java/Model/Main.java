@@ -5,6 +5,7 @@
  */
 package Model;
 
+
 /**
  *
  * @author everymind
@@ -22,6 +23,8 @@ public class Main {
         
         rel.setCodigoProduto(prod.nome);
         System.out.println("Nome: " + rel.getCodigoProduto());
+       
+               
     }
     
 }
