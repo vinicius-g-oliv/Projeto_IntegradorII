@@ -39,6 +39,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -91,13 +92,16 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu2.setText("Relatorio");
 
-        jMenuItem3.setText("Ver Relatorio");
+        jMenuItem3.setText("Relatorio Geral");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem3);
+
+        jMenuItem1.setText("Relatorio Analitico");
+        jMenu2.add(jMenuItem1);
 
         jMenuBar1.add(jMenu2);
 
@@ -201,6 +205,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem7;
