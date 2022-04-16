@@ -18,6 +18,7 @@ public class Cliente {
     String sexo;
     String cep;
     String endereco;
+    String numero;
     String complemento;
     String estadoCivil;
     
