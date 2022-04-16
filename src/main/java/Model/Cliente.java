@@ -21,6 +21,10 @@ public class Cliente {
     String complemento;
     String estadoCivil;
     
+    //Construtor
+    public Cliente(){
+    }
+    
     //Getters e Setters    
     public String getNome(){
         return this.nome;

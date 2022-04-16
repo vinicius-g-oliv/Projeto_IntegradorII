@@ -17,6 +17,10 @@ public class Venda {
     int quantidade;
     double valor;
     
+    //Construtor
+    public Venda(){
+    }
+    
     //getters and setters
      public String getNomeProduto(){
         return this.nomeProduto;
