@@ -15,6 +15,10 @@ public class Produto {
     String nome;
     double preco;
     
+    //Construtor
+    public Produto(){
+    }
+    
     //getters and setters
     public String getNome(){
         return this.nome;

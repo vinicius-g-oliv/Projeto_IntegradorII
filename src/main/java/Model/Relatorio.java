@@ -16,6 +16,10 @@ public class Relatorio {
     String dataVenda;
     double valorVenda;
     
+    //Construtor
+    public Relatorio(){
+    }
+    
     //Getters e Setters    
     public String getCodigoProduto(){
         return this.codigoProduto;
