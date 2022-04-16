@@ -33,29 +33,21 @@ public class Relatorio {
         this.nomeCliente = nomeCliente;
     }
     
-   /* public String getDataNascimento(){
-        return this.dataNascimento;
+    public String dataVenda(){
+        return this.dataVenda;
     }
     
-    public void setDataNascimento(String novaData){
-        this.dataNascimento = novaData;
+    public void setDataVenda(String novaData){
+        this.dataVenda = novaData;
     }
     
-     public String getEmail(){
-        return this.email;
+     public double getvalorVenda(){
+        return this.valorVenda;
     }
     
-    public void setEmail(String novoEmail){
-        this.dataNascimento = novoEmail;
+    public void setvalorVenda(double valor){
+        this.valorVenda = valor;
     }
-    
-     public String getSexo(){
-        return this.sexo;
-    }
-    
-    public void setSexo(String novoSexo){
-        this.sexo = novoSexo;
-    }*/
     
     
 }
