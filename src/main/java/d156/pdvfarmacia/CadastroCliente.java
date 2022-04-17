@@ -285,49 +285,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPróximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPróximoActionPerformed
-         
-        String tipoNascimento = "";
-        if(txtNascimento.getValue() != null){
-            tipoNascimento = txtNascimento.getValue().toString();
-        }else{
-            JOptionPane.showMessageDialog(this
-                    ,"Preencha todas as informações corretamente!(Campo Nascimento)");
-            return;
-        }
-        String tipoCPF = "";;
-        if(txtCPF.getValue() != null){
-            tipoCPF = txtCPF.getValue().toString();
-        }else{
-            JOptionPane.showMessageDialog(this
-                    ,"Preencha todas as informações corretamente!(Campo CPF)");
-            return;
-        }      
-        String tipoSexo = "";
-        if(cboSexo.getSelectedIndex()>0){
-            tipoSexo = cboSexo.getSelectedItem().toString();
-        }else{
-            JOptionPane.showMessageDialog(this
-                    ,"Preencha todas as informações corretamente!(Campo Sexo)");
-            return;
-        }
-        String tipoNome = "";
-        if(txtNome.getText().length() > 0 ){
-            tipoNome = txtNome.getText().toString();
-        }else{
-            JOptionPane.showMessageDialog(this
-                    ,"Preencha todas as informações corretamente! (Campo nome)");
-            return;
-        }
-        String tipoEmail = "";
-        if(txtEmail.getText().length() > 0 ){
-        tipoEmail = txtEmail.getText().toString();
-        }else{
-            JOptionPane.showMessageDialog(this
-                    ,"Preencha todas as informações corretamente! (Campo E-mail)");
-            return;
-        }
-            this.jTabbedPane1.setSelectedIndex(1);
-                
+        this.jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButtonPróximoActionPerformed
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed

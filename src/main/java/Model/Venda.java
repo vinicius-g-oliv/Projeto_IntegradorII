@@ -22,7 +22,7 @@ public class Venda {
     }
     
     //getters and setters
-     public String getNomeProduto(){
+    public String getNomeProduto(){
         return this.nomeProduto;
     }
 

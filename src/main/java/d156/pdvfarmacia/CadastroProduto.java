@@ -101,6 +101,11 @@ public class CadastroProduto extends javax.swing.JFrame {
         btnAlterar.setText("Alterar");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAlterar.setName(""); // NOI18N
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnDeletar.setText("Deletar");
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -245,11 +250,15 @@ public class CadastroProduto extends javax.swing.JFrame {
             verificar se as caixas estão vaizas
         */
         if(txtProduto.getText() == null 
-        || txtProduto.getText().equals("") 
-        || txtCodigo.getText() == null 
-        || txtCodigo.getText().equals("")
+            || txtProduto.getText().equals("") 
+            || txtCodigo.getText() == null 
+            || txtCodigo.getText().equals("")
+            || txtQuantidade.getText() == null
+            || txtQuantidade.getText().equals("")
+            || txtPreço.getText() == null
+            || txtPreço.getText().equals("")
         ){
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos de Código e Produto!");
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         }else{
         
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
@@ -264,30 +273,16 @@ public class CadastroProduto extends javax.swing.JFrame {
         produto.setNome(txtProduto.getText());
         produto.setCodigo(txtCodigo.getText());
         produto.setPreco(Double.parseDouble(txtPreço.getText()));
+        // produto.setQuantidade(Integer.parseInt(txtQuantidade.getText())); vai precisar?
     }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    // private void listarProdutos() {
-    //     Model.Produto produto = new Produto();
-    //     List<Produto> listaProdutos = produtoDAO.listarProdutos();
-    //     DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
-    //     modelo.setNumRows(0);
-    //     for (Produto produto : listaProdutos) {
-    //         modelo.addRow(new Object[]{
-    //             produto.getId(),
-    //             produto.getCodigo(),
-    //             produto.getProduto(),
-    //             produto.getDataCadastro(),
-    //             produto.getDataAlteracao(),
-    //             produto.getUsuarioCadastro(),
-    //             produto.getUsuarioAlteracao(),
-    //             produto.getStatus()
-    //         });
-    //     }
-    // }
 
     private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProdutoActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments

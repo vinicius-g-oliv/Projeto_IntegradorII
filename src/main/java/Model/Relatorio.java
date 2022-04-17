@@ -32,6 +32,10 @@ public class Relatorio {
     public String getNomeCliente(){
         return this.nomeCliente;
     }
+
+    public void setNomeCliente(String novoCliente){
+        this.nomeCliente = novoCliente;
+    }
     
     public void setCpf(String nomeCliente){
         this.nomeCliente = nomeCliente;
@@ -49,7 +53,7 @@ public class Relatorio {
         return this.valorVenda;
     }
     
-    public void setvalorVenda(double valor){
+    public void setValorVenda(double valor){
         this.valorVenda = valor;
     }
     
