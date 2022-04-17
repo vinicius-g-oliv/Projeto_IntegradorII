@@ -53,7 +53,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel2.setText("BEM-VINDO!");
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        jLabel4.setText("ESCOLHA MANUTENÇÃO OU RELATÓRIO");
+        jLabel4.setText("ESCOLHA VENDAS, MANUTENÇÃO OU RELATÓRIO");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/heart.png"))); // NOI18N
         jLabel5.setText("jLabel5");
