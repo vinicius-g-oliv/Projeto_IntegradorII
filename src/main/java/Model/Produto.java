@@ -14,12 +14,21 @@ public class Produto {
     String codigo;
     String nome;
     double preco;
+    int quantidadeEstoque;
     
     //Construtor
     public Produto(){
     }
     
     //getters and setters
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(int quantidade) {
+        this.quantidadeEstoque = quantidade;
+    }
+
     public String getNome(){
         return this.nome;
     }

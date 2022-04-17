@@ -273,6 +273,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         produto.setNome(txtProduto.getText());
         produto.setCodigo(txtCodigo.getText());
         produto.setPreco(Double.parseDouble(txtPreço.getText()));
+        produto.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
         // produto.setQuantidade(Integer.parseInt(txtQuantidade.getText())); vai precisar?
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

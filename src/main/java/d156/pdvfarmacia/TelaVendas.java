@@ -40,7 +40,7 @@ public class TelaVendas extends javax.swing.JFrame {
         lblTotal = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnAdicionar = new javax.swing.JButton();
-        btnBuscarCPF4 = new javax.swing.JButton();
+        btnFinalizarCompra = new javax.swing.JButton();
         txtQuantidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtBuscarCPF = new javax.swing.JFormattedTextField();
@@ -112,7 +112,7 @@ public class TelaVendas extends javax.swing.JFrame {
             }
         });
 
-        btnBuscarCPF4.setText("Finalizar compra");
+        btnFinalizarCompra.setText("Finalizar compra");
 
         txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +160,7 @@ public class TelaVendas extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscarCPF4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -208,7 +208,7 @@ public class TelaVendas extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBuscarCPF4)
+                            .addComponent(btnFinalizarCompra)
                             .addComponent(btnCancelar))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,9 +328,9 @@ public class TelaVendas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnBuscarCPF;
-    private javax.swing.JButton btnBuscarCPF4;
     private javax.swing.JButton btnBuscarProduto;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnRemover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

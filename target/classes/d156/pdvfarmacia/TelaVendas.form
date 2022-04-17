@@ -89,7 +89,7 @@
                       <Group type="102" attributes="0">
                           <Component id="btnCancelar" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnBuscarCPF4" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="btnFinalizarCompra" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -151,7 +151,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnBuscarCPF4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnFinalizarCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -342,7 +342,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnBuscarCPF4">
+        <Component class="javax.swing.JButton" name="btnFinalizarCompra">
           <Properties>
             <Property name="text" type="java.lang.String" value="Finalizar compra"/>
           </Properties>
