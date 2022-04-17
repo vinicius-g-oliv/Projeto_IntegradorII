@@ -44,33 +44,33 @@ public class CadastroCliente extends javax.swing.JFrame {
         cboCivil = new javax.swing.JComboBox<>();
         cboSexo = new javax.swing.JComboBox<>();
         txtEmail = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jButtonPróximo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtCEP = new javax.swing.JFormattedTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtComplemento = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnConcluir = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         txtNumero = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nome:");
+        jLabel1.setText("*Nome:");
 
-        jLabel2.setText("CPF:");
+        jLabel2.setText("*CPF:");
 
         jLabel3.setText("Data de Nascimento:");
 
         jLabel4.setText("Estado Civil:");
 
-        jLabel5.setText("Sexo:");
+        jLabel5.setText("*Sexo:");
 
-        jLabel6.setText("E-mail:");
+        jLabel6.setText("*E-mail:");
 
         try {
             txtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -88,10 +88,10 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----Selecione----", "Masculino", "Feminino", "Prefiro não informar" }));
 
-        jButton3.setText("Próximo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPróximo.setText("Próximo");
+        jButtonPróximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonPróximoActionPerformed(evt);
             }
         });
 
@@ -103,11 +103,11 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtEmail))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -117,21 +117,21 @@ public class CadastroCliente extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cboSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 96, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                    .addComponent(txtCPF))))
+                        .addGap(0, 132, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(jButtonPróximo)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -162,19 +162,19 @@ public class CadastroCliente extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(jButtonPróximo)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Dados Basicos", jPanel2);
 
-        jLabel7.setText("CEP:");
+        jLabel7.setText("*CEP:");
 
-        jLabel8.setText("Endereço:");
+        jLabel8.setText("*Endereço:");
 
-        jLabel9.setText("Numero:");
+        jLabel9.setText("*Numero:");
 
-        jLabel10.setText("Complemento:");
+        jLabel10.setText("*Complemento:");
 
         try {
             txtCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -182,10 +182,10 @@ public class CadastroCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jButton2.setText("Concluir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnConcluir.setText("Concluir");
+        btnConcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnConcluirActionPerformed(evt);
             }
         });
 
@@ -211,13 +211,13 @@ public class CadastroCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(btnConcluir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
@@ -228,7 +228,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                                     .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 75, Short.MAX_VALUE)))
+                        .addGap(0, 84, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -249,10 +249,10 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnConcluir)
                     .addComponent(btnVoltar))
                 .addContainerGap())
         );
@@ -267,103 +267,118 @@ public class CadastroCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGap(12, 12, 12)
+                .addComponent(jTabbedPane1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonPróximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPróximoActionPerformed
          
-        String tipoNascimento = "";;
-          if(txtNascimento.getValue() != null){
-             tipoNascimento = txtNascimento.getValue().toString();
-          }else{
-              JOptionPane.showMessageDialog(this
-                      ,"Preencha todas as informações corretamente!(Campo Nascimento)");
-              return;
-          }      
-          String tipoCPF = "";;
-          if(txtCPF.getValue() != null){
-             tipoCPF = txtCPF.getValue().toString();
-          }else{
-              JOptionPane.showMessageDialog(this
-                      ,"Preencha todas as informações corretamente!(Campo CPF)");
-              return;
-          }      
-          String tipoSexo = "";
-          if(cboSexo.getSelectedIndex()>0){
-              tipoSexo = cboSexo.getSelectedItem().toString();
-          }else{
-              JOptionPane.showMessageDialog(this
-                      ,"Preencha todas as informações corretamente!(Campo Sexo)");
-              return;
-          }
-              String tipoNome = "";
-          if(txtNome.getText().length() > 0 ){
-              tipoNome = txtNome.getText().toString();
-            
-          }else{
-              JOptionPane.showMessageDialog(this
-                      ,"Preencha todas as informações corretamente! (Campo nome)");
-              return;
-          }
-              String tipoEmail = "";
-          if(txtEmail.getText().length() > 0 ){
-           tipoEmail = txtEmail.getText().toString();
-            
-          }else{
-              JOptionPane.showMessageDialog(this
-                      ,"Preencha todas as informações corretamente! (Campo E-mail)");
-              return;
-          }
-                this.jTabbedPane1.setSelectedIndex(1);
+        String tipoNascimento = "";
+        if(txtNascimento.getValue() != null){
+            tipoNascimento = txtNascimento.getValue().toString();
+        }else{
+            JOptionPane.showMessageDialog(this
+                    ,"Preencha todas as informações corretamente!(Campo Nascimento)");
+            return;
+        }
+        String tipoCPF = "";;
+        if(txtCPF.getValue() != null){
+            tipoCPF = txtCPF.getValue().toString();
+        }else{
+            JOptionPane.showMessageDialog(this
+                    ,"Preencha todas as informações corretamente!(Campo CPF)");
+            return;
+        }      
+        String tipoSexo = "";
+        if(cboSexo.getSelectedIndex()>0){
+            tipoSexo = cboSexo.getSelectedItem().toString();
+        }else{
+            JOptionPane.showMessageDialog(this
+                    ,"Preencha todas as informações corretamente!(Campo Sexo)");
+            return;
+        }
+        String tipoNome = "";
+        if(txtNome.getText().length() > 0 ){
+            tipoNome = txtNome.getText().toString();
+        }else{
+            JOptionPane.showMessageDialog(this
+                    ,"Preencha todas as informações corretamente! (Campo nome)");
+            return;
+        }
+        String tipoEmail = "";
+        if(txtEmail.getText().length() > 0 ){
+        tipoEmail = txtEmail.getText().toString();
+        }else{
+            JOptionPane.showMessageDialog(this
+                    ,"Preencha todas as informações corretamente! (Campo E-mail)");
+            return;
+        }
+            this.jTabbedPane1.setSelectedIndex(1);
                 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonPróximoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         String tipoCEP = "";;
-          if(txtCEP.getValue() != null){
-            tipoCEP = txtCEP.getValue().toString();
-          }else{
-              JOptionPane.showMessageDialog(this
-                      ,"Preencha todas as informações corretamente!(Campo CEP)");
-              return;
-          }   
-             String tipoEndereco = "";;
-          if(txtEndereco.getText().length() > 0){
-            tipoEndereco = txtEndereco.getText().toString();
-          }else{
-              JOptionPane.showMessageDialog(this
-                      ,"Preencha todas as informações corretamente!(Campo Endereço)");
-              return;
-          }  
-             String tipoNumero = "";;
-          if(txtNumero.getText().length() > 0){
-            tipoNumero = txtNumero.getText().toString();
-          }else{
-              JOptionPane.showMessageDialog(this
-                      ,"Preencha todas as informações corretamente!(Campo Numero)");
-              return;
-          }  
-         JOptionPane.showMessageDialog(this,"Cadastro Concluido"
-                        );
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
+        
+        /*
+            validar campos obrigatorios
+        */
+        
+        if(
+                txtNome.getText().length() > 0 &&
+                cboSexo.getSelectedIndex() > 0 &&
+                txtCPF.getValue() != null &&
+                txtEmail.getText().length() > 0 &&
+                txtNascimento.getValue() != null
+        ){
+                
+            /*
+                Criando um Objeto Cliente
+            */
+            Model.Cliente cliente = new Model.Cliente();
+
+            /* Salvando e setando os dados do cliente */
+            String tipoNome = txtNome.getText().toString();
+            cliente.setNome(tipoNome);
+            String tipoCPF = txtCPF.getValue().toString();
+            cliente.setCpf(tipoCPF);
+            String tipoNascimento = txtNascimento.getValue().toString();
+            cliente.setDataNascimento(tipoNascimento);
+            String tipoEstadoCivil = cboCivil.getSelectedItem().toString();
+            cliente.setEstadoCivil(tipoEstadoCivil);
+            String tipoSexo = cboSexo.getSelectedItem().toString();
+            cliente.setSexo(tipoSexo);
+            String tipoEmail = txtEmail.getText().toString();
+            cliente.setEmail(tipoEmail);
+            String tipoCEP = txtCEP.getText().toString();
+            cliente.setCep(tipoCEP);
+            String tipoEndereco = txtEndereco.getText().toString();
+            cliente.setEndereco(tipoEndereco);
+            String tipoNumero = txtNumero.getText().toString();
+            cliente.setNumero(tipoNumero);
+        }else{
+            JOptionPane.showMessageDialog(this
+                ,"Preencha todas as informações corretamente com *!");
+            return;
+        }
+
+        /*
+            Conclusão
+        */
+        JOptionPane.showMessageDialog(this,"Cadastro Concluido");
+    }//GEN-LAST:event_btnConcluirActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
   
@@ -409,11 +424,11 @@ public class CadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConcluir;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cboCivil;
     private javax.swing.JComboBox<String> cboSexo;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonPróximo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -428,9 +443,9 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JFormattedTextField txtCEP;
     private javax.swing.JFormattedTextField txtCPF;
+    private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JFormattedTextField txtNascimento;

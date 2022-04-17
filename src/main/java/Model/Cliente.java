@@ -27,6 +27,14 @@ public class Cliente {
     }
     
     //Getters e Setters    
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+    
     public String getNome(){
         return this.nome;
     }
