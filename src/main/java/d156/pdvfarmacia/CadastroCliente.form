@@ -447,7 +447,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="OU CPF:"/>
+                <Property name="text" type="java.lang.String" value="ou CPF:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnBuscarCliente">
