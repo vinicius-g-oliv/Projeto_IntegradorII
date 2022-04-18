@@ -278,7 +278,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="txtCEP" min="-2" pref="123" max="-2" attributes="0"/>
                                           <Component id="txtEndereco" min="-2" pref="266" max="-2" attributes="0"/>
-                                          <Component id="txtNumero" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
+                                          <Component id="txtNumero" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -312,7 +312,7 @@
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtComplemento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="58" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnConcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -371,7 +371,12 @@
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnVoltarKeyTyped"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNumero">
+            <Component class="javax.swing.JFormattedTextField" name="txtNumero">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
