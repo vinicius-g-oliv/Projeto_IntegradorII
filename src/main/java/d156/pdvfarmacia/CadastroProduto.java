@@ -124,11 +124,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        try {
-            txtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtCodigo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtCodigo.setName(""); // NOI18N
 
@@ -144,12 +140,15 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel3.setName(""); // NOI18N
 
+        txtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtQuantidade.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtQuantidade.setName(""); // NOI18N
 
         jLabel4.setText("Preço:");
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel4.setName(""); // NOI18N
+
+        txtPreço.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,7 +159,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                            .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -171,17 +170,17 @@ public class CadastroProduto extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                                    .addComponent(txtPreço)))
+                                    .addComponent(txtQuantidade)
+                                    .addComponent(txtPreço, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                    .addComponent(txtProduto)
                                     .addComponent(txtCodigo))))
                         .addGap(27, 27, 27)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,32 +244,38 @@ public class CadastroProduto extends javax.swing.JFrame {
         /*
             verificar se as caixas estão vaizas
         */
-        if(txtProduto.getText() == null 
-            || txtProduto.getText().equals("") 
-            || txtCodigo.getText() == null 
-            || txtCodigo.getText().equals("")
-            || txtQuantidade.getText() == null
-            || txtQuantidade.getText().equals("")
-            || txtPreço.getText() == null
-            || txtPreço.getText().equals("")
+        if(
+            txtCodigo.getText().length() <= 0
+            || txtProduto.getText().length() <= 0
+            || txtQuantidade.getText().length() <= 0
+            || txtPreço.getText().length() <= 0
         ){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            return;
         }else{
+            /*
+            criar um objeto do tipo Produto
+            passar os valores para o objeto
+            chamar o método cadastrar
+            */ 
+            Model.Produto produto = new Model.Produto();
+            produto.setNome(txtProduto.getText());
+            produto.setCodigo(txtCodigo.getText());
+            produto.setPreco(Float.parseFloat(txtPreço.getText().replace(",", ".")));
+            produto.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
+
+            System.out.println(
+                "\n------------------------------------------------------\n"+
+                "nome: "+produto.getNome() + "\n" +
+                "código: "+produto.getCodigo() + "\n" +
+                "preço: "+produto.getPreco() + "\n" +
+                "quantidade: "+produto.getQuantidadeEstoque()
+            );
         
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
         }
 
-        /*
-            criar um objeto do tipo Produto
-            passar os valores para o objeto
-            chamar o método cadastrar
-        */ 
-        Model.Produto produto = new Model.Produto();
-        produto.setNome(txtProduto.getText());
-        produto.setCodigo(txtCodigo.getText());
-        produto.setPreco(Double.parseDouble(txtPreço.getText()));
-        produto.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
-        // produto.setQuantidade(Integer.parseInt(txtQuantidade.getText())); vai precisar?
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed

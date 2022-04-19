@@ -11,6 +11,7 @@ package Model;
 public class Venda {
     
     //atributos
+    String codigoProduto;
     String nomeProduto;
     String codigoCliente;
     String dataVenda;
@@ -22,6 +23,14 @@ public class Venda {
     }
     
     //getters and setters
+    public String getCodigoProduto() {
+        return codigoProduto;
+    }
+
+    public void setCodigoProduto(String codigoProduto) {
+        this.codigoProduto = codigoProduto;
+    }
+
     public String getNomeProduto(){
         return this.nomeProduto;
     }

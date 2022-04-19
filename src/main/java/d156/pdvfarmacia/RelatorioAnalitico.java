@@ -112,8 +112,9 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Relatório Analítico");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Relatório Analitico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 24))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Relatório Analítico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 24))); // NOI18N
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

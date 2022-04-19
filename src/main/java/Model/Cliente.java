@@ -64,7 +64,7 @@ public class Cliente {
     }
     
     public void setEmail(String novoEmail){
-        this.dataNascimento = novoEmail;
+        this.email= novoEmail;
     }
     
      public String getSexo(){
@@ -80,7 +80,7 @@ public class Cliente {
     }
     
     public void setCep(String novoCep){
-        this.dataNascimento = novoCep;
+        this.cep = novoCep;
     }
     
      public String getEndereco(){
@@ -95,7 +95,7 @@ public class Cliente {
     }
     
     public void setComplemento(String novoComplemento){
-        this.dataNascimento = complemento;
+        this.complemento = novoComplemento;
     }
      public String getEstadoCivil(){
         return this.estadoCivil;
