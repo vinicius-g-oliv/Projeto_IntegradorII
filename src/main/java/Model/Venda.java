@@ -26,13 +26,6 @@ public class Venda {
     
     //getters and setters
       
-    public String getCodigoCliente(){
-        return this.codigoCliente;
-    }
-    
-    public void setCodigoCliente(String novoCodigo){
-        this.codigoCliente = novoCodigo;
-    }
     
     public int getQuantidade(){
         return this.quantidade;
