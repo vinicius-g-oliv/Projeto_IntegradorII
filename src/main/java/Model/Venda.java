@@ -4,6 +4,9 @@
  */
 package Model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  *
  * @author everymind
@@ -11,9 +14,8 @@ package Model;
 public class Venda {
     
     //atributos
-    String codigoProduto;
-    String nomeProduto;
-    String codigoCliente;
+    ArrayList<Produto> produto = new ArrayList<Produto>();
+    //String codigoCliente;
     String dataVenda;
     int quantidade;
     double valor;
@@ -23,22 +25,7 @@ public class Venda {
     }
     
     //getters and setters
-    public String getCodigoProduto() {
-        return codigoProduto;
-    }
-
-    public void setCodigoProduto(String codigoProduto) {
-        this.codigoProduto = codigoProduto;
-    }
-
-    public String getNomeProduto(){
-        return this.nomeProduto;
-    }
-
-    public void setNomeProduto(String novoNome){
-        this.nomeProduto = novoNome;
-    }
-    
+      
     public String getCodigoCliente(){
         return this.codigoCliente;
     }
