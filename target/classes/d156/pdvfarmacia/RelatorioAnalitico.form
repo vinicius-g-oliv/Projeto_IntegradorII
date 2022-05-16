@@ -165,6 +165,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Relat&#xf3;rio Anal&#xed;tico"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -215,7 +216,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" title="Relat&#xf3;rio Analitico">
+            <TitledBorder justification="2" title="Relat&#xf3;rio Anal&#xed;tico">
               <Font PropertyName="font" name="Century Gothic" size="24" style="1"/>
             </TitledBorder>
           </Border>
