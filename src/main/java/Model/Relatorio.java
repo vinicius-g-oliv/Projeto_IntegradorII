@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.sql.Date;
+
 /**
  *
  * @author everymind
@@ -13,7 +15,7 @@ public class Relatorio {
     //atributos    
     String codigoProduto;
     String nomeCliente;
-    String dataVenda;
+    Date dataVenda;
     double valorVenda;
     
     //Construtor
@@ -41,11 +43,11 @@ public class Relatorio {
         this.nomeCliente = nomeCliente;
     }
     
-    public String dataVenda(){
+    public Date dataVenda(){
         return this.dataVenda;
     }
     
-    public void setDataVenda(String novaData){
+    public void setDataVenda(Date novaData){
         this.dataVenda = novaData;
     }
     
