@@ -5,6 +5,7 @@
 package Model;
 
 import java.lang.reflect.Array;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -13,10 +14,10 @@ import java.util.ArrayList;
  */
 public class Venda {
     
-    //atributos
+ //atributos
     ArrayList<Produto> produto = new ArrayList<Produto>();
     //String codigoCliente;
-    String dataVenda;
+    Date dataVenda;
     int quantidade;
     double valor;
     
@@ -43,11 +44,11 @@ public class Venda {
         this.valor = novoValor;
     }
     
-    public String getData(){
+    public Date getData(){
         return this.dataVenda;
     }
     
-    public void setData(String data){
+    public void setData(Date data){
         this.dataVenda = data;
     }
     

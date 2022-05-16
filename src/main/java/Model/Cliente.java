@@ -4,21 +4,23 @@
  */
 package Model;
 
+import java.sql.Date;
+
 /**
  *
  * @author everymind
  */
 public class Cliente {
-    
+
     //Atributos
     String nome;
     String cpf;
-    String dataNascimento;
+    Date dataNascimento;
     String email;
     String sexo;
     String cep;
     String endereco;
-    String numero;
+    int numero;
     String complemento;
     String estadoCivil;
     
@@ -27,11 +29,11 @@ public class Cliente {
     }
     
     //Getters e Setters    
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
     
@@ -51,11 +53,11 @@ public class Cliente {
         this.cpf = novoCpf;
     }
     
-    public String getDataNascimento(){
+    public Date getDataNascimento(){
         return this.dataNascimento;
     }
     
-    public void setDataNascimento(String novaData){
+    public void setDataNascimento(Date novaData){
         this.dataNascimento = novaData;
     }
     
