@@ -4,6 +4,10 @@
  */
 package d156.pdvfarmacia;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -366,6 +370,9 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPróximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPróximoActionPerformed
+        /**
+         * leva à próxima aba
+         */
         this.jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButtonPróximoActionPerformed
 
@@ -392,12 +399,19 @@ public class CadastroCliente extends javax.swing.JFrame {
 
 
             /* Salvando e setando os dados do cliente */
+            String tipoNascimento = txtNascimento.getText().toString();
+            try {
+                cliente.setDataNascimento(converterParaDate(tipoNascimento));
+            } catch (ParseException e) {
+                System.out.println(
+                        "Erro ao converter data de nascimento do cliente: " + e.getMessage()
+                );
+            }
+            // demais dados do cliente
             String tipoNome = txtNome.getText().toString();
             cliente.setNome(tipoNome);
             String tipoCPF = txtCPF.getText().toString();
             cliente.setCpf(tipoCPF);
-            String tipoNascimento = txtNascimento.getText().toString();
-            cliente.setDataNascimento(tipoNascimento);
             String tipoEstadoCivil = cboCivil.getSelectedItem().toString();
             cliente.setEstadoCivil(tipoEstadoCivil);
             String tipoSexo = cboSexo.getSelectedItem().toString();
@@ -408,7 +422,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             cliente.setCep(tipoCEP);
             String tipoEndereco = txtEndereco.getText().toString();
             cliente.setEndereco(tipoEndereco);
-            String tipoNumero = txtNumero.getText().toString();
+            int tipoNumero = Integer.parseInt(txtNumero.getText().toString());
             cliente.setNumero(tipoNumero);
 
             /*
@@ -430,15 +444,28 @@ public class CadastroCliente extends javax.swing.JFrame {
             );
         }else{
             JOptionPane.showMessageDialog(this
-                ,"Preencha todas as informações corretamente com *!");
+                ,"Preencha todos os campos as com *!");
             return;
         }
-
         /*
             Conclusão
         */
         JOptionPane.showMessageDialog(this,"Cadastro Concluido");
     }//GEN-LAST:event_btnConcluirActionPerformed
+
+    private java.sql.Date converterParaDate(String string) throws ParseException {
+        //trocando de dd/MM/yyyy para yyyy-MM-dd
+        string = 
+            string.substring(6, 9) + "-" +
+            string.substring(3, 4) + "-" +
+            string.substring(0, 1);
+        
+        //convertendo para o tipo Date
+        SimpleDateFormat FORMATACAO = new SimpleDateFormat("yyyy-MM-dd");
+        Date PARSED = FORMATACAO.parse(string);
+        java.sql.Date newDate = new java.sql.Date(PARSED.getTime());
+        return newDate;
+    }
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.jTabbedPane1.setSelectedIndex(0);
