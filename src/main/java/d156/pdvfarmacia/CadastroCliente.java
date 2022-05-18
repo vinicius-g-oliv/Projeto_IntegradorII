@@ -454,19 +454,6 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConcluirActionPerformed
 
     private java.sql.Date converterParaDate(String string) throws ParseException {
-<<<<<<< HEAD
-        //trocando de dd/MM/yyyy para yyyy-MM-dd
-        string = 
-            string.substring(6, 9) + "-" +
-            string.substring(3, 4) + "-" +
-            string.substring(0, 1);
-        
-        //convertendo para o tipo Date
-        SimpleDateFormat FORMATACAO = new SimpleDateFormat("yyyy-MM-dd");
-        Date PARSED = FORMATACAO.parse(string);
-        java.sql.Date newDate = new java.sql.Date(PARSED.getTime());
-        return newDate;
-=======
         // trocando de dd/MM/yyyy para yyyy-MM-dd
         string = 
             string.substring(6, 10) + "-" +
@@ -476,7 +463,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         Date dt_nasc = new SimpleDateFormat("yyyy-MM-dd").parse(string);
         java.sql.Date dt_nasc_sql = new java.sql.Date(dt_nasc.getTime());
         return dt_nasc_sql;
->>>>>>> localBranch
     }
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

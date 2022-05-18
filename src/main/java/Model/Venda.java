@@ -28,17 +28,17 @@ public class Venda {
     }
     
     //getters and setters
-    public void setCodigoProduto(String codigo){
-        this.codigoProduto = codigo;
-    } 
+    // public void setCodigoProduto(String codigo){
+    //     this.codigoProduto = codigo;
+    // } 
     
-    public int getQuantidade(){
-        return this.quantidade;
-    }
+    // public int getQuantidade(){
+    //     return this.quantidade;
+    // }
     
-    public void setQuatidade(int qtd){
-        this.quantidade = qtd;
-    }
+    // public void setQuatidade(int qtd){
+    //     this.quantidade = qtd;
+    // }
     
      public double getValor(){
         return this.valor;

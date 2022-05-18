@@ -242,6 +242,7 @@ public class TelaVendas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        //TODO: Adicionar produto ao carrinho
         /*
             Salvar valores para a venda e relatório
         */
@@ -263,20 +264,20 @@ public class TelaVendas extends javax.swing.JFrame {
         //venda
         Model.Venda venda = new Model.Venda();
 
-        venda.setCodigoProduto(codigoProduto);
-        venda.setNomeProduto(nomeProduto);
-        venda.setCodigoCliente(codigoCliente);
-        venda.setData(dataVenda);
-        venda.setQuatidade(quantidade);
-        venda.setValor(valor);
+        // venda.setCodigoProduto(codigoProduto);
+        // venda.setNomeProduto(nomeProduto);
+        // venda.setCodigoCliente(codigoCliente);
+        // venda.setData(dataVenda);
+        // venda.setQuatidade(quantidade);
+        // venda.setValor(valor);
 
-        //relatorio
-        Model.Relatorio relatorio = new Model.Relatorio();
+        // //relatorio
+        // Model.Relatorio relatorio = new Model.Relatorio();
 
-        relatorio.setCodigoProduto(RelatorioCodProduto);
-        relatorio.setNomeCliente(RelatorioNomeCliente);
-        relatorio.setDataVenda(dataVenda);
-        relatorio.setValorVenda(valor);
+        // relatorio.setCodigoProduto(RelatorioCodProduto);
+        // relatorio.setNomeCliente(RelatorioNomeCliente);
+        // relatorio.setDataVenda(dataVenda);
+        // relatorio.setValorVenda(valor);
 
         /*
             Mostrando valor total da venda
