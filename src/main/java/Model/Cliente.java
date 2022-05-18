@@ -13,6 +13,7 @@ import java.sql.Date;
 public class Cliente {
 
     //Atributos
+    int id_cliente;
     String nome;
     String cpf;
     Date dataNascimento;

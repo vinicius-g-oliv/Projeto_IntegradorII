@@ -17,16 +17,20 @@ public class Venda {
  //atributos
     ArrayList<Produto> produto = new ArrayList<Produto>();
     //String codigoCliente;
+    int id_cliente;
     Date dataVenda;
-    int quantidade;
     double valor;
+    int id_venda;
+
     
     //Construtor
     public Venda(){
     }
     
     //getters and setters
-      
+    public void setCodigoProduto(String codigo){
+        this.codigoProduto = codigo;
+    } 
     
     public int getQuantidade(){
         return this.quantidade;

@@ -19,7 +19,7 @@ public class GerenciadorConexao {
     public static String SERVER = "localhost";
     public static String DATABASE = "lojafarmacia";
     public static String LOGIN = "root";
-    public static String SENHA = "Hedaytimejobgot6";
+    public static String SENHA = "";
     public static String URL = "";
     public static Connection CONEXAO = null;
 
@@ -95,8 +95,6 @@ public class GerenciadorConexao {
 
     public static void testarConexao() throws ClassNotFoundException, SQLException {
         abrirConexao();
-        fecharConexao();
-        
         System.out.println(
                 "Driver: " + DRIVER + "\n" +
                 "Server: " + SERVER + "\n" +
@@ -106,5 +104,7 @@ public class GerenciadorConexao {
                 "URL: " + URL + "\n" +
                 "Status: " + STATUS + "\n"
         );
+        fecharConexao();
+        
     }
 }
