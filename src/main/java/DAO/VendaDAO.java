@@ -41,7 +41,8 @@ public class VendaDAO {
                 while ( rs.next() ) {
                 Venda v = new Venda();
                 v.setData(rs.getDate("data"));
-                v.setQuatidade(rs.getInt("quantidade"));
+                //TODO: Criar um construtor que recebe os valores
+                // v.setQuatidade(rs.getInt("quantidade"));
                 v.setValor(rs.getDouble("valor"));
                               
                 listaRetorno.add(v);
@@ -68,9 +69,9 @@ public class VendaDAO {
         } catch (SQLException ex) {
         }
         }*/
-        return listaRetorno;
+            return listaRetorno;
         }
     
-        }
+    }
     
 }

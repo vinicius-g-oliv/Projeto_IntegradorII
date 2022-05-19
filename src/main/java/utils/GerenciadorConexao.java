@@ -36,7 +36,6 @@ public class GerenciadorConexao {
 
                 Class.forName(DRIVER);
                 CONEXAO = DriverManager.getConnection(URL, LOGIN, SENHA);
-
                 if (CONEXAO != null) {
                     STATUS = "Conexão realizada com sucesso!";
                 } else {
@@ -88,23 +87,45 @@ public class GerenciadorConexao {
         
         return retorno;
     }
-    
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        testarConexao();
+
+    public static String getLOGIN() {
+        return LOGIN;
     }
 
-    public static void testarConexao() throws ClassNotFoundException, SQLException {
-        abrirConexao();
-        System.out.println(
-                "Driver: " + DRIVER + "\n" +
-                "Server: " + SERVER + "\n" +
-                "Database: " + DATABASE + "\n" +
-                "Login: " + LOGIN + "\n" +
-                "Senha: " + SENHA + "\n" +
-                "URL: " + URL + "\n" +
-                "Status: " + STATUS + "\n"
-        );
-        fecharConexao();
-        
+    public static void setLOGIN(String lOGIN) {
+        LOGIN = lOGIN;
     }
+
+    public static String getSENHA() {
+        return SENHA;
+    }
+
+    public static void setSENHA(String sENHA) {
+        SENHA = sENHA;
+    }
+
+    public static String getSTATUS() {
+        return STATUS;
+    }
+
+    public static String getDRIVER() {
+        return DRIVER;
+    }
+
+    public static String getSERVER() {
+        return SERVER;
+    }
+
+    public static String getDATABASE() {
+        return DATABASE;
+    }
+
+    public static String getURL() {
+        return URL;
+    }
+
+    public static Connection getCONEXAO() {
+        return CONEXAO;
+    }
+ 
 }
