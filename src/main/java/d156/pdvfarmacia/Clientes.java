@@ -77,19 +77,19 @@ public class Clientes extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0001", "Advil", "10"},
-                {"0002", "Allegra", "10"},
-                {"0003", "Barra de Cereal", "10"},
-                {"0004", "Chocolate Zero", "10"},
-                {"0005", "Condicionador", "10"},
-                {"0006", "Creme Hidratante", "1"},
-                {"0007", "Delineador Preto", "1"},
-                {"0008", "Dipirona", "21"},
-                {"0009", "Epocler", "2"},
-                {"0010", "Escova de Dente", "21"}
+                {"", "", ""},
+                {"", "", ""},
+                {"", "", ""},
+                {"", "", ""},
+                {"", "", ""},
+                {"", "", ""},
+                {"", "", ""},
+                {"", "", ""},
+                {"", "", ""},
+                {"", "", ""}
             },
             new String [] {
-                "Código", "Nome", "CPF"
+                "Código ", "Nome", "CPF"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -166,7 +166,7 @@ public class Clientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );

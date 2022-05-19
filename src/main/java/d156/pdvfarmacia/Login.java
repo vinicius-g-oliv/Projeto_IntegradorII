@@ -167,7 +167,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
-        TelaInicialFarmacia janelaModal = new TelaInicialFarmacia(this, true);
+        TelaInicial janelaModal = new TelaInicial();
         janelaModal.setVisible(true);
         
     }//GEN-LAST:event_btnEntrarActionPerformed
@@ -189,15 +189,26 @@ public class Login extends javax.swing.JFrame {
         //limitar número de caracteres
         if(txtID.getText().length()>=4){
             evt.consume();
-            JOptionPane.showMessageDialog(this, "ID: Máximo de 4 caracteres");
+            JOptionPane.showMessageDialog(this, "Máximo de 4 caracteres");
         }
         
     }//GEN-LAST:event_txtIDKeyTyped
 
     private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
         // TODO add your handling code here:
-         String textoLogin = txtID.getText();
-        txtID.setText(textoLogin.toUpperCase());
+          char c = evt.getKeyChar();
+        if(((c < '0') || (c > '9'))&&(c != KeyEvent.VK_BACK_SPACE)){
+            evt.consume();
+            this.lblStatus.setText("Apenas números");
+        }else{
+            this.lblStatus.setText("ID aceito!");
+        }
+       
+        if(txtPassword.getText().length()>=10){
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Máximo de 10 caracteres");
+        }
+        
     }//GEN-LAST:event_txtPasswordKeyReleased
 
     /**

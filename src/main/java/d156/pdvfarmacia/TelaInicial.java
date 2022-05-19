@@ -37,12 +37,12 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        btnVenda = new javax.swing.JMenuItem();
+        btnManutencao = new javax.swing.JMenu();
+        btnClientes = new javax.swing.JMenuItem();
+        btnProdutos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        btnRelatorioGeral = new javax.swing.JMenuItem();
+        btnRelatorio = new javax.swing.JMenuItem();
         btnRelatorioAnalitico = new javax.swing.JMenuItem();
 
         jToggleButton1.setText("jToggleButton1");
@@ -55,6 +55,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1.setText("REDE FARMICON");
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("BEM-VINDO!");
 
@@ -68,47 +69,52 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu5.setText("Vendas");
 
-        jMenuItem8.setText("Iniciar Venda");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        btnVenda.setText("Iniciar Venda");
+        btnVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                btnVendaActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem8);
+        jMenu5.add(btnVenda);
 
         jMenuBar1.add(jMenu5);
 
-        jMenu1.setText("Manutenção");
+        btnManutencao.setText("Manutenção");
 
-        jMenuItem2.setText("Clientes");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        btnClientes.setText("Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                btnClientesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        btnManutencao.add(btnClientes);
 
-        jMenuItem7.setText("Produtos");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        btnProdutos.setText("Produtos");
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                btnProdutosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem7);
+        btnManutencao.add(btnProdutos);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(btnManutencao);
 
-        jMenu2.setText("Relatorio");
+        jMenu2.setText("Relatórios");
 
-        btnRelatorioGeral.setText("Relatorio Geral");
-        btnRelatorioGeral.addActionListener(new java.awt.event.ActionListener() {
+        btnRelatorio.setText("Relatório");
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRelatorioGeralActionPerformed(evt);
+                btnRelatorioActionPerformed(evt);
             }
         });
-        jMenu2.add(btnRelatorioGeral);
+        jMenu2.add(btnRelatorio);
 
-        btnRelatorioAnalitico.setText("Relatorio Analitico");
+        btnRelatorioAnalitico.setText("Relatório Analítico");
+        btnRelatorioAnalitico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioAnaliticoActionPerformed(evt);
+            }
+        });
         jMenu2.add(btnRelatorioAnalitico);
 
         jMenuBar1.add(jMenu2);
@@ -144,23 +150,35 @@ public class TelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRelatorioGeralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioGeralActionPerformed
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
         // TODO add your handling code here:
-        RelatorioGeral janelaModal = new RelatorioGeral(this, true);
+        Relatorio janelaModal = new Relatorio();
         janelaModal.setVisible(true);
-    }//GEN-LAST:event_btnRelatorioGeralActionPerformed
+    }//GEN-LAST:event_btnRelatorioActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        CadastroCliente janelaModal = new CadastroCliente();
+        janelaModal.setVisible(true);
+    }//GEN-LAST:event_btnClientesActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+        CadastroProduto janelaModal = new CadastroProduto();
+        janelaModal.setVisible(true);
+    }//GEN-LAST:event_btnProdutosActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+        TelaVendas janelaModal = new TelaVendas();
+        janelaModal.setVisible(true);
+    }//GEN-LAST:event_btnVendaActionPerformed
+
+    private void btnRelatorioAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioAnaliticoActionPerformed
+        // TODO add your handling code here:
+         RelatorioAnalitico janelaModal = new RelatorioAnalitico();
+        janelaModal.setVisible(true);
+    }//GEN-LAST:event_btnRelatorioAnaliticoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,19 +216,19 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnClientes;
+    private javax.swing.JMenu btnManutencao;
+    private javax.swing.JMenuItem btnProdutos;
+    private javax.swing.JMenuItem btnRelatorio;
     private javax.swing.JMenuItem btnRelatorioAnalitico;
-    private javax.swing.JMenuItem btnRelatorioGeral;
+    private javax.swing.JMenuItem btnVenda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
