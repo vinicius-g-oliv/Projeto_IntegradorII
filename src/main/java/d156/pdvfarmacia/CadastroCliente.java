@@ -70,7 +70,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         txtNumero = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Cliente");
 
         jLabel12.setText("Nome:");

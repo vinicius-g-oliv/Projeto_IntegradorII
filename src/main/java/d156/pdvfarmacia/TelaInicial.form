@@ -16,6 +16,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="btnVenda">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+V"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Iniciar Venda"/>
               </Properties>
               <Events>
@@ -31,6 +34,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="btnClientes">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+C"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Clientes"/>
               </Properties>
               <Events>
@@ -39,6 +45,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="btnProdutos">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+P"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Produtos"/>
               </Properties>
               <Events>
@@ -54,6 +63,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="btnRelatorio">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+R"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
               </Properties>
               <Events>
@@ -62,6 +74,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="btnRelatorioAnalitico">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+R"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Anal&#xed;tico"/>
               </Properties>
               <Events>
@@ -74,6 +89,7 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Tela Inicial"/>
   </Properties>
   <SyntheticProperties>

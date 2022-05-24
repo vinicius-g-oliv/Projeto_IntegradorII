@@ -45,7 +45,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPreço = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produtos");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName(""); // NOI18N

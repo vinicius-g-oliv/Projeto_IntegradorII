@@ -47,6 +47,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jToggleButton1.setText("jToggleButton1");
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Inicial");
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
@@ -69,6 +70,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu5.setText("Vendas");
 
+        btnVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         btnVenda.setText("Iniciar Venda");
         btnVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +83,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         btnManutencao.setText("Manutenção");
 
+        btnClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         btnClientes.setText("Clientes");
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +92,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         btnManutencao.add(btnClientes);
 
+        btnProdutos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         btnProdutos.setText("Produtos");
         btnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +105,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu2.setText("Relatórios");
 
+        btnRelatorio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         btnRelatorio.setText("Relatório");
         btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +114,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(btnRelatorio);
 
+        btnRelatorioAnalitico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         btnRelatorioAnalitico.setText("Relatório Analítico");
         btnRelatorioAnalitico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
