@@ -1,11 +1,13 @@
 ﻿package utils;
 
 import java.util.Scanner;
+import utils.GerenciadorConexao;
 
 
 public class TestarConexao {
     static Scanner sc = new Scanner(System.in);
 
+    
     public static void main(String[] args) {
         try {
             if(GerenciadorConexao.getSENHA().toString() == ""){
