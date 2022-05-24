@@ -217,7 +217,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder justification="2" title="Relat&#xf3;rio Anal&#xed;tico">
-              <Font PropertyName="font" name="Century Gothic" size="24" style="1"/>
+              <Font PropertyName="font" name="AppleGothic" size="24" style="1"/>
             </TitledBorder>
           </Border>
         </Property>
