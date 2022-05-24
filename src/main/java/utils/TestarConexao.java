@@ -1,7 +1,6 @@
-﻿package utils;
-
-import java.util.Scanner;
+package utils;
 import utils.GerenciadorConexao;
+import java.util.Scanner;
 
 
 public class TestarConexao {
@@ -10,13 +9,13 @@ public class TestarConexao {
     
     public static void main(String[] args) {
         try {
-            if(GerenciadorConexao.getSENHA().toString() == ""){
+            if(GerenciadorConexao.getSENHA().toString() == null){
                 System.out.println(
                 "Senha atual:"+GerenciadorConexao.getSENHA()+"\n"+   
                 "Digite a senha do banco de dados:"
                 );
                 GerenciadorConexao.setSENHA(
-                    sc.nextLine()
+                    sc.next()
                 );
                 System.out.println("\n");   
             }
