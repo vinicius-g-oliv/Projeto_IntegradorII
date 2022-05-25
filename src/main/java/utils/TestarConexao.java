@@ -9,16 +9,7 @@ public class TestarConexao {
     
     public static void main(String[] args) {
         try {
-            if(GerenciadorConexao.getSENHA().toString() == null){
-                System.out.println(
-                "Senha atual:"+GerenciadorConexao.getSENHA()+"\n"+   
-                "Digite a senha do banco de dados:"
-                );
-                GerenciadorConexao.setSENHA(
-                    sc.next()
-                );
-                System.out.println("\n");   
-            }
+            System.out.println("Testando conexão com o banco de dados...");
             GerenciadorConexao.abrirConexao();
             imprimirStatus();
             GerenciadorConexao.fecharConexao();

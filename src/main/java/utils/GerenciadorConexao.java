@@ -48,7 +48,7 @@ public class GerenciadorConexao {
 
             } catch (SQLException e) {
 
-                throw new SQLException("Erro ao estabelecer a conexão (Ex: login ou senha errados).");
+                throw new SQLException("Erro ao estabelecer a conexão (possívelmente login ou senha errados).");
             }
             
         }
@@ -127,5 +127,4 @@ public class GerenciadorConexao {
     public static Connection getCONEXAO() {
         return CONEXAO;
     }
- 
 }

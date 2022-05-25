@@ -55,7 +55,7 @@ public class ProdutoDAO {
             listaRetorno = null;
         }catch (ClassNotFoundException ex) {
             listaRetorno = null;
-        } finally{
+        } finally {
        
         /*try {
             Object rs;
