@@ -188,7 +188,7 @@ public class Relatorio extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        btnRelatorioAnalitico.setText("Gerar Relatorio Analitico");
+        btnRelatorioAnalitico.setText("Relatorio Analitico");
         btnRelatorioAnalitico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioAnaliticoActionPerformed(evt);
