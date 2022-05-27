@@ -5,8 +5,8 @@
 package d156.pdvfarmacia;
 
 /**
- *
- * @author viniciusgomes
+ * Classe representa a classe de geração de relatório do PDV
+ * @author milenahochheim
  */
 public class Relatorio extends javax.swing.JFrame {
 
