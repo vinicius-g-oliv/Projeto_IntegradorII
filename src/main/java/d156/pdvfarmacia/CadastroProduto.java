@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
- * @author viniciusgomes
+ * Classe representa a classe de cadastro de produtos da farmácia
+ * @author everyone
  */
 public class CadastroProduto extends javax.swing.JFrame {
 

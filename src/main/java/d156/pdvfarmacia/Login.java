@@ -9,8 +9,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author elton
+ * Classe representa a classe de Login do PDV
+ * @author everyone
  */
 public class Login extends javax.swing.JFrame {
 

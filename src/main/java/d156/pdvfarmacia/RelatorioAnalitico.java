@@ -6,7 +6,7 @@ package d156.pdvfarmacia;
 
 /**
  * Classe representa a classe de geração do relatório analítico (mais detalhado) do PDV
- * @author milenahochheim
+ * @author everyone
  */
 public class RelatorioAnalitico extends javax.swing.JFrame {
 

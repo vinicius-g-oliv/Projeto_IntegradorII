@@ -5,8 +5,8 @@
 package d156.pdvfarmacia;
 
 /**
- *
- * @author Arkivo
+ * Classe representa a classe de consulta de cadastro dos clientes
+ * @author everyone
  */
 public class Clientes extends javax.swing.JFrame {
 

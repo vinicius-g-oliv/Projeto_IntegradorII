@@ -11,8 +11,8 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author viniciusgomes
+ * Classe representa a classe de cadastro de clientes da farmácia
+ * @author everyone
  */
 public class CadastroCliente extends javax.swing.JFrame {
 
