@@ -4,7 +4,12 @@
  */
 package d156.pdvfarmacia;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+
+import DAO.ProdutoDAO;
 
 
 /**
@@ -93,6 +98,11 @@ public class CadastroProduto extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscar.setName(""); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -284,6 +294,19 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        //buscar através da produtoDAO
+        //mostrar os dados na tela
+        ArrayList<Model.Produto> produtos = new ArrayList<>();
+        try {
+            produtos = ProdutoDAO.consultar();
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(produtos.toString());
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments

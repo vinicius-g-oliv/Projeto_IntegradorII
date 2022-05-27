@@ -107,6 +107,14 @@ public class Cliente {
     public void setEstadoCivil(String novoEC){
         this.estadoCivil = novoEC;
     }
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
     
            
     

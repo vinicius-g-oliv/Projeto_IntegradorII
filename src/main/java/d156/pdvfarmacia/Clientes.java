@@ -4,6 +4,14 @@
  */
 package d156.pdvfarmacia;
 
+import java.util.List;
+
+import javax.swing.AbstractButton;
+import javax.swing.table.DefaultTableModel;
+
+import DAO.ClienteDAO;
+import Model.Cliente;
+
 /**
  * Classe representa a classe de consulta de cadastro dos clientes
  * @author everyone
@@ -32,7 +40,7 @@ public class Clientes extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTblClientes = new javax.swing.JTable();
         btnDeletar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -45,6 +53,11 @@ public class Clientes extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscar.setName(""); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         txtProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtProduto.setName(""); // NOI18N
@@ -75,7 +88,7 @@ public class Clientes extends javax.swing.JFrame {
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setName(""); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", "", "", null, null, null, null, null, null, null, null},
                 {"", "", "", null, null, null, null, null, null, null, null},
@@ -92,7 +105,7 @@ public class Clientes extends javax.swing.JFrame {
                 "Código ", "Nome", "CPF", "Data de Nascimento", "Email", "Sexo", "Estado Civil", "Endereço", "Número", "CEP", "Complemento"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTblClientes);
 
         btnDeletar.setText("Deletar");
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -193,6 +206,30 @@ public class Clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // buscar usando clienteDAO e tabela
+        ClienteDAO clienteDAO = new ClienteDAO();
+        List<Cliente> clientes = clienteDAO.consultar();
+        AbstractButton tblClientes;
+        DefaultTableModel modelo = (DefaultTableModel) jTblClientes.getModel();
+        modelo.setNumRows(0);
+        for (Cliente cliente : clientes) {
+            modelo.addRow(new Object[]{
+                cliente.getId_cliente(),
+                cliente.getNome(),
+                cliente.getCpf(),
+                cliente.getDataNascimento(),
+                cliente.getEmail(),
+                cliente.getSexo(),
+                cliente.getEstadoCivil(),
+                cliente.getEndereco(),
+                cliente.getNumero(),
+                cliente.getComplemento()
+            });
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+
     /**
      * @param args the command line arguments
      */
@@ -237,7 +274,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTblClientes;
     private javax.swing.JFormattedTextField txtCodigo;
     private javax.swing.JFormattedTextField txtProduto;
     // End of variables declaration//GEN-END:variables

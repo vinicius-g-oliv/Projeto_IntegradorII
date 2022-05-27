@@ -24,63 +24,35 @@ import java.sql.SQLException;
  */
 public class ProdutoDAO {
         private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
-        //private static final String LOGIN = “root"; //nome do usuário do banco
-        private static final String SENHA = ""; //senha de acesso ao banco de dados
-        private static final String url = "jdbc:mysql://localhost:3306/lojamvc?useTimezone=true&serverTimezone=UTC";
+        static utils.GerenciadorConexao gc = new GerenciadorConexao();
+        static String LOGIN = gc.getLOGIN();
+        static String SENHA = gc.getSENHA();
+        static String URL = gc.getURL();
         private static Connection conexao;
-         static utils.GerenciadorConexao gc = new GerenciadorConexao();
+        static java.sql.Statement instrucaoSQL;
         
-        
-        public static ArrayList<Produto> consultar() throws ClassNotFoundException, SQLException
-        {
+    public static ArrayList<Produto> consultar() throws ClassNotFoundException, SQLException
+    {
         ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
-        try {
-        
-            Class.forName(DRIVER);
-            //conexao = DriverManager.getConnection(url, LOGIN, SENHA);
-            Statement instrucaoSQL = (Statement) (ResultSet) conexao.createStatement();
-            ResultSet rs;
-            
-           /* rs = instrucaoSQL.executeQuery("SELECT * FROM produto;");
-            if(rs != null){
-                while ( rs.next() ) {
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        instrucaoSQL = conexao.createStatement();
+        Class.forName(DRIVER);
+        ResultSet rs;            
+        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT * FROM produto;");
+        if(rs != null) {
+            while ( rs.next() ) {
                 Produto p = new Produto();
                 p.setCodigo(rs.getString("codigo"));
                 p.setPreco(rs.getFloat("preco"));
                 p.setNome(rs.getString("nome"));
                 p.setQuantidadeEstoque(rs.getInt("CPF"));
-               
                 listaRetorno.add(p);
-                }
             }
-            else
-            {
-                throw new SQLException();
-            }*/
-        }catch (SQLException e) {
-            listaRetorno = null;
-        }catch (ClassNotFoundException ex) {
-            listaRetorno = null;
-        } finally {
-       
-        /*try {
-            Object rs;
-            if(rs!=null)
-                rs.close();
-            if(instrucaoSQL!=null)
-                instrucaoSQL.close();
-            if(conexao!=null)
-                conexao.close();
-        } catch (SQLException ex) {
         }
-        }*/
         return listaRetorno;
-        }
+    }
     
-        }
-        
-        
-        public static void inserir(Produto produto) throws SQLException, ClassNotFoundException {
+    public static void inserir(Produto produto) throws SQLException, ClassNotFoundException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "INSERT INTO produto (nome, codigo, preco, quantidadeEstoque) VALUES (?, ?, ?, ?)";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
