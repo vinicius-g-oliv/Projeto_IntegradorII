@@ -353,6 +353,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             String tipoEmail = txtEmail.getText().toString();
             String tipoCEP = txtCEP.getText().toString();
             String tipoEndereco = txtEndereco.getText().toString();
+            String tipoComplemento = txtComplemento.getText().toString();
             int tipoNumero = Integer.parseInt(txtNumero.getText().toString());
 
             // salvando dados do cliente
@@ -364,11 +365,12 @@ public class CadastroCliente extends javax.swing.JFrame {
                 );
             }
             cliente.setNome(tipoNome);
-            cliente.setCpf(tipoCPF);
+            cliente.setCpf(tipoCPF.replace(".", "").replace("-", ""));
             cliente.setEstadoCivil(tipoEstadoCivil);
             cliente.setSexo(tipoSexo);
             cliente.setEmail(tipoEmail);
-            cliente.setCep(tipoCEP);
+            cliente.setCep(tipoCEP.replace("-", ""));
+            cliente.setComplemento(tipoComplemento);
             cliente.setEndereco(tipoEndereco);
             cliente.setNumero(tipoNumero);
 
@@ -387,7 +389,8 @@ public class CadastroCliente extends javax.swing.JFrame {
                 "\nEmail: " + cliente.getEmail() +
                 "\nCEP: " + cliente.getCep() +
                 "\nEndereço: " + cliente.getEndereco() +
-                "\nNúmero: " + cliente.getNumero()
+                "\nNúmero: " + cliente.getNumero() +
+                "\nComplemento: " + cliente.getComplemento()
             );
 
             // salvando dados do cliente no banco de dados através da classe ClienteDAO
