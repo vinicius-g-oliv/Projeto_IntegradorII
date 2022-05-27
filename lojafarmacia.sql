@@ -1,15 +1,14 @@
+create database if not exists lojafarmacia;
 
-create database PDVFarmacia;
-
-use PDVFarmacia;
+use lojafarmacia;
 
 
 /* Tabela de cliente desenvolvida com os mesmos campos da tela de cliente*/
-create table Cliente
+create table cliente
 (
 	id_cliente  int not null primary key auto_increment,
 	nome        varchar (100) not null,
-	cpf         numeric(11) unique not null,
+	cpf        varchar (11) not null,
 	date        date not null,
 	email       varchar(100) not null,
 	sexo        varchar(20)  not null,
@@ -23,7 +22,7 @@ create table Cliente
 
 
 /* Tabela de produto desenvolvida conforme os campos da tela de produto, adicionando também um campo id_produto como chave primária*/
-create table Produto
+create table produto
 (
 	id_produto          int not null primary key auto_increment,
 	codigo              varchar(10) not null,
@@ -35,7 +34,7 @@ create table Produto
 
 
 /* Tabela de Venda desenvolvida conforma os campos da tela de venda */
-create table Venda
+create table venda
 (
 	id_venda    int not null primary key auto_increment,
 	id_cliente  int not null, foreign key (id_cliente) references Cliente (id_cliente),
@@ -46,7 +45,7 @@ create table Venda
 
 /* Na Tabela ItemVenda foi alterado o campo (valor) para (valorUnitario) e adicionado o campo de valor Total, para
 armazernar as informações de preço dos produtos */
-create table ItemVenda
+create table item_venda
 (
 	id_itemVenda    int not null primary key auto_increment,
 	id_venda        int not null, foreign key (id_venda) references Venda (id_venda),

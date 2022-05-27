@@ -1,4 +1,4 @@
-﻿package DAO;
+package DAO;
 
 public class ItemVendaDAO {
     

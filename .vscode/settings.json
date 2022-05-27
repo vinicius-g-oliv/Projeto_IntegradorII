@@ -13,6 +13,20 @@
             "username": "root",
             "connectionTimeout": 10,
             "password": ""
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "xampMariaDB",
+            "database": "lojafarmacia",
+            "username": "root",
+            "connectionTimeout": 60,
+            "password": ""
         }
     ]
 }

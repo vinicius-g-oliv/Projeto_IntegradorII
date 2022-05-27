@@ -20,15 +20,13 @@ public class GerenciadorConexao {
     public static String DATABASE = "lojafarmacia";
     public static String LOGIN = "root";
     public static String SENHA = "";
-    public static String URL = "";
+    public static String URL = "jdbc:mysql://" + SERVER + ":3306/" +DATABASE;
     public static Connection CONEXAO = null;
 
     public GerenciadorConexao() {
     }
     
-    public static Connection abrirConexao() throws ClassNotFoundException,SQLException {
-        
-        URL = "jdbc:mysql://" + SERVER + ":3306/" +DATABASE;
+    public Connection abrirConexao() throws ClassNotFoundException,SQLException {
         
         if(CONEXAO == null)      
         {    
@@ -68,7 +66,7 @@ public class GerenciadorConexao {
         return STATUS;
     }
     
-    public static boolean fecharConexao() throws SQLException {
+    public boolean fecharConexao() throws SQLException {
  
         boolean retorno = false;
         
@@ -88,7 +86,7 @@ public class GerenciadorConexao {
         return retorno;
     }
 
-    public static String getLOGIN() {
+    public String getLOGIN() {
         return LOGIN;
     }
 
@@ -96,7 +94,7 @@ public class GerenciadorConexao {
         LOGIN = lOGIN;
     }
 
-    public static String getSENHA() {
+    public String getSENHA() {
         return SENHA;
     }
 
@@ -104,23 +102,23 @@ public class GerenciadorConexao {
         SENHA = sENHA;
     }
 
-    public static String getSTATUS() {
+    public String getSTATUS() {
         return STATUS;
     }
 
-    public static String getDRIVER() {
+    public String getDRIVER() {
         return DRIVER;
     }
 
-    public static String getSERVER() {
+    public String getSERVER() {
         return SERVER;
     }
 
-    public static String getDATABASE() {
+    public String getDATABASE() {
         return DATABASE;
     }
 
-    public static String getURL() {
+    public String getURL() {
         return URL;
     }
 
