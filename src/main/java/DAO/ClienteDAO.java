@@ -5,8 +5,11 @@
 package DAO;
 
 /**
- *
- * @author everymind
+ * Essa DAO armazena os cadastros dos clientes, a consulta dos mesmos 
+ * pelo nome e CPF, e deletar e alterar algum cadastro
+ * @author everyone
+ * @see Cliente
+ * @see CadastroCliente
  */
 import Model.Cliente;
 import utils.GerenciadorConexao;

@@ -1,5 +1,11 @@
 package Model;
 
+/**
+ * Essa model representa as classes de entidade dos Itens de Venda
+ * @author everymind
+ * @see ItemVendaDAO
+ */
+
 public class ItemVenda {
     int id_venda;
     int id_produto;

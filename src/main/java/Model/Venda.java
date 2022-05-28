@@ -9,8 +9,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- *
+ * Essa model representa as classes de entidade das Vendas
  * @author everymind
+ * @see VendaDAO
  */
 public class Venda {
     
