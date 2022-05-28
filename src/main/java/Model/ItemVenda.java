@@ -1,6 +1,7 @@
 package Model;
 
 public class ItemVenda {
+    int id_itemVenda;
     int id_venda;
     int id_produto;
     int quantidade;
@@ -39,5 +40,9 @@ public class ItemVenda {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+    
+     public int getId_itemVenda() {
+        return id_itemVenda;
     }
 }

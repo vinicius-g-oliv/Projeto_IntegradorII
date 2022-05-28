@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Venda {
     
  //atributos
-    ArrayList<Produto> produto = new ArrayList<Produto>();
+    ArrayList<ItemVenda> itemDaVenda = new ArrayList<ItemVenda>();
     //String codigoCliente;
     int id_cliente;
     Date dataVenda;
@@ -54,6 +54,11 @@ public class Venda {
     
     public void setData(Date data){
         this.dataVenda = data;
+    }
+    
+    
+     public int getId_venda(){
+        return this.id_venda;
     }
     
     
