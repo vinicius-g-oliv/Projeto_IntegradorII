@@ -15,7 +15,9 @@ import Model.Cliente;
 /**
  * Classe representa a classe de consulta de cadastro dos clientes
  * @author everyone
+ * @see ClienteDAO
  */
+
 public class Clientes extends javax.swing.JFrame {
 
     /**

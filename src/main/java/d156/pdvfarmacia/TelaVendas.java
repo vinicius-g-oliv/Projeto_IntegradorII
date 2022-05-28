@@ -7,6 +7,7 @@ package d156.pdvfarmacia;
 /**
  * Classe representa a classe que são realizadas as vendas do PDV
  * @author everyone
+ * @see VendaDAO
  */
 public class TelaVendas extends javax.swing.JFrame {
 
