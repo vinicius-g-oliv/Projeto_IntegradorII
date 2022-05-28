@@ -9,11 +9,11 @@ package DAO;
  * @author everymind
  */
 import Model.Cliente;
-import d156.pdvfarmacia.Login;
 import utils.GerenciadorConexao;
 import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -28,8 +28,15 @@ public class ClienteDAO {
 
     //Conecta ao banco de dados com utils.GerenciadorConexao
     public static void inserir(Cliente cliente) throws SQLException, ClassNotFoundException {
-        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
-        String sql = "INSERT INTO cliente (nome, cpf, date, email, sexo, endereco, cep, numero, complemento, estadoCivil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        if(clienteExistente(cliente)){
+            throw new SQLException("Cliente já cadastrado");
+        }
+        if(primeiroCliente(cliente)){
+            cadastrarComoPrimeiro(cliente);
+            return;
+        }
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        String sql = "INSERT INTO cliente (nome, cpf, date, email, sexo, endereco, cep, numero, complemento, estadoCivil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //10 parametros
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setString(1, cliente.getNome());
         stmt.setString(2, cliente.getCpf());
@@ -44,6 +51,53 @@ public class ClienteDAO {
         stmt.execute();
         stmt.close();
     }
+
+
+    private static void cadastrarComoPrimeiro(Cliente cliente) throws SQLException {
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        String sql = "INSERT INTO cliente (id_cliente, nome, cpf, date, email, sexo, endereco, cep, numero, complemento, estadoCivil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// 11 para
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setInt(1, 1); //FUNCIONA PELA MOR DE DEUS!
+        stmt.setString(2, cliente.getNome());
+        stmt.setString(3, cliente.getCpf());
+        stmt.setString(4, cliente.getDataNascimento().toString());
+        stmt.setString(5, cliente.getEmail());
+        stmt.setString(6, cliente.getSexo());
+        stmt.setString(7, cliente.getEndereco());
+        stmt.setString(8, cliente.getCep());
+        stmt.setString(9, Integer.toString(cliente.getNumero()));
+        stmt.setString(10, cliente.getComplemento());
+        stmt.setString(11, cliente.getEstadoCivil());
+        stmt.execute();
+        stmt.close();
+    }
+
+
+    private static boolean primeiroCliente(Cliente cliente) throws SQLException {
+        //se não houver linhas na tabela
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        String sql = "SELECT * FROM cliente";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        if(!rs.next()){
+            return true;
+        }
+        return false;
+    }
+
+
+    private static boolean clienteExistente(Cliente cliente) throws SQLException {
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        String sql = "SELECT * FROM cliente WHERE cpf = ?";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setString(1, cliente.getCpf());
+        ResultSet rs = stmt.executeQuery();
+        if(rs.next()){
+            return true;
+        }
+        return false;
+    }
+
 
     public static ArrayList<Cliente> consultar(){
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();

@@ -383,6 +383,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             System.out.println(
                 "------------------------------------------------------\n"+
                 "\nValore das classes atuais ou desatualizados\n"+
+                "\nCódigo: " + cliente.getId_cliente() + "\n"+
                 "\nNome: " + cliente.getNome() +
                 "\nCPF: " + cliente.getCpf() +
                 "\nData de Nascimento: " + cliente.getDataNascimento() +
@@ -401,14 +402,10 @@ public class CadastroCliente extends javax.swing.JFrame {
                 ClienteDAO.inserir(cliente);                                            //CLIENTE DAO
                 JOptionPane.showMessageDialog(this,"Cadastro Concluido");
             } catch (ClassNotFoundException e) {
-                System.out.println(
-                    "(1) Erro ao inserir cliente no banco de dados: " + e.getMessage()
-                );
+                JOptionPane.showMessageDialog(this,"Erro ao conectar com o banco de dados\n"+e.getMessage());
                 e.printStackTrace();
             } catch (SQLException e) {
-                System.out.println(
-                    "(2) Erro ao inserir cliente no banco de dados: " + e.getMessage()
-                );
+                JOptionPane.showMessageDialog(this,"Erro ao conectar com o banco de dados\n"+e.getMessage());
                 e.printStackTrace();
             }
             

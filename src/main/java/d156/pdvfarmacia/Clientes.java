@@ -226,6 +226,7 @@ public class Clientes extends javax.swing.JFrame {
                 cliente.getEstadoCivil(),
                 cliente.getEndereco(),
                 cliente.getNumero(),
+                cliente.getCep(),
                 cliente.getComplemento()
             });
         }

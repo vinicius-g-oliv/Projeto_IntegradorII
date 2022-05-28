@@ -23,9 +23,9 @@ import java.util.ArrayList;
 public class RelatorioDAO {
     
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
-        //private static final String LOGIN = “root"; //nome do usuário do banco
+        //private static final String LOGIN = "root"; //nome do usuário do banco
         private static final String SENHA = ""; //senha de acesso ao banco de dados
-        private static final String url = "jdbc:mysql://localhost:3306/lojamvc?useTimezone=true&serverTimezone=UTC";
+        private static final String URL = "jdbc:mysql://localhost:3306/lojamvc?useTimezone=true&serverTimezone=UTC";
         private static Connection conexao;
         public static ArrayList<Relatorio> consultarProdutos() throws ClassNotFoundException, SQLException
         {
