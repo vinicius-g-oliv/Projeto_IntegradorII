@@ -16,6 +16,8 @@ import DAO.ClienteDAO;
 /**
  * Classe representa a classe de cadastro de clientes da farmácia
  * @author everyone
+ * @see Clientes
+
  */
 public class CadastroCliente extends javax.swing.JFrame {
 
