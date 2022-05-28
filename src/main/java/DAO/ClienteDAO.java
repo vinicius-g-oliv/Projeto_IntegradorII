@@ -11,6 +11,7 @@ package DAO;
 import Model.Cliente;
 import utils.GerenciadorConexao;
 import java.beans.Statement;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -134,12 +135,12 @@ public class ClienteDAO {
 
     }
 
-    public static void deletar(Cliente cliente) throws SQLException {
+    public static void deletar(int id) throws SQLException {
         //deletar cliente
-        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         String sql = "DELETE FROM cliente WHERE id_cliente = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setInt(1, cliente.getId_cliente());
+        stmt.setInt(1, id);
         stmt.execute();
         stmt.close();
     }
