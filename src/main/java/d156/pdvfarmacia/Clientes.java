@@ -4,9 +4,10 @@
  */
 package d156.pdvfarmacia;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.AbstractButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.ClienteDAO;
@@ -15,7 +16,9 @@ import Model.Cliente;
 /**
  * Classe representa a classe de consulta de cadastro dos clientes
  * @author everyone
+ * @see ClienteDAO
  */
+
 public class Clientes extends javax.swing.JFrame {
 
     /**
@@ -110,6 +113,11 @@ public class Clientes extends javax.swing.JFrame {
         btnDeletar.setText("Deletar");
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDeletar.setName(""); // NOI18N
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("CPF:");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -207,10 +215,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // buscar usando clienteDAO e tabela
-        ClienteDAO clienteDAO = new ClienteDAO();
-        List<Cliente> clientes = clienteDAO.consultar();
-        AbstractButton tblClientes;
+        List<Cliente> clientes = ClienteDAO.consultar();
         DefaultTableModel modelo = (DefaultTableModel) jTblClientes.getModel();
         modelo.setNumRows(0);
         for (Cliente cliente : clientes) {
@@ -224,11 +229,36 @@ public class Clientes extends javax.swing.JFrame {
                 cliente.getEstadoCivil(),
                 cliente.getEndereco(),
                 cliente.getNumero(),
+                cliente.getCep(),
                 cliente.getComplemento()
             });
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) jTblClientes.getModel();
+        int linhas_Selecionadas = jTblClientes.getSelectedRowCount();
+        if(linhas_Selecionadas == 0){
+            JOptionPane.showMessageDialog(null, "Selecione uma linha para deletar");
+            return;
+        }
+
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja deletar o(s) registro(s) selecionado(s)?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(opcao == JOptionPane.NO_OPTION){
+            return;
+        }
+        for(int i = 0; i < linhas_Selecionadas; i++){
+            int id_cliente = (int) modelo.getValueAt(jTblClientes.getSelectedRow(), 0);
+            try {
+                ClienteDAO.deletar(id_cliente);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao deletar o registro");
+                e.printStackTrace();
+            }
+            modelo.removeRow(jTblClientes.getSelectedRow());
+        }
+        JOptionPane.showMessageDialog(null, "Registro(s) deletado(s) com sucesso");
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments

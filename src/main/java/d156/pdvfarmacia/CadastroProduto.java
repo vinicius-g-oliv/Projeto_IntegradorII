@@ -15,7 +15,9 @@ import DAO.ProdutoDAO;
 /**
  * Classe representa a classe de cadastro de produtos da farmácia
  * @author everyone
+ * @see ProdutoDAO
  */
+
 public class CadastroProduto extends javax.swing.JFrame {
 
     /**
