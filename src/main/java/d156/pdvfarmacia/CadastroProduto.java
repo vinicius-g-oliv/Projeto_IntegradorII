@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import DAO.ProdutoDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -284,6 +286,12 @@ public class CadastroProduto extends javax.swing.JFrame {
             );
         
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            
+            try {
+                ProdutoDAO.inserir(produto);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         
