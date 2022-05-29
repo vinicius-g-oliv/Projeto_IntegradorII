@@ -272,7 +272,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             Model.Produto produto = new Model.Produto();
             produto.setNome(txtProduto.getText());
             produto.setCodigo(txtCodigo.getText());
-            produto.setPreco(Float.parseFloat(txtPreço.getText().replace(",", ".")));
+            produto.setPreco(Double.parseDouble(txtPreço.getText().replace(",", ".")));
             produto.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
 
             System.out.println(

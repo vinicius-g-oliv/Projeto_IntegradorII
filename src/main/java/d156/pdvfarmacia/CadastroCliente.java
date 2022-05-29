@@ -374,7 +374,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         Model.Cliente cliente = new Model.Cliente();
         cliente = setCliente(cliente);
-        if(btnConcluir.getText().equals("Alterar") && validarCamposObrigatórios() == true){
+        if(btnConcluir.getText().equals("Alterar") && validarCamposObrigatórios() == true && desejaAlterar() == true){
             try{
                 ClienteDAO.alterar(cliente);
                 JOptionPane.showMessageDialog(this, "Cliente alterado com sucesso!");
@@ -397,6 +397,15 @@ public class CadastroCliente extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnConcluirActionPerformed
+
+    private boolean desejaAlterar() {
+        //deseja alterar dadaos?
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja alterar os dados?", "Alterar", JOptionPane.YES_NO_OPTION);
+        if(resposta == JOptionPane.YES_OPTION){
+            return true;
+        }
+        return false;
+    }
 
     private void limparCampos() {
         txtNome.setText("");

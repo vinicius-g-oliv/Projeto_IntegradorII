@@ -43,13 +43,32 @@ public class ProdutoDAO {
             while ( rs.next() ) {
                 Produto p = new Produto();
                 p.setCodigo(rs.getString("codigo"));
-                p.setPreco(rs.getFloat("preco"));
+                p.setPreco(rs.getDouble("preco"));
                 p.setNome(rs.getString("nome"));
                 p.setQuantidadeEstoque(rs.getInt("CPF"));
                 listaRetorno.add(p);
             }
         }
         return listaRetorno;
+    }
+
+    public static Produto consultarProduto(int cod_produto) throws ClassNotFoundException, SQLException
+    {
+        Produto p = new Produto();
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        instrucaoSQL = conexao.createStatement();
+        Class.forName(DRIVER);
+        ResultSet rs;            
+        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT * FROM produto WHERE codigo = %"+cod_produto+"%;");
+        if(rs != null) {
+            while ( rs.next() ) {
+                p.setCodigo(rs.getString("codigo"));
+                p.setNome(rs.getString("nome"));
+                p.setPreco(rs.getDouble("preco"));
+                p.setQuantidadeEstoque(rs.getInt("quantidade_estoque"));
+            }
+        }
+        return p;
     }
     
     public static void inserir(Produto produto) throws SQLException, ClassNotFoundException {
@@ -58,7 +77,7 @@ public class ProdutoDAO {
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setString(1, produto.getNome());
         stmt.setString(2, produto.getCodigo());
-        stmt.setFloat(3, produto.getPreco());
+        stmt.setDouble(3, produto.getPreco());
         stmt.setInt(4, produto.getQuantidadeEstoque());
         stmt.execute();
         stmt.close();
@@ -78,7 +97,7 @@ public class ProdutoDAO {
        String sql = "UPDATE produto SET nome = ?, preco = ?, quantidadeEstoque = ?" + "WHERE codigo = ?";
        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
        stmt.setString(1, produto.getNome());
-       stmt.setFloat(2, produto.getPreco());
+       stmt.setDouble(2, produto.getPreco());
        stmt.setInt(3, produto.getQuantidadeEstoque());
        stmt.setString(4, produto.getCodigo());
        stmt.execute();

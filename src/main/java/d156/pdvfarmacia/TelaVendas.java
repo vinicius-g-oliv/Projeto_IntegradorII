@@ -4,9 +4,17 @@
  */
 package d156.pdvfarmacia;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
+import javax.swing.Action;
+import javax.swing.JOptionPane;
+
+import DAO.ClienteDAO;
+import DAO.ProdutoDAO;
+import Model.Cliente;
 import Model.ItemVenda;
+import Model.Produto;
 import Model.Venda;
 
 /**
@@ -49,8 +57,10 @@ public class TelaVendas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtBuscarCPF = new javax.swing.JFormattedTextField();
         txtQuantidade = new javax.swing.JFormattedTextField();
-        txtBuscarCPF2 = new javax.swing.JFormattedTextField();
+        txtBuscarProduto = new javax.swing.JFormattedTextField();
         btnCadastrarCliente = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Venda");
@@ -97,6 +107,11 @@ public class TelaVendas extends javax.swing.JFrame {
         jLabel2.setText("Digite o código do produto:");
 
         btnBuscarCPF.setText("Buscar");
+        btnBuscarCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCPFActionPerformed(evt);
+            }
+        });
 
         btnBuscarProduto.setText("Buscar");
         btnBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +141,11 @@ public class TelaVendas extends javax.swing.JFrame {
         });
 
         btnFinalizarCompra.setText("Finalizar compra");
+        btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarCompraActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Quantidade:");
 
@@ -137,7 +157,7 @@ public class TelaVendas extends javax.swing.JFrame {
 
         txtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        txtBuscarCPF2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtBuscarProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         btnCadastrarCliente.setText("Cadastrar");
         btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +166,10 @@ public class TelaVendas extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Cliente:");
+
+        jLabel7.setText("###.###.###-##");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,6 +177,7 @@ public class TelaVendas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -160,7 +185,7 @@ public class TelaVendas extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel1)
                                         .addComponent(txtBuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtBuscarCPF2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtBuscarProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(btnBuscarProduto)
@@ -168,7 +193,7 @@ public class TelaVendas extends javax.swing.JFrame {
                                             .addComponent(btnBuscarCPF)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(btnCadastrarCliente))))
-                                .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -177,9 +202,12 @@ public class TelaVendas extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblTotal))
                             .addComponent(jLabel6)
-                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -201,7 +229,7 @@ public class TelaVendas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarProduto)
-                            .addComponent(txtBuscarCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,19 +237,23 @@ public class TelaVendas extends javax.swing.JFrame {
                             .addComponent(txtBuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscarCPF)
                             .addComponent(btnCadastrarCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
+                        .addGap(27, 27, 27)
                         .addComponent(btnAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRemover)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE))
+                        .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
@@ -259,15 +291,101 @@ public class TelaVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        //TODO: Adicionar produto ao carrinho
-        //...
-        // venda.setData(java.sql.Date.valueOf(LocalDate.now()));
-        //...
+        Produto produto = new Produto();
+        ItemVenda itemVenda = new ItemVenda();
+        
+        // produto = ProdutoDAO.consultar();
+         
+        // lblTotal.setText(total.toString());
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
-        // TODO add your handling code here:
+        buscarProduto();
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
+
+    private void buscarProduto() {
+        if(txtBuscarProduto.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Digite o código do produto para buscar");
+            return;
+        }
+        int cod_prod = Integer.parseInt(txtBuscarProduto.getText());
+        Produto produto = new Produto();
+        try {
+            produto = ProdutoDAO.consultarProduto(cod_prod);
+            JOptionPane.showMessageDialog(null, 
+                "Produto encontrado\n"+
+                "Nome: "+produto.getNome()+"\n"+
+                "Preço: "+produto.getPreco()+"\n"+
+                "QuantidadeEstoque: "+produto.getQuantidadeEstoque()+"\n"
+            );
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Produto não encontrado");
+            e.printStackTrace();
+        }
+    }
+
+    private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
+        buscarProduto();
+        buscarCPF();
+        if(txtQuantidade.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Digite a quantidade de produtos");
+            return;
+        }
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja finalizar a compra?");
+        if (resposta == JOptionPane.NO_OPTION) {
+            return;
+        }
+        setValores_Venda_Produto();
+        //finalizar compra
+        //limpar carrinho
+        //exibir mensagem de compra finalizada
+        //...
+        //...
+        //deseja finalizar a compra?
+        int opcao = JOptionPane.showConfirmDialog(this, "Deseja finalizar a compra?");
+        if(opcao == JOptionPane.NO_OPTION){
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Compra finalizada");
+    }//GEN-LAST:event_btnFinalizarCompraActionPerformed
+
+    private void buscarCPF() {
+        if(verificarCampoCPF() == false){
+            JOptionPane.showMessageDialog(null, "Digite o CPF do cliente para buscar");
+            return;
+        }
+        String string_cpf = txtBuscarCPF.getText().replace(".", "").replace("-", "").replace(" ", "");
+        Cliente cliente = new Cliente();
+        try {
+            cliente = ClienteDAO.consultarCPF(string_cpf);
+            JOptionPane.showMessageDialog(null, 
+                "Cliente encontrado\n"+
+                "Nome: "+cliente.getNome()+"\n"+
+                "CPF: "+cliente.getCpf()+"\n"
+            );
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado\n"+e);
+            e.printStackTrace();
+        }
+    }
+
+    private boolean verificarCampoCPF() {
+        String cpf = txtBuscarCPF.getText().replace(".", "").replace("-", "".replace(" ", ""));
+        if(cpf.length() != 11 || cpf.contains(" ") ){
+            return false;
+        }
+        return true;
+    }
+
+    private void setValores_Venda_Produto() {
+        Venda venda = new Venda();
+        venda.setData(java.sql.Date.valueOf(LocalDate.now()));
+        venda.setValor(Double.parseDouble(lblTotal.getText()));
+    }
+
+    private void btnBuscarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCPFActionPerformed
+        buscarCPF();
+    }//GEN-LAST:event_btnBuscarCPFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,14 +433,16 @@ public class TelaVendas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JFormattedTextField txtBuscarCPF;
-    private javax.swing.JFormattedTextField txtBuscarCPF2;
+    private javax.swing.JFormattedTextField txtBuscarProduto;
     private javax.swing.JFormattedTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }
