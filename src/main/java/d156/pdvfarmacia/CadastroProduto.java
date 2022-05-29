@@ -339,7 +339,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             return;
         }
         for(int i = 0; i < linhas_Selecionadas; i++){
-            int id_produto = (int) modelo.getValueAt(jTable1.getSelectedRow(), 1);
+            int id_produto = (int) modelo.getValueAt(jTable1.getSelectedRow(), 0);
             try {
                 ProdutoDAO.deletar(id_produto);
             } catch (SQLException e) {
