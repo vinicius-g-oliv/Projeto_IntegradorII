@@ -1,4 +1,5 @@
-﻿package utils;
+package utils;
+
 import java.time.LocalDate;
 //programa que retorne a data de hoje
 

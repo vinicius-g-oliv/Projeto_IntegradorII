@@ -60,7 +60,7 @@ public class ClienteDAO {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         String sql = "INSERT INTO cliente (id_cliente, nome, cpf, date, email, sexo, endereco, cep, numero, complemento, estadoCivil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// 11 para
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setInt(1, 1); //FUNCIONA PELA MOR DE DEUS!
+        stmt.setInt(1, 1);
         stmt.setString(2, cliente.getNome());
         stmt.setString(3, cliente.getCpf());
         stmt.setString(4, cliente.getDataNascimento().toString());
@@ -94,9 +94,9 @@ public class ClienteDAO {
         stmt.setString(1, cliente.getCpf());
         ResultSet rs = stmt.executeQuery();
         if(rs.next()){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public static ArrayList<Cliente> consultar(String nome, String cpf){
@@ -248,6 +248,25 @@ public class ClienteDAO {
         String sql = "DELETE FROM cliente WHERE id_cliente = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setInt(1, id);
+        stmt.execute();
+        stmt.close();
+    }
+
+    public static void alterarCPF(Cliente cliente, String novo_cpf) throws SQLException {
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        String sql = "UPDATE cliente SET nome = ?, cpf = ?, date = ?, email = ?, sexo = ?, endereco = ?, cep = ?, numero = ?, complemento = ?, estadoCivil = ? WHERE cpf = ?";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setString(1, cliente.getNome());
+        stmt.setString(2, novo_cpf);
+        stmt.setString(3, cliente.getDataNascimento().toString());
+        stmt.setString(4, cliente.getEmail());
+        stmt.setString(5, cliente.getSexo());
+        stmt.setString(6, cliente.getEndereco());
+        stmt.setString(7, cliente.getCep());
+        stmt.setString(8, Integer.toString(cliente.getNumero()));
+        stmt.setString(9, cliente.getComplemento());
+        stmt.setString(10, cliente.getEstadoCivil());
+        stmt.setString(11, cliente.getCpf());
         stmt.execute();
         stmt.close();
     }
