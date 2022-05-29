@@ -64,11 +64,11 @@ public class ProdutoDAO {
         stmt.close();
     }
     
-     public static void deletar(Produto produto) throws SQLException {
+     public static void deletar(int id) throws SQLException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "DELETE FROM produto WHERE codigo = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setString(1, produto.getCodigo());
+        stmt.setInt(1, id);
         stmt.execute();
         stmt.close();
     }

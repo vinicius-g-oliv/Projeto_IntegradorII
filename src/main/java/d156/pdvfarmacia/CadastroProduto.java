@@ -326,7 +326,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        Model.Produto produto = new Model.Produto();
+//        Model.Produto produto = new Model.Produto();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         int linhas_Selecionadas = jTable1.getSelectedRowCount();
         if(linhas_Selecionadas == 0){
@@ -339,9 +339,9 @@ public class CadastroProduto extends javax.swing.JFrame {
             return;
         }
         for(int i = 0; i < linhas_Selecionadas; i++){
-            produto = (Produto) modelo.getValueAt(jTable1.getSelectedRow(), 1);
+            int id_produto = (int) modelo.getValueAt(jTable1.getSelectedRow(), 1);
             try {
-                ProdutoDAO.deletar(produto);
+                ProdutoDAO.deletar(id_produto);
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Erro ao deletar o registro");
                 e.printStackTrace();
