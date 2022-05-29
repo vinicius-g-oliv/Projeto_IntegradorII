@@ -120,6 +120,11 @@ public class CadastroProduto extends javax.swing.JFrame {
         btnDeletar.setText("Deletar");
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDeletar.setName(""); // NOI18N
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -317,6 +322,15 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
         System.out.println(produtos.toString());
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        Model.Produto produto = new Model.Produto();
+        try {
+            ProdutoDAO.deletar(produto);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments
