@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import DAO.ProdutoDAO;
+import Model.Produto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -325,11 +327,28 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         Model.Produto produto = new Model.Produto();
-        try {
-            ProdutoDAO.deletar(produto);
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        int linhas_Selecionadas = jTable1.getSelectedRowCount();
+        if(linhas_Selecionadas == 0){
+            JOptionPane.showMessageDialog(null, "Selecione uma linha para deletar");
+            return;
         }
+
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja deletar o(s) registro(s) selecionado(s)?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(opcao == JOptionPane.NO_OPTION){
+            return;
+        }
+        for(int i = 0; i < linhas_Selecionadas; i++){
+            produto = (Produto) modelo.getValueAt(jTable1.getSelectedRow(), 1);
+            try {
+                ProdutoDAO.deletar(produto);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao deletar o registro");
+                e.printStackTrace();
+            }
+            modelo.removeRow(jTable1.getSelectedRow());
+        }
+        JOptionPane.showMessageDialog(null, "Registro(s) deletado(s) com sucesso");
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
