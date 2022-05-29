@@ -167,7 +167,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         // TODO add your handling code here:
-        CadastroCliente janelaModal = new CadastroCliente();
+        Clientes janelaModal = new Clientes();
         janelaModal.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
 

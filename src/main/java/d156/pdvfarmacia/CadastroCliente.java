@@ -334,8 +334,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             txtNascimento.getValue() != null &&
             txtCEP.getText().length() > 0 &&
             txtEndereco.getText().length() > 0 &&
-            txtNumero.getText().length() > 0 &&
-            txtComplemento.getText().length() > 0
+            txtNumero.getText().length() > 0
         ){
             if(!txtEmail.getText().contains("@") && !txtEmail.getText().contains(".")){
                 JOptionPane.showMessageDialog(null, "Email inválido");
