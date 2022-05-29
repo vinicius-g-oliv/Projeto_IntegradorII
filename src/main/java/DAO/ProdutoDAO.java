@@ -5,13 +5,8 @@
 package DAO;
 
 /**
- * Essa DAO representa a classe de cadastro de produtos da farmácia,
- * podemos cadastrar, deletar, alterar e consultar através do número 
- * de identificação do produto
- * Na venda é utilizado o número de identificação do produto
- * @author everyone
- * @see CadastroProduto
- * @see TelaVendas
+ *
+ * @author everymind
  */
 import Model.Produto;
 import utils.GerenciadorConexao;
@@ -76,5 +71,19 @@ public class ProdutoDAO {
         stmt.setString(1, produto.getCodigo());
         stmt.execute();
         stmt.close();
+    }
+     
+     public static void alterar(Produto produto) throws SQLException {
+        //TODO: implementar alteração
+       conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
+       String sql = "UPDATE produto SET nome = ?, preco = ?, quantidadeEstoque = ?" + "WHERE codigo = ?";
+       java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+       stmt.setString(1, produto.getNome());
+       stmt.setFloat(2, produto.getPreco());
+       stmt.setInt(3, produto.getQuantidadeEstoque());
+       stmt.setString(4, produto.getCodigo());
+       stmt.execute();
+       stmt.close();   
+
     }
 }

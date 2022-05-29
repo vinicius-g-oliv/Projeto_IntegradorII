@@ -5,6 +5,7 @@
 package Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * Essa model representa as classes de entidade do Relatório
@@ -18,12 +19,38 @@ public class Relatorio {
     String nomeCliente;
     Date dataVenda;
     double valorVenda;
-    
+    ArrayList<Venda> vendas = new ArrayList<Venda>();
+    ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+    ArrayList<ItemVenda> itemVenda = new ArrayList<ItemVenda>();
     //Construtor
     public Relatorio(){
     }
     
-    //Getters e Setters    
+    //Getters e Setters 
+    public ArrayList<ItemVenda> getItemVenda(){
+        return this.itemVenda;
+    }
+    
+    public void setItemVenda(ArrayList<ItemVenda> itens){
+        this.itemVenda = itens;
+    }
+    
+    public ArrayList<Cliente> getCliente(){
+        return this.clientes;
+    }
+    
+    public void setClientes(ArrayList<Cliente> clientes){
+        this.clientes = clientes;
+    }
+    
+    public ArrayList<Venda> getVenda(){
+        return this.vendas;
+    }
+    
+    public void setVendas(ArrayList<Venda> vendas){
+        this.vendas = vendas;
+    }
+    
     public String getCodigoProduto(){
         return this.codigoProduto;
     }

@@ -13,13 +13,19 @@ package DAO;
  * @see Relatorio
  * @see RelatorioAnalitico
  */
+import static DAO.VendaDAO.instrucaoSQL;
+import Model.Cliente;
+import Model.Produto;
 import Model.Relatorio;
 import Model.Venda;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import utils.GerenciadorConexao;
+import static utils.GerenciadorConexao.DRIVER;
 
 /**
  *
@@ -27,56 +33,31 @@ import java.util.ArrayList;
  */
 public class RelatorioDAO {
     
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
-        //private static final String LOGIN = "root"; //nome do usuário do banco
-        private static final String SENHA = ""; //senha de acesso ao banco de dados
-        private static final String URL = "jdbc:mysql://localhost:3306/lojamvc?useTimezone=true&serverTimezone=UTC";
-        private static Connection conexao;
-        public static ArrayList<Relatorio> consultarProdutos() throws ClassNotFoundException, SQLException
-        {
-        ArrayList<Relatorio> listaRetorno = new ArrayList<Relatorio>();
-        try {
-        
-            Class.forName(DRIVER);
-            //conexao = DriverManager.getConnection(url, LOGIN, SENHA);
-            Statement instrucaoSQL = (Statement) (ResultSet) conexao.createStatement();
-            ResultSet rs;
-            
-            rs = instrucaoSQL.executeQuery("SELECT * FROM produto;");
-            if(rs != null){
-                while ( rs.next() ) {
-                Relatorio r = new Relatorio();
-                r.setDataVenda(rs.getDate("data venda"));
-                r.setCodigoProduto(rs.getString("codigo produto"));
-                r.setNomeCliente(rs.getString("nome cliente"));
-                r.setValorVenda(rs.getDouble("valor venda"));
-                              
-                listaRetorno.add(r);
-                }
-            }
-            else
-            {
-                throw new SQLException();
-            }
-        }catch (SQLException e) {
-            listaRetorno = null;
-        }catch (ClassNotFoundException ex) {
-            listaRetorno = null;
-        } finally{
-       
-        /*try {
-            Object rs;
-            if(rs!=null)
-                rs.close();
-            if(instrucaoSQL!=null)
-                instrucaoSQL.close();
-            if(conexao!=null)
-                conexao.close();
-        } catch (SQLException ex) {
-        }
-        }*/
-        return listaRetorno;
-        }
+    static utils.GerenciadorConexao gc = new GerenciadorConexao();
+    static Connection conexao = null;
+    static java.beans.Statement stmt;
+    static String LOGIN = gc.getLOGIN();
+    static String SENHA = gc.getSENHA();
+    static String URL = gc.getURL();
     
+    public static ArrayList<Relatorio> consultarVendaCliente() throws ClassNotFoundException, SQLException
+    {
+        ArrayList<Relatorio> listaRetorno = new ArrayList<Relatorio>();
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        instrucaoSQL = conexao.createStatement();
+        Class.forName(DRIVER);
+        ResultSet rs;            
+        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT dataVenda, valor FROM venda as v JOIN (SELECT nomeCliente FROM cliente) as cli on v.id_cliente = cli.id_cliente INNER JOIN (SELECT  id_produto FROM itemVenda) as iv on iv.id_venda = v.id_venda ;");
+        if(rs != null) {
+            while ( rs.next() ) {
+                Relatorio rel = new Relatorio();
+                rel.setNomeCliente(rs.getString("cliente"));
+                rel.setVendas((ArrayList<Venda>) rs.getArray("vendas"));
+                rel.setClientes((ArrayList<Cliente>) rs.getArray("clientes"));
+                listaRetorno.add(rel);
+            }
         }
+        return listaRetorno;
+    }
+
 }
