@@ -4,6 +4,11 @@
  */
 package d156.pdvfarmacia;
 
+import java.time.LocalDate;
+
+import Model.ItemVenda;
+import Model.Venda;
+
 /**
  * Classe representa a classe que são realizadas as vendas do PDV
  * @author everyone
@@ -173,16 +178,18 @@ public class TelaVendas extends javax.swing.JFrame {
                                 .addComponent(lblTotal))
                             .addComponent(jLabel6)
                             .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 22, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,24 +216,20 @@ public class TelaVendas extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(btnAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRemover))
+                        .addComponent(btnRemover)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(lblTotal)
-                            .addComponent(jLabel5))
-                        .addGap(14, 14, 14))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFinalizarCompra)
-                            .addComponent(btnCancelar))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(lblTotal)
+                        .addComponent(jLabel5))
+                    .addComponent(btnFinalizarCompra)
+                    .addComponent(btnCancelar))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,61 +252,22 @@ public class TelaVendas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
+        // TODO add your handling code here:
+        CadastroCliente janelaModal = new CadastroCliente();
+        janelaModal.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarClienteActionPerformed
+
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         //TODO: Adicionar produto ao carrinho
-        /*
-            Salvar valores para a venda e relatório
-        */
-        String codigoProduto = "n/a";//codigo do produto - pegar de uma relação ao buscar produto
-        String nomeProduto = "n/a";//pegar de uma relação ao buscar o produto
-        String codigoCliente = "n/a";//pegar de uma relação ao buscar o produto
-        String dataVenda = "n/a";//pegar de uma relação
-        int quantidade = Integer.parseInt(txtQuantidade.getText());
-        double valor = 0;//pegar de uma relação ao buscar código do produto
-        valor += valor * quantidade;//pegar de uma relação ao buscar o produto
-
-        //relatorio
-        String RelatorioCodProduto = "n/a";//pegar de uma relação ao buscar o produto
-        String RelatorioNomeCliente = "n/a";//pegar de uma relação ao buscar o produto
-
-        /*
-            Setando os valores da venda e relatório
-        */
-        //venda
-        Model.Venda venda = new Model.Venda();
-
-        // venda.setCodigoProduto(codigoProduto);
-        // venda.setNomeProduto(nomeProduto);
-        // venda.setCodigoCliente(codigoCliente);
-        // venda.setData(dataVenda);
-        // venda.setQuatidade(quantidade);
-        // venda.setValor(valor);
-
-        // //relatorio
-        // Model.Relatorio relatorio = new Model.Relatorio();
-
-        // relatorio.setCodigoProduto(RelatorioCodProduto);
-        // relatorio.setNomeCliente(RelatorioNomeCliente);
-        // relatorio.setDataVenda(dataVenda);
-        // relatorio.setValorVenda(valor);
-
-        /*
-            Mostrando valor total da venda
-        */
-        String valorFormatado = String.format("%.2f", valor);
-        lblTotal.setText(valorFormatado);
-
+        //...
+        // venda.setData(java.sql.Date.valueOf(LocalDate.now()));
+        //...
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
-
-    private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
-        // TODO add your handling code here:
-         CadastroCliente janelaModal = new CadastroCliente();
-        janelaModal.setVisible(true);
-    }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
     /**
      * @param args the command line arguments

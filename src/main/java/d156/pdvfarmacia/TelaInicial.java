@@ -170,6 +170,8 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         Cliente janela_cliente = new Cliente();
+        Clientes janelaModal = new Clientes();
+        janelaModal.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed

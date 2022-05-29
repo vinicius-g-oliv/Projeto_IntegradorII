@@ -4,7 +4,6 @@
  */
 package Model;
 
-import java.lang.reflect.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -16,32 +15,40 @@ import java.util.ArrayList;
 public class Venda {
     
  //atributos
-    ArrayList<ItemVenda> itemDaVenda = new ArrayList<ItemVenda>();
-    //String codigoCliente;
-    int id_cliente;
-    Date dataVenda;
-    double valor;
     int id_venda;
+    int id_cliente;
+    java.sql.Date dataVenda;
+    double valor;
 
-    
     //Construtor
     public Venda(){
     }
-    
-    //getters and setters
-    // public void setCodigoProduto(String codigo){
-    //     this.codigoProduto = codigo;
-    // } 
-    
-    // public int getQuantidade(){
-    //     return this.quantidade;
-    // }
-    
-    // public void setQuatidade(int qtd){
-    //     this.quantidade = qtd;
-    // }
-    
-     public double getValor(){
+
+    public int getId_venda() {
+        return id_venda;
+    }
+
+    public void setId_venda(int id_venda) {
+        this.id_venda = id_venda;
+    }
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
+    public Date getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(Date dataVenda) {
+        this.dataVenda = dataVenda;
+    }
+
+    public double getValor(){
         return this.valor;
     }
     
@@ -55,11 +62,6 @@ public class Venda {
     
     public void setData(Date data){
         this.dataVenda = data;
-    }
-    
-    
-     public int getId_venda(){
-        return this.id_venda;
     }
     
     

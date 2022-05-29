@@ -74,7 +74,6 @@ public class ProdutoDAO {
     }
      
      public static void alterar(Produto produto) throws SQLException {
-        //TODO: implementar alteração
        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
        String sql = "UPDATE produto SET nome = ?, preco = ?, quantidadeEstoque = ?" + "WHERE codigo = ?";
        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);

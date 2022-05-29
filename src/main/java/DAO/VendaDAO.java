@@ -14,67 +14,91 @@ package DAO;
  * @see Relatorio
  * @see RelatorioAnalitico
  */
-
 import Model.Venda;
+import utils.GerenciadorConexao;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import utils.GerenciadorConexao;
 
 /**
  *
  * @author everymind
  */
 public class VendaDAO {
-    
-      private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
-        static utils.GerenciadorConexao gc = new GerenciadorConexao();
-        static String LOGIN = gc.getLOGIN();
-        static String SENHA = gc.getSENHA();
-        static String URL = gc.getURL();
-        private static Connection conexao;
-        static java.sql.Statement instrucaoSQL;
-        
-      public static ArrayList<Venda> consultar() throws ClassNotFoundException, SQLException
-    {
-        ArrayList<Venda> listaRetorno = new ArrayList<Venda>();
-        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-        instrucaoSQL = conexao.createStatement();
-        Class.forName(DRIVER);
-        ResultSet rs;            
-        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT * FROM venda;");
-        if(rs != null) {
-            while ( rs.next() ) {
-                Venda v = new Venda();
-                v.setData(rs.getDate("data"));
-                v.setValor(rs.getDouble("valor"));
-                listaRetorno.add(v);
-            }
-        }
-        return listaRetorno;
-    }
-    
-      public static void inserir(Venda venda) throws SQLException, ClassNotFoundException {
-        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
-        String sql = "INSERT INTO venda (valor, data) VALUES (?, ?)";
-        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setDouble(1, venda.getValor());
-        stmt.setDate(2, venda.getData());
-        stmt.execute();
-        stmt.close();
-    }
-      
-      public static void deletar(Venda venda) throws SQLException {
-        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
-        String sql = "DELETE FROM venda WHERE id_venda = ?";
-        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setInt(1, venda.getId_venda());
-        stmt.execute();
-        stmt.close();
-    }
-      
 
+    static final utils.GerenciadorConexao gc = new GerenciadorConexao();
+    static final Connection conexao = null;
+    static final String LOGIN = gc.getLOGIN();
+    static final String SENHA = gc.getSENHA();
+    static final String URL = gc.getURL();
+    static final Statement stmt = null;
+
+    /**
+     * Método para inserir uma venda no banco de dados
+     * @param venda
+     * @return
+     * @throws SQLException
+     */
+
+
+    //consulta
+    //inserir
+
+    public static void consultar(){
+        //TODO
+    }
+
+    public static void inserir(Venda venda) throws SQLException {
+        //TODO: inserir venda no banco de dados
+    }
+
+    // public static ArrayList<Venda> consultarProdutos() throws ClassNotFoundException, SQLException
+    //     {
+    //     ArrayList<Venda> listaRetorno = new ArrayList<Venda>();
+    //     try {
+        
+    //         Class.forName(DRIVER);
+    //         //conexao = DriverManager.getConnection(url, LOGIN, SENHA);
+    //         Statement instrucaoSQL = (Statement) (ResultSet) conexao.createStatement();
+    //         ResultSet rs;
+            
+    //         rs = instrucaoSQL.executeQuery("SELECT * FROM produto;");
+    //         if(rs != null){
+    //             while ( rs.next() ) {
+    //             Venda v = new Venda();
+    //             v.setData(rs.getDate("data"));
+    //             //TODO: Criar um construtor que recebe os valores
+    //             // v.setQuatidade(rs.getInt("quantidade"));
+    //             v.setValor(rs.getDouble("valor"));
+                              
+    //             listaRetorno.add(v);
+    //             }
+    //         }
+    //         else
+    //         {
+    //             throw new SQLException();
+    //         }
+    //     }catch (SQLException e) {
+    //         listaRetorno = null;
+    //     }catch (ClassNotFoundException ex) {
+    //         listaRetorno = null;
+    //     } finally{
+       
+    //     /*try {
+    //         Object rs;
+    //         if(rs!=null)
+    //             rs.close();
+    //         if(instrucaoSQL!=null)
+    //             instrucaoSQL.close();
+    //         if(conexao!=null)
+    //             conexao.close();
+    //     } catch (SQLException ex) {
+    //     }
+    //     }*/
+    //         return listaRetorno;
+    //     }
+    
 }
