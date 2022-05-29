@@ -5,8 +5,9 @@
 package Model;
 
 /**
- *
+ * Essa model representa as classes de entidade de Produto
  * @author everymind
+ * @see PrudutoDAO
  */
 public class Produto {
     

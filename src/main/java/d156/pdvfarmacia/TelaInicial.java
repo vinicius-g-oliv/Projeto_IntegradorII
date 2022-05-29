@@ -4,6 +4,9 @@
  */
 package d156.pdvfarmacia;
 
+import DAO.ClienteDAO;
+import Model.Cliente;
+
 /**
  * Classe representa a classe de geração de relatório do PDV
  * @author everyone
@@ -166,9 +169,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorioActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        // TODO add your handling code here:
-        CadastroCliente janelaModal = new CadastroCliente();
-        janelaModal.setVisible(true);
+        Cliente janela_cliente = new Cliente();
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed

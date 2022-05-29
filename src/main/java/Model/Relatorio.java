@@ -7,8 +7,9 @@ package Model;
 import java.sql.Date;
 
 /**
- *
+ * Essa model representa as classes de entidade do Relatório
  * @author everymind
+ * @see RelatorioDAO
  */
 public class Relatorio {
     

@@ -5,8 +5,13 @@
 package DAO;
 
 /**
- *
+ * Essa DAO representa o armazenamento dos relatórios de compras realizadas
+ * pelos clientes.
+ * A busca pode ser feita através de um período de datas.
+ * Podem ser consultados relatório e relatório analítico
  * @author everymind
+ * @see Relatorio
+ * @see RelatorioAnalitico
  */
 import Model.Relatorio;
 import Model.Venda;

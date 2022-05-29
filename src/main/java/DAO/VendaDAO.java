@@ -5,8 +5,14 @@
 package DAO;
 
 /**
- *
+ * Essa DAO representa o armazenamento das vendas realizadas
+ * São feitas através do número de CPF do cliente
+ * e depois da continuidade para a compra.
+ * Assim, fica armazenado nos relatórios as vendas feitas.
  * @author everymind
+ * @see TelaVendas
+ * @see Relatorio
+ * @see RelatorioAnalitico
  */
 
 import Model.Venda;

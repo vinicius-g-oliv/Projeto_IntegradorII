@@ -5,8 +5,13 @@
 package DAO;
 
 /**
- *
- * @author everymind
+ * Essa DAO representa a classe de cadastro de produtos da farmácia,
+ * podemos cadastrar, deletar, alterar e consultar através do número 
+ * de identificação do produto
+ * Na venda é utilizado o número de identificação do produto
+ * @author everyone
+ * @see CadastroProduto
+ * @see TelaVendas
  */
 import Model.Produto;
 import utils.GerenciadorConexao;

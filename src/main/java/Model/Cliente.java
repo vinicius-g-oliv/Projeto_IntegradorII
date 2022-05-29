@@ -7,8 +7,9 @@ package Model;
 import java.sql.Date;
 
 /**
- *
+ * Essa model representa as classes de entidade do Cliente
  * @author everymind
+ * @see ClienteDAO
  */
 public class Cliente {
 
