@@ -5,6 +5,7 @@
 package d156.pdvfarmacia;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -26,6 +27,81 @@ public class Clientes extends javax.swing.JFrame {
      */
     public Clientes() {
         initComponents();
+        try {
+            carregarJTable();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a tabela de clientes");
+            e.printStackTrace();
+        }
+    }
+
+    private void carregarJTable() throws SQLException {
+        DefaultTableModel tmClientes = new DefaultTableModel();
+        tmClientes.setRowCount(0);
+        tmClientes.addColumn("Código");	
+        tmClientes.addColumn("Nome");
+        tmClientes.addColumn("CPF");
+        tmClientes.addColumn("Data de Nascimento");
+        tmClientes.addColumn("Email");
+        tmClientes.addColumn("Sexo");
+        tmClientes.addColumn("Estado Civil");
+        tmClientes.addColumn("Endereço");
+        tmClientes.addColumn("Número");
+        tmClientes.addColumn("CEP");
+        tmClientes.addColumn("Complemento");
+        jTblClientes.setModel(tmClientes);
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        clientes = ClienteDAO.consultar();
+        for (Cliente cliente : clientes) {
+            tmClientes.addRow(new Object[]{
+                cliente.getId_cliente(),
+                cliente.getNome(),
+                cliente.getCpf(),
+                cliente.getDataNascimento(),
+                cliente.getEmail(),
+                cliente.getSexo(),
+                cliente.getEstadoCivil(),
+                cliente.getEndereco(),
+                cliente.getNumero(),
+                cliente.getCep(),
+                cliente.getComplemento()
+            });
+        }
+    }
+
+    private void carregarJTable(ArrayList<Cliente> clientes){
+        DefaultTableModel tmClientes = new DefaultTableModel();
+        tmClientes.setRowCount(0);
+        tmClientes.addColumn("Código");	
+        tmClientes.addColumn("Nome");
+        tmClientes.addColumn("CPF");
+        tmClientes.addColumn("Data de Nascimento");
+        tmClientes.addColumn("Email");
+        tmClientes.addColumn("Sexo");
+        tmClientes.addColumn("Estado Civil");
+        tmClientes.addColumn("Endereço");
+        tmClientes.addColumn("Número");
+        tmClientes.addColumn("CEP");
+        tmClientes.addColumn("Complemento");
+        jTblClientes.setModel(tmClientes);
+        if(clientes == null || clientes.isEmpty()){
+            return;
+        }
+        for (Cliente aux : clientes) {
+            tmClientes.addRow(new Object[]{
+                aux.getId_cliente(),
+                aux.getNome(),
+                aux.getCpf(),
+                aux.getDataNascimento(),
+                aux.getEmail(),
+                aux.getSexo(),
+                aux.getEstadoCivil(),
+                aux.getEndereco(),
+                aux.getNumero(),
+                aux.getCep(),
+                aux.getComplemento()
+            });
+        }
     }
 
     /**
@@ -39,7 +115,7 @@ public class Clientes extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnBuscar = new javax.swing.JButton();
-        txtProduto = new javax.swing.JFormattedTextField();
+        txtNome = new javax.swing.JFormattedTextField();
         btnAlterar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -47,7 +123,7 @@ public class Clientes extends javax.swing.JFrame {
         btnDeletar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JFormattedTextField();
+        txtCPF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -62,11 +138,11 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
-        txtProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtProduto.setName(""); // NOI18N
-        txtProduto.addActionListener(new java.awt.event.ActionListener() {
+        txtNome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtNome.setName(""); // NOI18N
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtProdutoActionPerformed(evt);
+                txtNomeActionPerformed(evt);
             }
         });
 
@@ -128,12 +204,12 @@ public class Clientes extends javax.swing.JFrame {
         jLabel1.setName(""); // NOI18N
 
         try {
-            txtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtCodigo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtCodigo.setName(""); // NOI18N
+        txtCPF.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtCPF.setName(""); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,8 +224,8 @@ public class Clientes extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,11 +241,11 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCadastrar)
@@ -206,33 +282,31 @@ public class Clientes extends javax.swing.JFrame {
         janelaModal.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtProdutoActionPerformed
+    }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        List<Cliente> clientes = ClienteDAO.consultar();
-        DefaultTableModel modelo = (DefaultTableModel) jTblClientes.getModel();
-        modelo.setNumRows(0);
-        for (Cliente cliente : clientes) {
-            modelo.addRow(new Object[]{
-                cliente.getId_cliente(),
-                cliente.getNome(),
-                cliente.getCpf(),
-                cliente.getDataNascimento(),
-                cliente.getEmail(),
-                cliente.getSexo(),
-                cliente.getEstadoCivil(),
-                cliente.getEndereco(),
-                cliente.getNumero(),
-                cliente.getCep(),
-                cliente.getComplemento()
-            });
+        String cpf = txtCPF.getText().replace(".", "").replace("-", "").replace(" ", "");
+        ArrayList<Cliente> clientes = new ArrayList<>();
+
+        if(txtNome.getText().length() > 0 && cpf != ""){//nome e cpf
+            clientes = ClienteDAO.consultar(txtNome.getText(), cpf);
+        }else if(txtNome.getText().length() > 0){//nome
+            clientes = ClienteDAO.consultarNOME(txtNome.getText());
+        }else if(cpf != ""){//cpf
+            clientes = ClienteDAO.consultarCPF(cpf);
+        }else{//nenhum
+            clientes = ClienteDAO.consultar();
         }
+        carregarJTable(clientes);
+        //limnpar campos
+        txtNome.setText("");
+        txtCPF.setText("");
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
@@ -305,7 +379,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTblClientes;
-    private javax.swing.JFormattedTextField txtCodigo;
-    private javax.swing.JFormattedTextField txtProduto;
+    private javax.swing.JFormattedTextField txtCPF;
+    private javax.swing.JFormattedTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,6 +20,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDAO {
 
@@ -102,6 +103,37 @@ public class ClienteDAO {
         return false;
     }
 
+    public static ArrayList<Cliente> consultar(String nome, String cpf){
+        ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
+        try {
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            String sql = "SELECT * FROM cliente WHERE nome LIKE ? AND cpf LIKE ?";
+            java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, "%" + nome + "%");
+            stmt.setString(2, "%" + cpf + "%");
+            java.sql.ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId_cliente(rs.getInt("id_cliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setDataNascimento(rs.getDate("date"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setSexo(rs.getString("sexo"));
+                cliente.setCep(rs.getString("cep"));
+                cliente.setEndereco(rs.getString("endereco"));
+                cliente.setNumero(rs.getInt("numero"));
+                cliente.setComplemento(rs.getString("complemento"));
+                cliente.setEstadoCivil(rs.getString("estadoCivil"));
+                array_clientes.add(cliente); //Adiciona o cliente na lista
+            }
+            rs.close();
+            stmt.close();
+        }catch (SQLException e) {
+            System.out.println("Erro ao consultar clientes: " + e.getMessage());
+        }
+        return array_clientes;
+    }
 
     public static ArrayList<Cliente> consultar(){
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
@@ -109,6 +141,68 @@ public class ClienteDAO {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
             String sql = "SELECT * FROM cliente";
             java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+            java.sql.ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId_cliente(rs.getInt("id_cliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setDataNascimento(rs.getDate("date"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setSexo(rs.getString("sexo"));
+                cliente.setCep(rs.getString("cep"));
+                cliente.setEndereco(rs.getString("endereco"));
+                cliente.setNumero(rs.getInt("numero"));
+                cliente.setComplemento(rs.getString("complemento"));
+                cliente.setEstadoCivil(rs.getString("estadoCivil"));
+                array_clientes.add(cliente); //Adiciona o cliente na lista
+            }
+            rs.close();
+            stmt.close();
+        }catch (SQLException e) {
+            System.out.println("Erro ao consultar clientes: " + e.getMessage());
+        }
+        return array_clientes;
+    }
+
+    public static ArrayList<Cliente> consultarCPF(String cpf){
+        ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
+        try {
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            String sql = "SELECT * FROM cliente WHERE cpf LIKE ?";
+            java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, ""+cpf+""); //%cpf%
+            java.sql.ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId_cliente(rs.getInt("id_cliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setDataNascimento(rs.getDate("date"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setSexo(rs.getString("sexo"));
+                cliente.setEndereco(rs.getString("endereco"));
+                cliente.setCep(rs.getString("cep"));
+                cliente.setNumero(rs.getInt("numero"));
+                cliente.setComplemento(rs.getString("complemento"));
+                cliente.setEstadoCivil(rs.getString("estadoCivil"));
+                array_clientes.add(cliente); //Adiciona o cliente na lista
+            }
+            rs.close();
+            stmt.close();
+        }catch (SQLException e) {
+            System.out.println("Erro ao consultar clientes: " + e.getMessage());
+        }
+        return array_clientes;
+    }
+
+    public static ArrayList<Cliente> consultarNOME(String nome){
+        ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
+        try {
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            String sql = "SELECT * FROM cliente WHERE nome LIKE ?";
+            java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, "%"+nome+"%"); //%nome%
             java.sql.ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Cliente cliente = new Cliente();
@@ -134,8 +228,22 @@ public class ClienteDAO {
     }
 
     public static void alterar(Cliente cliente) throws SQLException {
-        //TODO: implementar alteração
-
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        String sql = "UPDATE cliente SET nome = ?, cpf = ?, date = ?, email = ?, sexo = ?, endereco = ?, cep = ?, numero = ?, complemento = ?, estadoCivil = ? WHERE id_cliente = ?";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setString(1, cliente.getNome());
+        stmt.setString(2, cliente.getCpf());
+        stmt.setString(3, cliente.getDataNascimento().toString());
+        stmt.setString(4, cliente.getEmail());
+        stmt.setString(5, cliente.getSexo());
+        stmt.setString(6, cliente.getEndereco());
+        stmt.setString(7, cliente.getCep());
+        stmt.setString(8, Integer.toString(cliente.getNumero()));
+        stmt.setString(9, cliente.getComplemento());
+        stmt.setString(10, cliente.getEstadoCivil());
+        stmt.setInt(11, cliente.getId_cliente());
+        stmt.execute();
+        stmt.close();
     }
 
     public static void deletar(int id) throws SQLException {
@@ -147,6 +255,8 @@ public class ClienteDAO {
         stmt.execute();
         stmt.close();
     }
+
+    
 }
 
 

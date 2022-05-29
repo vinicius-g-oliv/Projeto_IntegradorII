@@ -338,7 +338,14 @@ public class CadastroCliente extends javax.swing.JFrame {
         ){
             if(!txtEmail.getText().contains("@") && !txtEmail.getText().contains(".")){
                 JOptionPane.showMessageDialog(null, "Email inválido");
+                return;
             }
+            //validar data de nascimento
+            if(txtNascimento.getValue() == null || txtNascimento.getValue().toString().equals("00/00/0000")){
+                JOptionPane.showMessageDialog(null, "Data de nascimento inválida");
+                return;
+            }
+            
             /*
             Criando um Objeto Cliente
             */
@@ -400,6 +407,17 @@ public class CadastroCliente extends javax.swing.JFrame {
             try {
                 ClienteDAO.inserir(cliente);                                            //CLIENTE DAO
                 JOptionPane.showMessageDialog(this,"Cadastro Concluido");
+                // limpa os campos
+                txtNome.setText("");
+                cboCivil.setSelectedIndex(0);
+                cboSexo.setSelectedIndex(0);
+                txtCPF.setValue(null);
+                txtEmail.setText("");
+                txtNascimento.setValue(null);
+                txtCEP.setText("");
+                txtEndereco.setText("");
+                txtNumero.setText("");
+                txtComplemento.setText("");
             } catch (ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(this,"Erro ao conectar com o banco de dados\n"+e.getMessage());
                 e.printStackTrace();
@@ -407,18 +425,6 @@ public class CadastroCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Erro ao conectar com o banco de dados\n"+e.getMessage());
                 e.printStackTrace();
             }
-            
-            // limpa os campos
-            // txtNome.setText("");
-            // cboCivil.setSelectedIndex(0);
-            // cboSexo.setSelectedIndex(0);
-            // txtCPF.setValue(null);
-            // txtEmail.setText("");
-            // txtNascimento.setValue(null);
-            // txtCEP.setText("");
-            // txtEndereco.setText("");
-            // txtNumero.setText("");
-            // txtComplemento.setText("");
         }else{
             JOptionPane.showMessageDialog(this
                 ,"Preencha todos os campos obrigatórios (*)");
