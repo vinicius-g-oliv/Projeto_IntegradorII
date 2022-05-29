@@ -15,7 +15,7 @@ import DAO.ClienteDAO;
 import Model.Cliente;
 
 /**
- * Classe representa a classe de consulta de cadastro dos clientes
+ * Classe representa a classe de consulta de clientes no banco de dados e a classe de inserção de clientes no banco de dados.
  * @author everyone
  * @see ClienteDAO
  */
@@ -35,7 +35,7 @@ public class Clientes extends javax.swing.JFrame {
         }
     }
 
-    private void carregarJTable() throws SQLException {
+    public void carregarJTable() throws SQLException {
         DefaultTableModel tmClientes = new DefaultTableModel();
         tmClientes.setRowCount(0);
         tmClientes.addColumn("Código");	
@@ -287,8 +287,36 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        
+        DefaultTableModel modelo = (DefaultTableModel) jTblClientes.getModel();
+        int linhaSelecionada = jTblClientes.getSelectedRow();
+        if(linhaSelecionada >= 0) {
+            Cliente cliente = new Cliente();
+            setClienteComValoresDaLinha(cliente, modelo, linhaSelecionada);
+            CadastroCliente janelaModal = new CadastroCliente(cliente);
+            janelaModal.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um cliente para alterar");
+        }
+        try {
+            carregarJTable();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a tabela");
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void setClienteComValoresDaLinha(Cliente cliente, DefaultTableModel modelo, int linhaSelecionada) {
+        cliente.setId_cliente(Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString()));
+        cliente.setNome(modelo.getValueAt(linhaSelecionada, 1).toString());
+        cliente.setCpf(modelo.getValueAt(linhaSelecionada, 2).toString());
+        cliente.setDataNascimento(java.sql.Date.valueOf(modelo.getValueAt(linhaSelecionada, 3).toString()));
+        cliente.setEmail(modelo.getValueAt(linhaSelecionada, 4).toString());
+        cliente.setSexo(modelo.getValueAt(linhaSelecionada, 5).toString());
+        cliente.setEstadoCivil(modelo.getValueAt(linhaSelecionada, 6).toString());
+        cliente.setEndereco(modelo.getValueAt(linhaSelecionada, 7).toString());
+        cliente.setNumero(Integer.parseInt(modelo.getValueAt(linhaSelecionada, 8).toString()));
+        cliente.setCep(modelo.getValueAt(linhaSelecionada, 9).toString());
+        cliente.setComplemento(modelo.getValueAt(linhaSelecionada, 10).toString());
+    }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cpf = txtCPF.getText().replace(".", "").replace("-", "").replace(" ", "");

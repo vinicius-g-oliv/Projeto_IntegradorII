@@ -5,6 +5,7 @@
 package d156.pdvfarmacia;
 
 import java.util.Date;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 import DAO.ClienteDAO;
+import Model.Cliente;
 
 /**
  * Classe representa a classe de cadastro de clientes da farmácia
@@ -24,12 +26,50 @@ public class CadastroCliente extends javax.swing.JFrame {
     /**
      * Creates new form CadastroCliente
      */
+
     public CadastroCliente() {
         
         initComponents();
 
     }
 
+    public CadastroCliente(Cliente cliente) {
+        initComponents();
+        mostrarValores(cliente);
+        this.btnConcluir.setText("Alterar");
+    }
+
+    private void mostrarValores(Cliente cliente) {
+        this.txtNome.setText(cliente.getNome()+"");
+        this.txtCPF.setText(cliente.getCpf()+"");
+        this.txtEndereco.setText(cliente.getEndereco()+"");
+        this.txtComplemento.setText(cliente.getComplemento()+"");
+        this.txtCEP.setText(cliente.getCep()+"");
+        this.txtEmail.setText(cliente.getEmail()+"");
+        this.txtNumero.setText(String.valueOf(cliente.getNumero())+"");
+        try {
+            String data_convertida = converterDateParaString(cliente.getDataNascimento());
+            this.txtNascimento.setText(data_convertida);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao converter data\n"+e);
+            e.printStackTrace();
+        }
+        if(cliente.getEstadoCivil().equals("Solteira(o)")){
+            this.cboCivil.setSelectedIndex(1);
+        }
+        if(cliente.getEstadoCivil().equals("Casada(o)")){
+            this.cboCivil.setSelectedIndex(2);
+        }
+        if(cliente.getEstadoCivil().equals("Viúva(o)")){
+            this.cboCivil.setSelectedIndex(3);
+        }
+        if(cliente.getSexo().equals("Masculino")){
+            this.cboSexo.setSelectedIndex(1);
+        }
+        if(cliente.getSexo().equals("Feminino")){
+            this.cboSexo.setSelectedIndex(2);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,6 +144,14 @@ public class CadastroCliente extends javax.swing.JFrame {
         jButtonPróximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPróximoActionPerformed(evt);
+            }
+        });
+        jButtonPróximo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonPróximoKeyPressed(evt);
+            }
+
+            private void jButtonPróximoKeyPressed(KeyEvent evt) {
             }
         });
 
@@ -247,7 +295,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 115, Short.MAX_VALUE)))
+                        .addGap(0, 124, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -314,121 +362,92 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVoltarKeyTyped
-
+        jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnVoltarKeyTyped
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        this.jTabbedPane1.setSelectedIndex(1);
+        this.jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
-        /*
-        validar campos obrigatorios
-        */
-
         if(
-            txtNome.getText().length() > 0 &&
-            cboSexo.getSelectedIndex() > 0 &&
-            txtCPF.getValue() != null &&
-            txtEmail.getText().length() > 0 &&
-            txtNascimento.getValue() != null &&
-            txtCEP.getText().length() > 0 &&
-            txtEndereco.getText().length() > 0 &&
-            txtNumero.getText().length() > 0
+            cboSexo.getSelectedIndex() <= 0 ||
+            txtNome.getText().isEmpty() ||
+            txtCPF.getText().isEmpty() ||
+            txtEmail.getText().isEmpty() ||
+            txtCEP.getText().isEmpty() ||
+            txtEndereco.getText().isEmpty() ||
+            txtNumero.getText().isEmpty() ||
+            txtNascimento.getText().isEmpty()
         ){
-            if(!txtEmail.getText().contains("@") && !txtEmail.getText().contains(".")){
-                JOptionPane.showMessageDialog(null, "Email inválido");
-                return;
-            }
-            //validar data de nascimento
-            if(txtNascimento.getValue() == null || txtNascimento.getValue().toString().equals("00/00/0000")){
-                JOptionPane.showMessageDialog(null, "Data de nascimento inválida");
-                return;
-            }
-            
-            /*
-            Criando um Objeto Cliente
-            */
-            Model.Cliente cliente = new Model.Cliente();
-
-            /* Salvando e setando os dados do cliente */
-
-            String tipoNascimento = txtNascimento.getText().toString();
-            String tipoNome = txtNome.getText().toString();
-            String tipoCPF = txtCPF.getText().toString();
-            String tipoEstadoCivil = cboCivil.getSelectedItem().toString();
-            String tipoSexo = cboSexo.getSelectedItem().toString();
-            String tipoEmail = txtEmail.getText().toString();
-            String tipoCEP = txtCEP.getText().toString();
-            String tipoEndereco = txtEndereco.getText().toString();
-            String tipoComplemento = txtComplemento.getText().toString();
-            int tipoNumero = Integer.parseInt(txtNumero.getText().toString());
-
-            // salvando dados do cliente
-            try {
-                cliente.setDataNascimento(converterParaDate(tipoNascimento));
-            } catch (ParseException e) {
-                System.out.println(
-                    "Erro ao converter data de nascimento do cliente: " + e.getMessage()
-                );
-            }
-            cliente.setNome(tipoNome);
-            cliente.setCpf(tipoCPF.replace(".", "").replace("-", ""));
-            cliente.setEstadoCivil(tipoEstadoCivil);
-            cliente.setSexo(tipoSexo);
-            cliente.setEmail(tipoEmail);
-            cliente.setCep(tipoCEP.replace("-", ""));
-            cliente.setComplemento(tipoComplemento);
-            cliente.setEndereco(tipoEndereco);
-            cliente.setNumero(tipoNumero);
-
-            /*
-            * Imprimindo resultados no terminal para teste
-            */
-
-            System.out.println(
-                "------------------------------------------------------\n"+
-                "\nValore das classes atuais ou desatualizados\n"+
-                "\nCódigo: " + cliente.getId_cliente() + "\n"+
-                "\nNome: " + cliente.getNome() +
-                "\nCPF: " + cliente.getCpf() +
-                "\nData de Nascimento: " + cliente.getDataNascimento() +
-                "\nEstado Civil: " + cliente.getEstadoCivil() +
-                "\nSexo: " + cliente.getSexo() +
-                "\nEmail: " + cliente.getEmail() +
-                "\nCEP: " + cliente.getCep() +
-                "\nEndereço: " + cliente.getEndereco() +
-                "\nNúmero: " + cliente.getNumero() +
-                "\nComplemento: " + cliente.getComplemento()
-            );
-
-            // salvando dados do cliente no banco de dados através da classe ClienteDAO
-            
-            try {
-                ClienteDAO.inserir(cliente);                                            //CLIENTE DAO
-                JOptionPane.showMessageDialog(this,"Cadastro Concluido");
-                // limpa os campos
-                txtNome.setText("");
-                cboCivil.setSelectedIndex(0);
-                cboSexo.setSelectedIndex(0);
-                txtCPF.setValue(null);
-                txtEmail.setText("");
-                txtNascimento.setValue(null);
-                txtCEP.setText("");
-                txtEndereco.setText("");
-                txtNumero.setText("");
-                txtComplemento.setText("");
-            } catch (ClassNotFoundException e) {
-                JOptionPane.showMessageDialog(this,"Erro ao conectar com o banco de dados\n"+e.getMessage());
-                e.printStackTrace();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this,"Erro ao conectar com o banco de dados\n"+e.getMessage());
-                e.printStackTrace();
-            }
-        }else{
-            JOptionPane.showMessageDialog(this
-                ,"Preencha todos os campos obrigatórios (*)");
+            JOptionPane.showMessageDialog(this,"Preencha todos os campos obrigatórios (*)");
             return;
+        }
+        if(!txtEmail.getText().contains("@") && !txtEmail.getText().contains(".")){
+            JOptionPane.showMessageDialog(null, "Email inválido");
+            return;
+        }
+        if(txtNascimento.toString() == null || txtNascimento.toString().equals("00/00/0000")){
+            JOptionPane.showMessageDialog(null, "Data de nascimento inválida");
+            return;
+        }
+        Model.Cliente cliente = new Model.Cliente();
+        String tipoNascimento = txtNascimento.getText().toString();
+        String tipoNome = txtNome.getText().toString();
+        String tipoCPF = txtCPF.getText().toString();
+        String tipoEstadoCivil = cboCivil.getSelectedItem().toString();
+        String tipoSexo = cboSexo.getSelectedItem().toString();
+        String tipoEmail = txtEmail.getText().toString();
+        String tipoCEP = txtCEP.getText().toString();
+        String tipoEndereco = txtEndereco.getText().toString();
+        String tipoComplemento = txtComplemento.getText().toString();
+        int tipoNumero = Integer.parseInt(txtNumero.getText().toString());
+        try {
+            cliente.setDataNascimento(converterParaDate(tipoNascimento));
+        } catch (ParseException e) {
+            System.out.println(
+                "Erro ao converter data de nascimento do cliente: " + e.getMessage()
+            );
+        }
+        cliente.setNome(tipoNome);
+        cliente.setCpf(tipoCPF.replace(".", "").replace("-", ""));
+        cliente.setEstadoCivil(tipoEstadoCivil);
+        cliente.setSexo(tipoSexo);
+        cliente.setEmail(tipoEmail);
+        cliente.setCep(tipoCEP.replace("-", ""));
+        cliente.setComplemento(tipoComplemento);
+        cliente.setEndereco(tipoEndereco);
+        cliente.setNumero(tipoNumero);
+        if(btnConcluir.getText().equals("Alterar")){
+            try{
+                ClienteDAO.alterar(cliente);
+                JOptionPane.showMessageDialog(this, "Cliente alterado com sucesso!");
+                return;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Erro ao atualizar cliente: " + e.getMessage());
+            }
+        }
+        
+        try {
+            ClienteDAO.inserir(cliente);
+            JOptionPane.showMessageDialog(this,"Cadastro Concluido");
+            // limpa os campos
+            txtNome.setText("");
+            cboCivil.setSelectedIndex(0);
+            cboSexo.setSelectedIndex(0);
+            txtCPF.setValue(null);
+            txtEmail.setText("");
+            txtNascimento.setValue(null);
+            txtCEP.setText("");
+            txtEndereco.setText("");
+            txtNumero.setText("");
+            txtComplemento.setText("");
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this,"Erro ao conectar com o banco de dados\n"+e.getMessage());
+            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,e.getMessage());
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnConcluirActionPerformed
 
@@ -442,13 +461,20 @@ public class CadastroCliente extends javax.swing.JFrame {
     private java.sql.Date converterParaDate(String string) throws ParseException {
         // trocando de dd/MM/yyyy para yyyy-MM-dd
         string = 
-            string.substring(6, 10) + "-" +
-            string.substring(3, 5) + "-" +
-            string.substring(0, 2);
+        string.substring(6, 10) + "-" +
+        string.substring(3, 5) + "-" +
+        string.substring(0, 2);
         // converter para data
         Date dt_nasc = new SimpleDateFormat("yyyy-MM-dd").parse(string);
         java.sql.Date dt_nasc_sql = new java.sql.Date(dt_nasc.getTime());
         return dt_nasc_sql;
+    }
+
+    private String converterDateParaString(java.sql.Date date) throws ParseException {
+        // converter para string
+        Date dt_nasc = new SimpleDateFormat("yyyy-MM-dd").parse(date.toString());
+        String dt_nasc_string = new SimpleDateFormat("dd/MM/yyyy").format(dt_nasc);
+        return dt_nasc_string;
     }
 
     /**

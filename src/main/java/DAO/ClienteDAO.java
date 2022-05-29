@@ -20,7 +20,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ClienteDAO {
 
@@ -57,7 +56,6 @@ public class ClienteDAO {
         stmt.close();
     }
 
-
     private static void cadastrarComoPrimeiro(Cliente cliente) throws SQLException {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         String sql = "INSERT INTO cliente (id_cliente, nome, cpf, date, email, sexo, endereco, cep, numero, complemento, estadoCivil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// 11 para
@@ -77,7 +75,6 @@ public class ClienteDAO {
         stmt.close();
     }
 
-
     private static boolean primeiroCliente(Cliente cliente) throws SQLException {
         //se não houver linhas na tabela
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -89,7 +86,6 @@ public class ClienteDAO {
         }
         return false;
     }
-
 
     private static boolean clienteExistente(Cliente cliente) throws SQLException {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -229,25 +225,6 @@ public class ClienteDAO {
 
     public static void alterar(Cliente cliente) throws SQLException {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-        String sql = "UPDATE cliente SET nome = ?, cpf = ?, date = ?, email = ?, sexo = ?, endereco = ?, cep = ?, numero = ?, complemento = ?, estadoCivil = ? WHERE id_cliente = ?";
-        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setString(1, cliente.getNome());
-        stmt.setString(2, cliente.getCpf());
-        stmt.setString(3, cliente.getDataNascimento().toString());
-        stmt.setString(4, cliente.getEmail());
-        stmt.setString(5, cliente.getSexo());
-        stmt.setString(6, cliente.getEndereco());
-        stmt.setString(7, cliente.getCep());
-        stmt.setString(8, Integer.toString(cliente.getNumero()));
-        stmt.setString(9, cliente.getComplemento());
-        stmt.setString(10, cliente.getEstadoCivil());
-        stmt.setInt(11, cliente.getId_cliente());
-        stmt.execute();
-        stmt.close();
-    }
-    
-    public static void alterarPorCPF(Cliente cliente) throws SQLException {
-        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         String sql = "UPDATE cliente SET nome = ?, cpf = ?, date = ?, email = ?, sexo = ?, endereco = ?, cep = ?, numero = ?, complemento = ?, estadoCivil = ? WHERE cpf = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setString(1, cliente.getNome());
@@ -260,26 +237,7 @@ public class ClienteDAO {
         stmt.setString(8, Integer.toString(cliente.getNumero()));
         stmt.setString(9, cliente.getComplemento());
         stmt.setString(10, cliente.getEstadoCivil());
-        stmt.setInt(11, cliente.getId_cliente());
-        stmt.execute();
-        stmt.close();
-    }
-    
-    public static void alterarPorNome(Cliente cliente) throws SQLException {
-        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-        String sql = "UPDATE cliente SET nome = ?, cpf = ?, date = ?, email = ?, sexo = ?, endereco = ?, cep = ?, numero = ?, complemento = ?, estadoCivil = ? WHERE nome = ?";
-        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setString(1, cliente.getNome());
-        stmt.setString(2, cliente.getCpf());
-        stmt.setString(3, cliente.getDataNascimento().toString());
-        stmt.setString(4, cliente.getEmail());
-        stmt.setString(5, cliente.getSexo());
-        stmt.setString(6, cliente.getEndereco());
-        stmt.setString(7, cliente.getCep());
-        stmt.setString(8, Integer.toString(cliente.getNumero()));
-        stmt.setString(9, cliente.getComplemento());
-        stmt.setString(10, cliente.getEstadoCivil());
-        stmt.setInt(11, cliente.getId_cliente());
+        stmt.setString(11, cliente.getCpf());
         stmt.execute();
         stmt.close();
     }
