@@ -4,23 +4,12 @@
  */
 package DAO;
 
-/**
- * Essa DAO representa o armazenamento dos relatórios de compras realizadas
- * pelos clientes.
- * A busca pode ser feita através de um período de datas.
- * Podem ser consultados relatório e relatório analítico
- * @author everymind
- * @see Relatorio
- * @see RelatorioAnalitico
- */
-import Model.Produto;
 import Model.Relatorio;
-import Model.Venda;
+import Model.RelatorioAnaliticoClasse;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import utils.GerenciadorConexao;
 
@@ -28,9 +17,9 @@ import utils.GerenciadorConexao;
  *
  * @author everymind
  */
-public class RelatorioDAO {
+public class RelatorioAnaliticoDAO {
     
-  private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
         static utils.GerenciadorConexao gc = new GerenciadorConexao();
         static String LOGIN = gc.getLOGIN();
         static String SENHA = gc.getSENHA();
@@ -38,20 +27,21 @@ public class RelatorioDAO {
         private static Connection conexao;
         static java.sql.Statement instrucaoSQL;
         
-    public static ArrayList<Relatorio> buscar() throws ClassNotFoundException, SQLException
+    public static ArrayList<RelatorioAnaliticoClasse> buscar() throws ClassNotFoundException, SQLException
     {
-        ArrayList<Relatorio> listaRetorno = new ArrayList<Relatorio>();
+        ArrayList<RelatorioAnaliticoClasse> listaRetorno = new ArrayList<RelatorioAnaliticoClasse>();
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         instrucaoSQL = conexao.createStatement();
         Class.forName(DRIVER);
         ResultSet rs;            
-        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT c.nome, v.valorVenda, v.dataVenda FROM venda as v INNER JOIN clients as c on v.id_cliente = c.id_cliente WHERE dataVenda BETWEEN ? AND ? ;");
+        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT iv.id_produto, iv.quantidade, v.id_cliente.nome, v.data FROM itemVenda as iv INNER JOIN venda as v on iv.id_venda = v.id_venda WHERE dataVenda BETWEEN ? AND ? ;");
         if(rs != null) {
             while ( rs.next() ) {
-                Relatorio rel = new Relatorio();
-                rel.setNomeCliente(rs.getString("nomeCliente"));
-                rel.setValorVenda(rs.getFloat("valorVenda"));
-                rel.setDataVenda(rs.getDate("dataVenda"));
+                RelatorioAnaliticoClasse rel = new RelatorioAnaliticoClasse();
+                rel.setProdutos(rs.getString("produtos"));
+                rel.setQuantidade(rs.getInt("quantidade"));
+                rel.setNomeCli(rs.getString("nomeCliente"));
+                rel.setData(rs.getDate("data"));
                
                 listaRetorno.add(rel);
             }
@@ -59,5 +49,6 @@ public class RelatorioDAO {
         return listaRetorno;
     }
 
-   
+    
+    
 }

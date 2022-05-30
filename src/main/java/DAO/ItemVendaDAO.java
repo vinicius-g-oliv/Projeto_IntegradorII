@@ -39,6 +39,8 @@ public class ItemVendaDAO {
         return listaRetorno;
     }
     
+    
+    
     public static void inserir(ItemVenda itemVenda) throws SQLException, ClassNotFoundException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "INSERT INTO itemVenda (id_venda, id_produto, quantidade, valor) VALUES (?, ?, ?, ?)";
