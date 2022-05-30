@@ -18,7 +18,7 @@ public class Venda {
     int id_venda;
     int id_cliente;
     java.sql.Date dataVenda;
-    double valor;
+    Double valor;
 
     //Construtor
     public Venda(){
@@ -52,7 +52,7 @@ public class Venda {
         return this.valor;
     }
     
-    public void setValor(double novoValor){
+    public void setValor(Double novoValor){
         this.valor = novoValor;
     }
     

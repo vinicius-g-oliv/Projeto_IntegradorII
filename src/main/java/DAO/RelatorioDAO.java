@@ -45,7 +45,7 @@ public class RelatorioDAO {
         instrucaoSQL = conexao.createStatement();
         Class.forName(DRIVER);
         ResultSet rs;            
-        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT c.nome, v.valorVenda, v.dataVenda FROM venda as v INNER JOIN clients as c on v.id_cliente = c.id_cliente WHERE dataVenda BETWEEN ? AND ? ;");
+        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT c.nome, v.valorVenda, v.dataVenda FROM venda as v INNER JOIN clientes AS c ON v.id_cliente = c.id_cliente WHERE dataVenda BETWEEN ? AND ? ;");
         if(rs != null) {
             while ( rs.next() ) {
                 Relatorio rel = new Relatorio();

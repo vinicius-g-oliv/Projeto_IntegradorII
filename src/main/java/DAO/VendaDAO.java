@@ -18,6 +18,7 @@ import Model.Venda;
 import utils.GerenciadorConexao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,76 +30,73 @@ import java.util.ArrayList;
  */
 public class VendaDAO {
 
-    static final utils.GerenciadorConexao gc = new GerenciadorConexao();
-    static final Connection conexao = null;
-    static final String LOGIN = gc.getLOGIN();
-    static final String SENHA = gc.getSENHA();
-    static final String URL = gc.getURL();
-    static final Statement stmt = null;
+    static utils.GerenciadorConexao gc = new GerenciadorConexao();
+    static Connection conexao = null;
+    static String LOGIN = gc.getLOGIN();
+    static String SENHA = gc.getSENHA();
+    static String URL = gc.getURL();
+    static Statement stmt = null;
 
     /**
      * Método para inserir uma venda no banco de dados
      * @param venda
-     * @return
+     * @return void
      * @throws SQLException
      */
-
-
-    //consulta
-    //inserir
-
-    public static void consultar(){
-        //TODO
-    }
-
     public static void inserir(Venda venda) throws SQLException {
-        //TODO: inserir venda no banco de dados
+        String sql = "INSERT INTO venda (id_cliente, data_venda, valor) VALUES (?, ?, ?)";
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setInt(1, venda.getId_cliente());
+        stmt.setDate(2, venda.getDataVenda());
+        stmt.setDouble(3, venda.getValor());
+        stmt.execute();
+        conexao.close();
     }
 
-    // public static ArrayList<Venda> consultarProdutos() throws ClassNotFoundException, SQLException
-    //     {
-    //     ArrayList<Venda> listaRetorno = new ArrayList<Venda>();
-    //     try {
-        
-    //         Class.forName(DRIVER);
-    //         //conexao = DriverManager.getConnection(url, LOGIN, SENHA);
-    //         Statement instrucaoSQL = (Statement) (ResultSet) conexao.createStatement();
-    //         ResultSet rs;
-            
-    //         rs = instrucaoSQL.executeQuery("SELECT * FROM produto;");
-    //         if(rs != null){
-    //             while ( rs.next() ) {
-    //             Venda v = new Venda();
-    //             v.setData(rs.getDate("data"));
-    //             //TODO: Criar um construtor que recebe os valores
-    //             // v.setQuatidade(rs.getInt("quantidade"));
-    //             v.setValor(rs.getDouble("valor"));
-                              
-    //             listaRetorno.add(v);
-    //             }
-    //         }
-    //         else
-    //         {
-    //             throw new SQLException();
-    //         }
-    //     }catch (SQLException e) {
-    //         listaRetorno = null;
-    //     }catch (ClassNotFoundException ex) {
-    //         listaRetorno = null;
-    //     } finally{
-       
-    //     /*try {
-    //         Object rs;
-    //         if(rs!=null)
-    //             rs.close();
-    //         if(instrucaoSQL!=null)
-    //             instrucaoSQL.close();
-    //         if(conexao!=null)
-    //             conexao.close();
-    //     } catch (SQLException ex) {
-    //     }
-    //     }*/
-    //         return listaRetorno;
-    //     }
+    /**
+     * Método para inserir uma venda no banco de dados
+     * @param venda
+     * @return Venda
+     * @throws SQLException
+     */
+    public static Venda consultarVenda() throws SQLException {
+        Venda venda = new Venda();
+        String sql = "SELECT * FROM venda WHERE id_cliente = ? AND id_produto = ? AND dataVenda = ?;";
+        return venda;
+    }
+
+    /**
+     * Método para inserir uma venda no banco de dados
+     * @param venda
+     * @return ArrayList
+     * @throws SQLException
+     */
+    public static ArrayList<Venda> consultarVendas() throws SQLException {
+        ArrayList<Venda> vendas = new ArrayList<>();
+        String sql = "SELECT * FROM Venda";
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            Venda venda = new Venda();
+            vendas.add(venda);
+        }
+        return vendas;
+    }
+
+    public static int getIdVenda() {
+        int idVenda = 0;
+        String sql = "SELECT MAX(id_venda) FROM venda";
+        try {
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            stmt = conexao.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                idVenda = rs.getInt("MAX(id_venda)");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao consultar id da venda: " + ex.getMessage());
+        }
+        return idVenda;
+    }
     
 }
