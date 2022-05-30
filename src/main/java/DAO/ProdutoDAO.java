@@ -52,6 +52,58 @@ public class ProdutoDAO {
         return listaRetorno;
     }
     
+    public static ArrayList<Produto> consultarPorNome(String nome) throws ClassNotFoundException, SQLException
+    {
+        ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
+        
+        try{
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            String sql = "SELECT * FROM produto WHERE id_produto = ?";
+            java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, nome); 
+            java.sql.ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Produto p = new Produto();
+                p.setCodigo(rs.getString("codigo"));
+                p.setPreco(rs.getFloat("preco"));
+                p.setNome(rs.getString("nome"));
+                p.setQuantidadeEstoque(rs.getInt("CPF"));
+                listaRetorno.add(p);
+            }
+            rs.close();
+            stmt.close();
+        }catch (SQLException e) {
+            System.out.println("Erro ao consultar produto: " + e.getMessage());
+        }
+        return listaRetorno;
+    }
+    
+    public static ArrayList<Produto> consultarPorCodigo(String codigo) throws ClassNotFoundException, SQLException
+    {
+        ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
+        
+        try{
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            String sql = "SELECT * FROM produto WHERE id_produto = ?";
+            java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, codigo); 
+            java.sql.ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Produto p = new Produto();
+                p.setCodigo(rs.getString("codigo"));
+                p.setPreco(rs.getFloat("preco"));
+                p.setNome(rs.getString("nome"));
+                p.setQuantidadeEstoque(rs.getInt("CPF"));
+                listaRetorno.add(p);
+            }
+            rs.close();
+            stmt.close();
+        }catch (SQLException e) {
+            System.out.println("Erro ao consultar produto: " + e.getMessage());
+        }
+        return listaRetorno;
+    }
+    
     public static void inserir(Produto produto) throws SQLException, ClassNotFoundException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "INSERT INTO produto (nome, codigo, preco, quantidadeEstoque) VALUES (?, ?, ?, ?)";
