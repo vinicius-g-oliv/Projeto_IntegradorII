@@ -164,7 +164,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
         // TODO add your handling code here:
-        Relatorio janelaModal = new Relatorio();
+        Relatorios janelaModal = new Relatorios();
         janelaModal.setVisible(true);
     }//GEN-LAST:event_btnRelatorioActionPerformed
 
