@@ -11,7 +11,6 @@ package DAO;
 import Model.Produto;
 import utils.GerenciadorConexao;
 import java.util.ArrayList;
-import utils.GerenciadorConexao;
 import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,7 +41,7 @@ public class ProdutoDAO {
         if(rs != null) {
             while ( rs.next() ) {
                 Produto p = new Produto();
-                p.setCodigo(rs.getString("codigo"));
+                p.setCodigo(rs.getString("id_produto"));
                 p.setPreco(rs.getDouble("preco"));
                 p.setNome(rs.getString("nome"));
                 p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
@@ -83,7 +82,7 @@ public class ProdutoDAO {
             java.sql.ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Produto p = new Produto();
-                p.setCodigo(rs.getString("codigo"));
+                p.setCodigo(rs.getString("id_produto"));
                 p.setPreco(rs.getDouble("preco"));
                 p.setNome(rs.getString("nome"));
                 p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));

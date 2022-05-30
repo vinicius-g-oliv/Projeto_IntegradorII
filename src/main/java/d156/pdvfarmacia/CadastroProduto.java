@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import DAO.ProdutoDAO;
+import Model.Cliente;
 import Model.Produto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,30 +71,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0001", "Advil", "10", "R$"},
-                {"0002", "Allegra", "10", "R$"},
-                {"0003", "Barra de Cereal", "10", "R$"},
-                {"0004", "Chocolate Zero", "10", "R$"},
-                {"0005", "Condicionador", "10", "R$"},
-                {"0006", "Creme Hidratante", "1", "R$"},
-                {"0007", "Delineador Preto", "1", "R$"},
-                {"0008", "Dipirona", "21", "R$"},
-                {"0009", "Epocler", "2", "R$"},
-                {"0010", "Escova de Dente", "21", "R$"},
-                {"0011", "Esmalte", "212", "R$"},
-                {"0012", "Fini", "21", "R$"},
-                {"0013", "Fralda", "32", "R$"},
-                {"0014", "Halls", "21", "R$"},
-                {"0015", "Lenço Umedecido", "21", "R$"},
-                {"0016", "Manteiga de Cacau", "21", "R$"},
-                {"0017", "Máscara para Cílios", "21", "R$"},
-                {"0018", "Merthiolate", "21", "R$"},
-                {"0019", "Monster", "21", "R$"},
-                {"0020", "Novalgina", "21", "R$"},
-                {"0021", "Óleo para Cabelo", "21", "R$"},
-                {"0022", "Sabonete", "21", "R$"},
-                {"0023", "Shampoo", "21", "R$"},
-                {"0024", "Trident", "22", "R$"}
+
             },
             new String [] {
                 "Código", "Nome", "Quantidade", "Preço"
@@ -113,12 +91,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         btnAlterar.setText("Alterar");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAlterar.setName(""); // NOI18N
-        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarActionPerformed(evt);
-            }
-        });
-
+        
         btnDeletar.setText("Deletar");
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDeletar.setName(""); // NOI18N
@@ -148,6 +121,11 @@ public class CadastroProduto extends javax.swing.JFrame {
         txtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtCodigo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtCodigo.setName(""); // NOI18N
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Produto:");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -260,8 +238,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             verificar se as caixas estão vaizas
         */
         if(
-            txtCodigo.getText().length() <= 0
-            || txtProduto.getText().length() <= 0
+            txtProduto.getText().length() <= 0
             || txtQuantidade.getText().length() <= 0
             || txtPreço.getText().length() <= 0
         ){
@@ -313,10 +290,28 @@ public class CadastroProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProdutoActionPerformed
 
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        int linhaSelecionada = jTable1.getSelectedRow();
+        ArrayList<Produto> produtos = new ArrayList<>();//TODO: fazer ArrayList Reeber Produtos
+        if(linhaSelecionada >= 0) {
+            Produto produto = new Produto();
+            setProdutoComValoresDaLinha(produto, modelo, linhaSelecionada);
+            CadastroProduto janelaModal = new CadastroProduto();
+            janelaModal.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um cliente para alterar");
+        }
+        atualizarTabela(produtos);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    private void setProdutoComValoresDaLinha(Produto produto, DefaultTableModel modelo, int linhaSelecionada) {
+        produto.setCodigo((modelo.getValueAt(linhaSelecionada, 0).toString()));
+        produto.setNome(modelo.getValueAt(linhaSelecionada, 1).toString());
+        produto.setPreco((Double)modelo.getValueAt(linhaSelecionada, 2));
+        produto.setQuantidadeEstoque(Integer.parseInt(modelo.getValueAt(linhaSelecionada, 3).toString()));
+    }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
         ArrayList<Produto> produtos = new ArrayList<>();
@@ -386,6 +381,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null, "Registro(s) deletado(s) com sucesso");
     }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
     /**
      * @param args the command line arguments

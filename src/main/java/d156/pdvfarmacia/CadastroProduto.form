@@ -159,111 +159,11 @@
             <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="24">
-                    <Column editable="true" title="C&#xf3;digo" type="java.lang.Object">
-                      <Data value="0001"/>
-                      <Data value="0002"/>
-                      <Data value="0003"/>
-                      <Data value="0004"/>
-                      <Data value="0005"/>
-                      <Data value="0006"/>
-                      <Data value="0007"/>
-                      <Data value="0008"/>
-                      <Data value="0009"/>
-                      <Data value="0010"/>
-                      <Data value="0011"/>
-                      <Data value="0012"/>
-                      <Data value="0013"/>
-                      <Data value="0014"/>
-                      <Data value="0015"/>
-                      <Data value="0016"/>
-                      <Data value="0017"/>
-                      <Data value="0018"/>
-                      <Data value="0019"/>
-                      <Data value="0020"/>
-                      <Data value="0021"/>
-                      <Data value="0022"/>
-                      <Data value="0023"/>
-                      <Data value="0024"/>
-                    </Column>
-                    <Column editable="true" title="Nome" type="java.lang.Object">
-                      <Data value="Advil"/>
-                      <Data value="Allegra"/>
-                      <Data value="Barra de Cereal"/>
-                      <Data value="Chocolate Zero"/>
-                      <Data value="Condicionador"/>
-                      <Data value="Creme Hidratante"/>
-                      <Data value="Delineador Preto"/>
-                      <Data value="Dipirona"/>
-                      <Data value="Epocler"/>
-                      <Data value="Escova de Dente"/>
-                      <Data value="Esmalte"/>
-                      <Data value="Fini"/>
-                      <Data value="Fralda"/>
-                      <Data value="Halls"/>
-                      <Data value="Len&#xe7;o Umedecido"/>
-                      <Data value="Manteiga de Cacau"/>
-                      <Data value="M&#xe1;scara para C&#xed;lios"/>
-                      <Data value="Merthiolate"/>
-                      <Data value="Monster"/>
-                      <Data value="Novalgina"/>
-                      <Data value="&#xd3;leo para Cabelo"/>
-                      <Data value="Sabonete"/>
-                      <Data value="Shampoo"/>
-                      <Data value="Trident"/>
-                    </Column>
-                    <Column editable="true" title="Quantidade" type="java.lang.Object">
-                      <Data value="10"/>
-                      <Data value="10"/>
-                      <Data value="10"/>
-                      <Data value="10"/>
-                      <Data value="10"/>
-                      <Data value="1"/>
-                      <Data value="1"/>
-                      <Data value="21"/>
-                      <Data value="2"/>
-                      <Data value="21"/>
-                      <Data value="212"/>
-                      <Data value="21"/>
-                      <Data value="32"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="21"/>
-                      <Data value="22"/>
-                    </Column>
-                    <Column editable="true" title="Pre&#xe7;o" type="java.lang.Object">
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                      <Data value="R$"/>
-                    </Column>
+                  <Table columnCount="4" rowCount="0">
+                    <Column editable="true" title="C&#xf3;digo" type="java.lang.Object"/>
+                    <Column editable="true" title="Nome" type="java.lang.Object"/>
+                    <Column editable="true" title="Quantidade" type="java.lang.Object"/>
+                    <Column editable="true" title="Pre&#xe7;o" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -361,6 +261,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
