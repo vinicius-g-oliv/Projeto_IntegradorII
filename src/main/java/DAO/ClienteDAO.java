@@ -14,7 +14,6 @@ package DAO;
 import Model.Cliente;
 import utils.GerenciadorConexao;
 import java.beans.Statement;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -32,7 +31,7 @@ public class ClienteDAO {
 
     //Conecta ao banco de dados com utils.GerenciadorConexao
     public static void inserir(Cliente cliente) throws SQLException, ClassNotFoundException {
-        if(clienteExistente(cliente)){
+        if(clienteExistente(cliente) == true){
             throw new SQLException("Cliente já cadastrado");
         }
         if(primeiroCliente(cliente)){
@@ -94,12 +93,12 @@ public class ClienteDAO {
         stmt.setString(1, cliente.getCpf());
         ResultSet rs = stmt.executeQuery();
         if(rs.next()){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    public static ArrayList<Cliente> consultar(String nome, String cpf){
+    public static ArrayList<Cliente> consultar(String nome, String cpf) throws SQLException{
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
         try {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -126,12 +125,12 @@ public class ClienteDAO {
             rs.close();
             stmt.close();
         }catch (SQLException e) {
-            System.out.println("Erro ao consultar clientes: " + e.getMessage());
+            throw new SQLException("Erro ao consultar clientes: " + e.getMessage());
         }
         return array_clientes;
     }
 
-    public static ArrayList<Cliente> consultar(){
+    public static ArrayList<Cliente> consultar() throws SQLException{
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
         try {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -156,12 +155,12 @@ public class ClienteDAO {
             rs.close();
             stmt.close();
         }catch (SQLException e) {
-            System.out.println("Erro ao consultar clientes: " + e.getMessage());
+            throw new SQLException("Erro ao consultar clientes: " + e.getMessage());
         }
         return array_clientes;
     }
 
-    public static ArrayList<Cliente> consultarCPF(String cpf){
+    public static ArrayList<Cliente> consultarClientesCPF(String cpf) throws SQLException{
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
         try {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -187,12 +186,41 @@ public class ClienteDAO {
             rs.close();
             stmt.close();
         }catch (SQLException e) {
-            System.out.println("Erro ao consultar clientes: " + e.getMessage());
+            throw new SQLException("Erro ao consultar clientes: " + e.getMessage());
         }
         return array_clientes;
     }
 
-    public static ArrayList<Cliente> consultarNOME(String nome){
+    public static Cliente consultarCPF(String cpf) throws SQLException{
+        Cliente cliente = new Cliente();
+        try {
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            String sql = "SELECT * FROM cliente WHERE cpf = ?";
+            java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, cpf);
+            java.sql.ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                cliente.setId_cliente(rs.getInt("id_cliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setDataNascimento(rs.getDate("date"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setSexo(rs.getString("sexo"));
+                cliente.setEndereco(rs.getString("endereco"));
+                cliente.setCep(rs.getString("cep"));
+                cliente.setNumero(rs.getInt("numero"));
+                cliente.setComplemento(rs.getString("complemento"));
+                cliente.setEstadoCivil(rs.getString("estadoCivil"));
+            }
+            rs.close();
+            stmt.close();
+        }catch (SQLException e) {
+            throw new SQLException("Erro ao consultar clientes: " + e.getMessage());
+        }
+        return cliente;
+    }
+
+    public static ArrayList<Cliente> consultarNOME(String nome) throws SQLException{
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
         try {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -218,7 +246,7 @@ public class ClienteDAO {
             rs.close();
             stmt.close();
         }catch (SQLException e) {
-            System.out.println("Erro ao consultar clientes: " + e.getMessage());
+            throw new SQLException("Erro ao consultar clientes: " + e.getMessage());
         }
         return array_clientes;
     }

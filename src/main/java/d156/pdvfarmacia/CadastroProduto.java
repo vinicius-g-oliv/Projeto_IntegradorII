@@ -276,7 +276,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             Model.Produto produto = new Model.Produto();
             produto.setNome(txtProduto.getText());
             produto.setCodigo(txtCodigo.getText());
-            produto.setPreco(Float.parseFloat(txtPreço.getText().replace(",", ".")));
+            produto.setPreco(Double.parseDouble(txtPreço.getText().replace(",", ".")));
             produto.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
 
             System.out.println(
@@ -322,6 +322,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         ArrayList<Produto> produtos = new ArrayList<>();
         
         if (txtProduto.getText().length() > 0){//texto produto
+            
             try {
                 produtos = ProdutoDAO.consultarPorNome(txtProduto.getText());//consultar por nome
             } catch (ClassNotFoundException | SQLException ex) {
@@ -329,7 +330,8 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         }else if(txtCodigo.getText().length() > 0){//texto codigo
             try {
-                produtos = ProdutoDAO.consultarPorCodigo(txtCodigo.getText());//por código
+                int codigo = Integer.parseInt(txtCodigo.getValue().toString());
+                produtos = ProdutoDAO.consultarPorCodigo(codigo);//por código
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -375,7 +377,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
         for(int i = 0; i < linhas_Selecionadas; i++){
             // int id_produto = (int) 
-            String id_produto = modelo.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            int id_produto = Integer.parseInt(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString());
             try {
                 ProdutoDAO.deletar(id_produto);
             } catch (SQLException e) {

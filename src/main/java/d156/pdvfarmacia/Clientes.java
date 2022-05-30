@@ -300,7 +300,7 @@ public class Clientes extends javax.swing.JFrame {
         try {
             carregarJTable();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar a tabela");
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a tabela"+ex);
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -323,13 +323,33 @@ public class Clientes extends javax.swing.JFrame {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         if(txtNome.getText().length() > 0 && cpf != ""){//nome e cpf
-            clientes = ClienteDAO.consultar(txtNome.getText(), cpf);
+            try {
+                clientes = ClienteDAO.consultar(txtNome.getText(), cpf);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao consultar cliente\n" + e.getMessage());
+                e.printStackTrace();
+            }
         }else if(txtNome.getText().length() > 0){//nome
-            clientes = ClienteDAO.consultarNOME(txtNome.getText());
+            try {
+                clientes = ClienteDAO.consultarNOME(txtNome.getText());
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao consultar cliente\n" + e.getMessage());
+                e.printStackTrace();
+            }
         }else if(cpf != ""){//cpf
-            clientes = ClienteDAO.consultarCPF(cpf);
+            try {
+                clientes = ClienteDAO.consultarClientesCPF(cpf);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao consultar cliente\n" + e.getMessage());
+                e.printStackTrace();
+            }
         }else{//nenhum
-            clientes = ClienteDAO.consultar();
+            try {
+                clientes = ClienteDAO.consultar();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao consultar cliente\n" + e.getMessage());
+                e.printStackTrace();
+            }
         }
         carregarJTable(clientes);
         //limnpar campos

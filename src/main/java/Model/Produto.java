@@ -14,7 +14,7 @@ public class Produto {
     //Atributos
     String codigo;
     String nome;
-    float preco;
+    Double preco;
     int quantidadeEstoque;
     
     //Construtor
@@ -46,11 +46,11 @@ public class Produto {
         this.codigo = novoCodigo;
     }
     
-    public float getPreco(){
+    public Double getPreco(){
         return this.preco;
     }
     
-    public void setPreco(float novoPreco){
+    public void setPreco(Double novoPreco){
         this.preco = novoPreco;
     }
 }

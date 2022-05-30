@@ -11,8 +11,6 @@ package DAO;
 import Model.Produto;
 import utils.GerenciadorConexao;
 import java.util.ArrayList;
-import utils.GerenciadorConexao;
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -42,14 +40,33 @@ public class ProdutoDAO {
         if(rs != null) {
             while ( rs.next() ) {
                 Produto p = new Produto();
-                p.setCodigo(rs.getString("codigo"));
-                p.setPreco(rs.getFloat("preco"));
+                p.setCodigo(rs.getString("id_produto"));
+                p.setPreco(rs.getDouble("preco"));
                 p.setNome(rs.getString("nome"));
-                p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
+                p.setQuantidadeEstoque(rs.getInt("quantidade_estoque"));
                 listaRetorno.add(p);
             }
         }
         return listaRetorno;
+    }
+
+    public static Produto consultarProduto(int id_produto) throws ClassNotFoundException, SQLException
+    {
+        Produto p = new Produto();
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+        instrucaoSQL = conexao.createStatement();
+        Class.forName(DRIVER);
+        ResultSet rs;            
+        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT * FROM produto WHERE id_produto = "+id_produto+";");
+        if(rs != null) {
+            while ( rs.next() ) {
+                p.setCodigo(rs.getString("id_produto"));
+                p.setNome(rs.getString("nome"));
+                p.setPreco(rs.getDouble("preco"));
+                p.setQuantidadeEstoque(rs.getInt("quantidade_estoque"));
+            }
+        }
+        return p;
     }
     
     public static ArrayList<Produto> consultarPorNome(String nome) throws ClassNotFoundException, SQLException
@@ -64,10 +81,10 @@ public class ProdutoDAO {
             java.sql.ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Produto p = new Produto();
-                p.setCodigo(rs.getString("codigo"));
-                p.setPreco(rs.getFloat("preco"));
+                p.setCodigo(rs.getString("id_produto"));
+                p.setPreco(rs.getDouble("preco"));
                 p.setNome(rs.getString("nome"));
-                p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
+                p.setQuantidadeEstoque(rs.getInt("quantidade_estoque"));
                 listaRetorno.add(p);
             }
             rs.close();
@@ -78,7 +95,7 @@ public class ProdutoDAO {
         return listaRetorno;
     }
     
-    public static ArrayList<Produto> consultarPorCodigo(String codigo) throws ClassNotFoundException, SQLException
+    public static ArrayList<Produto> consultarPorCodigo(int id_produto) throws ClassNotFoundException, SQLException
     {
         ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
         
@@ -86,14 +103,14 @@ public class ProdutoDAO {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
             String sql = "SELECT * FROM produto WHERE id_produto LIKE ?";
             java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, codigo); 
+            stmt.setInt(1, id_produto); 
             java.sql.ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Produto p = new Produto();
                 p.setCodigo(rs.getString("id_produto"));
                 p.setNome(rs.getString("nome"));
-                p.setPreco(rs.getFloat("preco"));
-                p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
+                p.setPreco(rs.getDouble("preco"));
+                p.setQuantidadeEstoque(rs.getInt("quantidade_estoque"));
                 listaRetorno.add(p);
             }
             rs.close();
@@ -106,31 +123,31 @@ public class ProdutoDAO {
     
     public static void inserir(Produto produto) throws SQLException, ClassNotFoundException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
-        String sql = "INSERT INTO produto (nome, codigo, preco, quantidadeEstoque) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, id_produto, preco, quantidade_estoque) VALUES (?, ?, ?, ?)";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setString(1, produto.getNome());
         stmt.setString(2, produto.getCodigo());
-        stmt.setFloat(3, produto.getPreco());
+        stmt.setDouble(3, produto.getPreco());
         stmt.setInt(4, produto.getQuantidadeEstoque());
         stmt.execute();
         stmt.close();
     }
     
-     public static void deletar(String id) throws SQLException {
+     public static void deletar(int id_produto) throws SQLException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "DELETE FROM produto WHERE id_produto = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setString(1, id);
+        stmt.setInt(1, id_produto);
         stmt.execute();
         stmt.close();
     }
      
      public static void alterar(Produto produto) throws SQLException {
        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
-       String sql = "UPDATE produto SET nome = ?, preco = ?, quantidadeEstoque = ?" + "WHERE codigo = ?";
+       String sql = "UPDATE produto SET nome = ?, preco = ?, quantidade_estoque = ?" + "WHERE id_produto = ?";
        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
        stmt.setString(1, produto.getNome());
-       stmt.setFloat(2, produto.getPreco());
+       stmt.setDouble(2, produto.getPreco());
        stmt.setInt(3, produto.getQuantidadeEstoque());
        stmt.setString(4, produto.getCodigo());
        stmt.execute();
