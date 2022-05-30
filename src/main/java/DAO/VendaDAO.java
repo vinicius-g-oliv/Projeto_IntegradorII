@@ -39,66 +39,38 @@ public class VendaDAO {
     /**
      * Método para inserir uma venda no banco de dados
      * @param venda
-     * @return
+     * @return void
      * @throws SQLException
      */
-
-
-    //consulta
-    //inserir
-
-    public static void consultar(){
-        //TODO
-    }
-
     public static void inserir(Venda venda) throws SQLException {
-        //TODO: inserir venda no banco de dados
     }
 
-    // public static ArrayList<Venda> consultarProdutos() throws ClassNotFoundException, SQLException
-    //     {
-    //     ArrayList<Venda> listaRetorno = new ArrayList<Venda>();
-    //     try {
-        
-    //         Class.forName(DRIVER);
-    //         //conexao = DriverManager.getConnection(url, LOGIN, SENHA);
-    //         Statement instrucaoSQL = (Statement) (ResultSet) conexao.createStatement();
-    //         ResultSet rs;
-            
-    //         rs = instrucaoSQL.executeQuery("SELECT * FROM produto;");
-    //         if(rs != null){
-    //             while ( rs.next() ) {
-    //             Venda v = new Venda();
-    //             v.setData(rs.getDate("data"));
-    //             //TODO: Criar um construtor que recebe os valores
-    //             // v.setQuatidade(rs.getInt("quantidade"));
-    //             v.setValor(rs.getDouble("valor"));
-                              
-    //             listaRetorno.add(v);
-    //             }
-    //         }
-    //         else
-    //         {
-    //             throw new SQLException();
-    //         }
-    //     }catch (SQLException e) {
-    //         listaRetorno = null;
-    //     }catch (ClassNotFoundException ex) {
-    //         listaRetorno = null;
-    //     } finally{
-       
-    //     /*try {
-    //         Object rs;
-    //         if(rs!=null)
-    //             rs.close();
-    //         if(instrucaoSQL!=null)
-    //             instrucaoSQL.close();
-    //         if(conexao!=null)
-    //             conexao.close();
-    //     } catch (SQLException ex) {
-    //     }
-    //     }*/
-    //         return listaRetorno;
-    //     }
+    /**
+     * Método para inserir uma venda no banco de dados
+     * @param venda
+     * @return Venda
+     * @throws SQLException
+     */
+    public static Venda consultarVenda() throws SQLException {
+        Venda venda = new Venda();
+        return venda;
+    }
+
+    /**
+     * Método para inserir uma venda no banco de dados
+     * @param venda
+     * @return ArrayList
+     * @throws SQLException
+     */
+    public static ArrayList<Venda> consultarVendas() throws SQLException {
+        ArrayList<Venda> vendas = new ArrayList<>();
+        String sql = "SELECT * FROM Venda";
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            Venda venda = new Venda();
+            vendas.add(venda);
+        }
+        return vendas;
+    }
     
 }

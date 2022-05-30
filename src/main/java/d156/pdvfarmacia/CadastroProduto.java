@@ -31,6 +31,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     public CadastroProduto() {
         initComponents();
         atualizarTabela();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -252,49 +253,56 @@ public class CadastroProduto extends javax.swing.JFrame {
         /*
         verificar se as caixas estão vaizas
         */
-        if(
-            !verificarCamposVazios()
-        ){
+        Produto produto = new Produto();
+        if(txtCodigo.getText().isEmpty() || txtCodigo.getText() == null){
+            btnCadastrar.setText("Salvar");
+            btnBuscar.setText("Cancelar");
+            txtCodigo.setEnabled(false);
+            btnDeletar.setEnabled(false);
+            btnAlterar.setEnabled(false);
+            txtCodigo.setText(gerarID());
             return;
-        }else{
-            /*
-            criar um objeto do tipo Produto
-            passar os valores para o objeto
-            chamar o método cadastrar
-            */
-            Model.Produto produto = new Model.Produto();
-            produto.setNome(txtProduto.getText());
+        }
+        
+        if(verificarCamposVazios() && btnCadastrar.getText().equals("Salvar")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            return;
+        }
+        if(btnCadastrar.getText().equals("Salvar")){
             produto.setCodigo(txtCodigo.getText());
+            produto.setNome(txtProduto.getText());
             produto.setPreco(Double.parseDouble(txtPreço.getText().replace(",", ".")));
             produto.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
-
-            System.out.println(
-                "\n------------------------------------------------------\n"+
-                "nome: "+produto.getNome() + "\n" +
-                "código: "+produto.getCodigo() + "\n" +
-                "preço: "+produto.getPreco() + "\n" +
-                "quantidade: "+produto.getQuantidadeEstoque()
-            );
-
             try {
                 ProdutoDAO.inserir(produto);
+                JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+                limparCampos();
             } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar produto!\n"+ex.getMessage());
             }
-            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
-
-            //limpar campos
-            limparCampos();
         }
-
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private String gerarID() {
+        Produto  produto = new Produto();
+        try {
+            produto = ProdutoDAO.buscarUltimo();
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar ultimo produto!\n"+e.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar ultimo produto!\n"+e.getMessage());
+        }
+        int i = Integer.parseInt(produto.getCodigo());
+        i++;
+        String id = ""+i;
+        return id;
+    }
 
     private boolean verificarCamposVazios() {
         if(
             txtProduto.getText().length() <= 0
             || txtQuantidade.getText().length() <= 0
             || txtPreço.getText().length() <= 0
-            || txtCodigo.getText().length() <= 0
         ){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos para continuar");
             return true;//não contém dados
@@ -331,48 +339,52 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         int linhaSelecionada = jTblProdutos.getSelectedRow();
-        int qtd_linhas_Selecionadas = jTblProdutos.getSelectedRowCount(); // linhaS selecionadaS
         Produto produto = new Produto();
+        if(linhaSelecionada <= 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para alterar");
+            return;
+        }
         setProdutoComValoresDaLinha(produto, linhaSelecionada);
         if(btnAlterar.getText().equals("Salvar") && !verificarCamposVazios()){
             try {
+                produto = atualizarValoresProduto(produto);
                 produto = ProdutoDAO.alterar(produto);
+                JOptionPane.showMessageDialog(null, "Produto alterado com sucesso!");
+                limparCampos();
+                resetarComponentes();
+                atualizarTabela();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Erro ao alterar o registro\n"+e);
                 e.printStackTrace();
             }
             return;
         }
-        if(qtd_linhas_Selecionadas <= 0) {
-            JOptionPane.showMessageDialog(null, "Selecione um produto para alterar");
-            return;
-        }
+        
         btnAlterar.setText("Salvar");
         btnBuscar.setText("Cancelar");
         btnCadastrar.setEnabled(false);
         btnDeletar.setEnabled(false);
         jTblProdutos.setEnabled(false);
         setCamposParaAlteração(produto);
+        txtCodigo.setEnabled(false);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-
-    private boolean confirmarAlteração() {
-        return false;
+    private Produto atualizarValoresProduto(Produto produto) {
+        produto.setCodigo(txtCodigo.getText());
+        produto.setNome(txtProduto.getText());
+        produto.setPreco(Double.parseDouble(txtPreço.getText().replace(",", ".")));
+        produto.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
+        return produto;
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if(btnBuscar.getText().equals("Cancelar")){
             limparCampos();
-            btnAlterar.setText("Alterar");
-            btnBuscar.setText("Buscar");
-            btnCadastrar.setEnabled(true);
-            btnDeletar.setEnabled(true);
-            jTblProdutos.setEnabled(true);
+            resetarComponentes();
         }
 
         ArrayList<Produto> produtos = new ArrayList<>();
         if (txtProduto.getText().length() > 0){//texto produto
-
             try {
                 produtos = ProdutoDAO.consultarPorNome(txtProduto.getText());//consultar por nome
             } catch (ClassNotFoundException | SQLException ex) {
@@ -395,8 +407,25 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
         atualizarTabela(produtos);
         limparCampos();
-        System.out.println(produtos.toString());
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void resetarComponentes() {
+        limparCampos();
+        atualizarTabela();
+        btnAlterar.setText("Alterar");
+        btnBuscar.setText("Buscar");
+        btnCadastrar.setText("Cadastrar");
+        btnDeletar.setText("Deletar");
+
+        txtCodigo.setEnabled(true);
+
+        btnCadastrar.setEnabled(true);
+        btnAlterar.setEnabled(true);
+        btnDeletar.setEnabled(true);
+        btnBuscar.setEnabled(true);
+
+        jTblProdutos.setEnabled(true);
+    }
 
     private void limparCampos() {
         txtCodigo.setText("");
@@ -410,7 +439,6 @@ public class CadastroProduto extends javax.swing.JFrame {
         txtProduto.setText(produto.getNome());
         txtQuantidade.setText(String.valueOf(produto.getQuantidadeEstoque()));
         txtPreço.setText(String.valueOf(produto.getPreco()));
-        txtCodigo.setEnabled(false);
     }
 
     private void setProdutoComValoresDaLinha(Produto produto, int linhaSelecionada) {
@@ -420,6 +448,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         produto.setQuantidadeEstoque(Integer.parseInt(modelo.getValueAt(linhaSelecionada, 2).toString())); //strin pra int
         produto.setPreco(Double.parseDouble(modelo.getValueAt(linhaSelecionada, 3).toString())); //string pra double
     }
+
     private void atualizarTabela(ArrayList<Produto> produtos) {
         DefaultTableModel model = new DefaultTableModel();
         model = (DefaultTableModel) jTblProdutos.getModel();

@@ -21,7 +21,7 @@ import java.sql.SQLException;
  * @author everymind
  */
 public class ProdutoDAO {
-        private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
+        static String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
         static utils.GerenciadorConexao gc = new GerenciadorConexao();
         static String LOGIN = gc.getLOGIN();
         static String SENHA = gc.getSENHA();
@@ -50,12 +50,13 @@ public class ProdutoDAO {
         return listaRetorno;
     }
 
-    public static Produto consultarProduto(int id_produto) throws ClassNotFoundException, SQLException
-    {
+    public static Produto consultarProduto(int id_produto) throws SQLException {
+        if(verificarProdutoExistente(id_produto) == false){
+            throw new SQLException("Produto Não Encontrado");
+        }
         Produto p = new Produto();
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         instrucaoSQL = conexao.createStatement();
-        Class.forName(DRIVER);
         ResultSet rs;            
         rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT * FROM produto WHERE id_produto = "+id_produto+";");
         if(rs != null) {
@@ -69,6 +70,18 @@ public class ProdutoDAO {
         return p;
     }
     
+    private static boolean verificarProdutoExistente(int id_produto) throws SQLException {
+        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
+        String sql = "SELECT * FROM produto WHERE id_produto = ?";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setInt(1, id_produto);
+        java.sql.ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return true;
+        }
+        return false;
+    }
+
     public static ArrayList<Produto> consultarPorNome(String nome) throws ClassNotFoundException, SQLException
     {
         ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
@@ -122,18 +135,32 @@ public class ProdutoDAO {
     }
     
     public static void inserir(Produto produto) throws SQLException, ClassNotFoundException {
+        if(verificarProdutoExistente(produto.getCodigo())){
+            throw new SQLException("Produto já existente\n"+"Se deseja alterar o produto, clique em \"ALTERAR\"");
+        }
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
-        String sql = "INSERT INTO produto (nome, id_produto, preco, quantidade_estoque) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco, quantidade_estoque) VALUES (?, ?, ?)";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setString(1, produto.getNome());
-        stmt.setString(2, produto.getCodigo());
-        stmt.setDouble(3, produto.getPreco());
-        stmt.setInt(4, produto.getQuantidadeEstoque());
+        stmt.setDouble(2, produto.getPreco());
+        stmt.setInt(3, produto.getQuantidadeEstoque());
         stmt.execute();
         stmt.close();
     }
     
-     public static void deletar(int id_produto) throws SQLException {
+     private static boolean verificarProdutoExistente(String id_produto) throws ClassNotFoundException, SQLException {
+        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
+        String sql = "SELECT * FROM produto WHERE id_produto = ?";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setString(1, id_produto);
+        java.sql.ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return true;
+        }
+        return false; //se não existir, retorna false
+    }
+
+    public static void deletar(int id_produto) throws SQLException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "DELETE FROM produto WHERE id_produto = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -144,7 +171,7 @@ public class ProdutoDAO {
      
      public static Produto alterar(Produto produto) throws SQLException {
        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
-       String sql = "UPDATE produto SET nome = ?, preco = ?, quantidade_estoque = ?" + "WHERE id_produto = ?";
+       String sql = "UPDATE produto SET nome = ?, preco = ?, quantidade_estoque = ? WHERE id_produto = ?";
        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
        stmt.setString(1, produto.getNome());
        stmt.setDouble(2, produto.getPreco());
@@ -153,5 +180,26 @@ public class ProdutoDAO {
        stmt.execute();
        stmt.close();
        return produto;
+    }
+
+    public static Produto buscarUltimo() throws ClassNotFoundException, SQLException {
+        Produto p = new Produto();
+        try {
+            conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
+            String sql = "SELECT * FROM produto ORDER BY id_produto DESC LIMIT 1";
+            java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+            java.sql.ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                p.setCodigo(rs.getString("id_produto"));
+                p.setNome(rs.getString("nome"));
+                p.setPreco(rs.getDouble("preco"));
+                p.setQuantidadeEstoque(rs.getInt("quantidade_estoque"));
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao gerar id para produto: " + e.getMessage());
+        }
+        return p;
     }
 }
