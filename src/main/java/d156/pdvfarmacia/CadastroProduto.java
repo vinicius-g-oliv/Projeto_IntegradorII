@@ -30,6 +30,7 @@ public class CadastroProduto extends javax.swing.JFrame {
      */
     public CadastroProduto() {
         initComponents();
+        atualizarTabela();
     }
 
     /**
@@ -43,7 +44,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTblProdutos = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
@@ -69,7 +70,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setName(""); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -77,7 +78,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 "Código", "Nome", "Quantidade", "Preço"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTblProdutos);
 
         btnBuscar.setText("Buscar");
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -91,7 +92,12 @@ public class CadastroProduto extends javax.swing.JFrame {
         btnAlterar.setText("Alterar");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAlterar.setName(""); // NOI18N
-        
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         btnDeletar.setText("Deletar");
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDeletar.setName(""); // NOI18N
@@ -156,31 +162,31 @@ public class CadastroProduto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtQuantidade)
-                                    .addComponent(txtPreço, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtProduto)
-                                    .addComponent(txtCodigo))))
-                        .addGap(12, 12, 12))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPreço, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnDeletar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAlterar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,8 +215,10 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addComponent(btnAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDeletar)
-                .addContainerGap(152, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap(169, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,30 +234,34 @@ public class CadastroProduto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProdutoActionPerformed
+
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         /*
-            verificar se as caixas estão vaizas
+        verificar se as caixas estão vaizas
         */
         if(
-            txtProduto.getText().length() <= 0
-            || txtQuantidade.getText().length() <= 0
-            || txtPreço.getText().length() <= 0
+            !verificarCamposVazios()
         ){
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
         }else{
             /*
             criar um objeto do tipo Produto
             passar os valores para o objeto
             chamar o método cadastrar
-            */ 
+            */
             Model.Produto produto = new Model.Produto();
             produto.setNome(txtProduto.getText());
             produto.setCodigo(txtCodigo.getText());
@@ -263,8 +275,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 "preço: "+produto.getPreco() + "\n" +
                 "quantidade: "+produto.getQuantidadeEstoque()
             );
-        
-            
+
             try {
                 ProdutoDAO.inserir(produto);
             } catch (SQLException | ClassNotFoundException ex) {
@@ -276,47 +287,92 @@ public class CadastroProduto extends javax.swing.JFrame {
             limparCampos();
         }
 
-        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void limparCampos() {
-        txtCodigo.setText("");
-        txtProduto.setText("");
-        txtQuantidade.setText("");
-        txtPreço.setText("");
+    private boolean verificarCamposVazios() {
+        if(
+            txtProduto.getText().length() <= 0
+            || txtQuantidade.getText().length() <= 0
+            || txtPreço.getText().length() <= 0
+            || txtCodigo.getText().length() <= 0
+        ){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos para continuar");
+            return true;//não contém dados
+        }
+        return false; //contém dados
     }
 
-    private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProdutoActionPerformed
-
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        int linhaSelecionada = jTable1.getSelectedRow();
-        ArrayList<Produto> produtos = new ArrayList<>();//TODO: fazer ArrayList Reeber Produtos
-        if(linhaSelecionada >= 0) {
-            Produto produto = new Produto();
-            setProdutoComValoresDaLinha(produto, modelo, linhaSelecionada);
-            CadastroProduto janelaModal = new CadastroProduto();
-            janelaModal.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Selecione um cliente para alterar");
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        //        Model.Produto produto = new Model.Produto();
+        DefaultTableModel modelo = (DefaultTableModel) jTblProdutos.getModel();
+        int linhas_Selecionadas = jTblProdutos.getSelectedRowCount();
+        if(linhas_Selecionadas == 0){
+            JOptionPane.showMessageDialog(null, "Selecione uma linha para deletar");
+            return;
         }
-        atualizarTabela(produtos);
+
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja deletar o(s) registro(s) selecionado(s)?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(opcao == JOptionPane.NO_OPTION){
+            return;
+        }
+        for(int i = 0; i < linhas_Selecionadas; i++){
+            // int id_produto = (int)
+            int id_produto = Integer.parseInt(modelo.getValueAt(jTblProdutos.getSelectedRow(), 0).toString());
+            try {
+                ProdutoDAO.deletar(id_produto);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao deletar o registro");
+                e.printStackTrace();
+            }
+            modelo.removeRow(jTblProdutos.getSelectedRow());
+        }
+        JOptionPane.showMessageDialog(null, "Registro(s) deletado(s) com sucesso");
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        int linhaSelecionada = jTblProdutos.getSelectedRow();
+        int qtd_linhas_Selecionadas = jTblProdutos.getSelectedRowCount(); // linhaS selecionadaS
+        Produto produto = new Produto();
+        setProdutoComValoresDaLinha(produto, linhaSelecionada);
+        if(btnAlterar.getText().equals("Salvar") && !verificarCamposVazios()){
+            try {
+                produto = ProdutoDAO.alterar(produto);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao alterar o registro\n"+e);
+                e.printStackTrace();
+            }
+            return;
+        }
+        if(qtd_linhas_Selecionadas <= 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para alterar");
+            return;
+        }
+        btnAlterar.setText("Salvar");
+        btnBuscar.setText("Cancelar");
+        btnCadastrar.setEnabled(false);
+        btnDeletar.setEnabled(false);
+        jTblProdutos.setEnabled(false);
+        setCamposParaAlteração(produto);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void setProdutoComValoresDaLinha(Produto produto, DefaultTableModel modelo, int linhaSelecionada) {
-        produto.setCodigo((modelo.getValueAt(linhaSelecionada, 0).toString()));
-        produto.setNome(modelo.getValueAt(linhaSelecionada, 1).toString());
-        produto.setPreco((Double)modelo.getValueAt(linhaSelecionada, 2));
-        produto.setQuantidadeEstoque(Integer.parseInt(modelo.getValueAt(linhaSelecionada, 3).toString()));
+
+    private boolean confirmarAlteração() {
+        return false;
     }
+
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+        if(btnBuscar.getText().equals("Cancelar")){
+            limparCampos();
+            btnAlterar.setText("Alterar");
+            btnBuscar.setText("Buscar");
+            btnCadastrar.setEnabled(true);
+            btnDeletar.setEnabled(true);
+            jTblProdutos.setEnabled(true);
+        }
+
         ArrayList<Produto> produtos = new ArrayList<>();
-        
         if (txtProduto.getText().length() > 0){//texto produto
+
             try {
                 produtos = ProdutoDAO.consultarPorNome(txtProduto.getText());//consultar por nome
             } catch (ClassNotFoundException | SQLException ex) {
@@ -324,7 +380,8 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         }else if(txtCodigo.getText().length() > 0){//texto codigo
             try {
-                produtos = ProdutoDAO.consultarPorCodigo(txtCodigo.getText());//por código
+                int codigo = Integer.parseInt(txtCodigo.getValue().toString());
+                produtos = ProdutoDAO.consultarPorCodigo(codigo);//por código
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -341,50 +398,61 @@ public class CadastroProduto extends javax.swing.JFrame {
         System.out.println(produtos.toString());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void limparCampos() {
+        txtCodigo.setText("");
+        txtProduto.setText("");
+        txtQuantidade.setText("");
+        txtPreço.setText("");
+    }
+
+    private void setCamposParaAlteração(Produto produto) {
+        txtCodigo.setText(produto.getCodigo());
+        txtProduto.setText(produto.getNome());
+        txtQuantidade.setText(String.valueOf(produto.getQuantidadeEstoque()));
+        txtPreço.setText(String.valueOf(produto.getPreco()));
+        txtCodigo.setEnabled(false);
+    }
+
+    private void setProdutoComValoresDaLinha(Produto produto, int linhaSelecionada) {
+        DefaultTableModel modelo = (DefaultTableModel) jTblProdutos.getModel();
+        produto.setCodigo((modelo.getValueAt(linhaSelecionada, 0).toString()));
+        produto.setNome(modelo.getValueAt(linhaSelecionada, 1).toString());
+        produto.setQuantidadeEstoque(Integer.parseInt(modelo.getValueAt(linhaSelecionada, 2).toString())); //strin pra int
+        produto.setPreco(Double.parseDouble(modelo.getValueAt(linhaSelecionada, 3).toString())); //string pra double
+    }
     private void atualizarTabela(ArrayList<Produto> produtos) {
         DefaultTableModel model = new DefaultTableModel();
-        model = (DefaultTableModel) jTable1.getModel();
+        model = (DefaultTableModel) jTblProdutos.getModel();
         model.setNumRows(0);
         for (Produto p : produtos) {
             model.addRow(new Object[]{
                 p.getCodigo(),//TODO: pegar id_cliente;
                 p.getNome(),
-                p.getPreco(),
-                p.getQuantidadeEstoque()
+                p.getQuantidadeEstoque(),
+                p.getPreco()
             });
         }
     }
-
-    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-//        Model.Produto produto = new Model.Produto();
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        int linhas_Selecionadas = jTable1.getSelectedRowCount();
-        if(linhas_Selecionadas == 0){
-            JOptionPane.showMessageDialog(null, "Selecione uma linha para deletar");
-            return;
+    private void atualizarTabela() {
+        ArrayList<Produto> produtos = new ArrayList<>();
+        try {
+            produtos = ProdutoDAO.consultar();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar produtos!");
+            e.printStackTrace();
         }
-
-        int opcao = JOptionPane.showConfirmDialog(null, "Deseja deletar o(s) registro(s) selecionado(s)?", "Atenção", JOptionPane.YES_NO_OPTION);
-        if(opcao == JOptionPane.NO_OPTION){
-            return;
+        DefaultTableModel model = new DefaultTableModel();
+        model = (DefaultTableModel) jTblProdutos.getModel();
+        model.setNumRows(0);
+        for (Produto p : produtos) {
+            model.addRow(new Object[]{
+                p.getCodigo(),//TODO: pegar id_cliente;
+                p.getNome(),
+                p.getQuantidadeEstoque(),
+                p.getPreco()
+            });
         }
-        for(int i = 0; i < linhas_Selecionadas; i++){
-            // int id_produto = (int) 
-            String id_produto = modelo.getValueAt(jTable1.getSelectedRow(), 0).toString();
-            try {
-                ProdutoDAO.deletar(id_produto);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Erro ao deletar o registro");
-                e.printStackTrace();
-            }
-            modelo.removeRow(jTable1.getSelectedRow());
-        }
-        JOptionPane.showMessageDialog(null, "Registro(s) deletado(s) com sucesso");
-    }//GEN-LAST:event_btnDeletarActionPerformed
-
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -432,7 +500,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTblProdutos;
     private javax.swing.JFormattedTextField txtCodigo;
     private javax.swing.JFormattedTextField txtPreço;
     private javax.swing.JFormattedTextField txtProduto;

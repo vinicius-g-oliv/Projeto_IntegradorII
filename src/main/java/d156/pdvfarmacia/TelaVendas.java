@@ -296,9 +296,19 @@ public class TelaVendas extends javax.swing.JFrame {
         Venda venda = new Venda();
         Cliente cliente = new Cliente();
 
+        int cod_prod = Integer.parseInt(txtBuscarProduto.getText());
+        try {
+            produto = ProdutoDAO.consultarProduto(cod_prod);
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar produto:\n"+e);
+            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar produto:\n"+e);
+            e.printStackTrace();
+        }
+
         int quantidade = Integer.parseInt(txtQuantidade.getValue().toString());
-        String cod_prod = txtBuscarProduto.getValue().toString();
-        // Double valour_un = produto = ProdutoDAO.consultarProduto(cod_prod);
+        Double valour_un = produto.getPreco();
         Double valor_total = 0.0;
         venda.setValor(valor_total);
         //
