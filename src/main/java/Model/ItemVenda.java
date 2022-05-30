@@ -11,7 +11,7 @@ public class ItemVenda {
     int id_venda;
     int id_produto;
     int quantidade;
-    double valor;
+    double valor_unitario;
 
     public ItemVenda() {
     }
@@ -40,12 +40,12 @@ public class ItemVenda {
         this.quantidade = quantidade;
     }
 
-    public double getValor() {
-        return valor;
+    public double getValorUnitario() {
+        return valor_unitario;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setValorUnitario(double valor) {
+        this.valor_unitario = valor;
     }
     
      public int getId_itemVenda() {
