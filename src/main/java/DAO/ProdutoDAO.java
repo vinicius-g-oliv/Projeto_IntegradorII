@@ -45,7 +45,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setPreco(rs.getFloat("preco"));
                 p.setNome(rs.getString("nome"));
-                p.setQuantidadeEstoque(rs.getInt("CPF"));
+                p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
                 listaRetorno.add(p);
             }
         }
@@ -67,7 +67,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setPreco(rs.getFloat("preco"));
                 p.setNome(rs.getString("nome"));
-                p.setQuantidadeEstoque(rs.getInt("CPF"));
+                p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
                 listaRetorno.add(p);
             }
             rs.close();
@@ -93,7 +93,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setPreco(rs.getFloat("preco"));
                 p.setNome(rs.getString("nome"));
-                p.setQuantidadeEstoque(rs.getInt("CPF"));
+                p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
                 listaRetorno.add(p);
             }
             rs.close();
