@@ -293,10 +293,18 @@ public class TelaVendas extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         Produto produto = new Produto();
         ItemVenda itemVenda = new ItemVenda();
-        
+        Venda venda = new Venda();
+        Cliente cliente = new Cliente();
+
+        int quantidade = Integer.parseInt(txtQuantidade.getValue().toString());
+        String cod_prod = txtBuscarProduto.getValue().toString();
+        // Double valour_un = produto = ProdutoDAO.consultarProduto(cod_prod);
+        Double valor_total = 0.0;
+        venda.setValor(valor_total);
+        //
         // produto = ProdutoDAO.consultar();
          
-        // lblTotal.setText(total.toString());
+        // lblTotal.setText(total.toString().replace(".", ","));
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
