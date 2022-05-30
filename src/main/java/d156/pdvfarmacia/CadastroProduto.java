@@ -319,44 +319,46 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
-        String produto = txtProduto.getText();
-        String id = txtCodigo.getText();
         ArrayList<Produto> produtos = new ArrayList<>();
         
-        if (txtProduto.getText().length() > 0){
+        if (txtProduto.getText().length() > 0){//texto produto
             try {
-                produtos = ProdutoDAO.consultarPorNome(txtProduto.getText());
+                produtos = ProdutoDAO.consultarPorNome(txtProduto.getText());//consultar por nome
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else if(txtCodigo.getText().length() > 0){
+        }else if(txtCodigo.getText().length() > 0){//texto codigo
             try {
-                produtos = ProdutoDAO.consultarPorCodigo(txtCodigo.getText());
+                produtos = ProdutoDAO.consultarPorCodigo(txtCodigo.getText());//por código
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        }else{//nem um nem outro
             try {
-            produtos = ProdutoDAO.consultar();
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+                produtos = ProdutoDAO.consultar();
+            } catch (ClassNotFoundException | SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao consultar produtos!");
+                e.printStackTrace();
+            }
         }
-        //atualizar tabela
+        atualizarTabela(produtos);
+        limparCampos();
+        System.out.println(produtos.toString());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void atualizarTabela(ArrayList<Produto> produtos) {
         DefaultTableModel model = new DefaultTableModel();
         model = (DefaultTableModel) jTable1.getModel();
         model.setNumRows(0);
         for (Produto p : produtos) {
             model.addRow(new Object[]{
-                p.getCodigo(),
+                p.getCodigo(),//TODO: pegar id_cliente;
                 p.getNome(),
                 p.getPreco(),
                 p.getQuantidadeEstoque()
             });
         }
-        }
-        System.out.println(produtos.toString());
-        limparCampos();
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
 //        Model.Produto produto = new Model.Produto();

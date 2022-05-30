@@ -58,9 +58,9 @@ public class ProdutoDAO {
         
         try{
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-            String sql = "SELECT * FROM produto WHERE nome = ?";
+            String sql = "SELECT * FROM produto WHERE nome LIKE ?";
             java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, nome); 
+            stmt.setString(1, "%"+nome+"%");
             java.sql.ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Produto p = new Produto();
@@ -84,15 +84,15 @@ public class ProdutoDAO {
         
         try{
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-            String sql = "SELECT * FROM produto WHERE id_produto = ?";
+            String sql = "SELECT * FROM produto WHERE id_produto LIKE ?";
             java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, codigo); 
             java.sql.ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Produto p = new Produto();
-                p.setCodigo(rs.getString("codigo"));
-                p.setPreco(rs.getFloat("preco"));
+                p.setCodigo(rs.getString("id_produto"));
                 p.setNome(rs.getString("nome"));
+                p.setPreco(rs.getFloat("preco"));
                 p.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));
                 listaRetorno.add(p);
             }
