@@ -273,8 +273,12 @@ public class ClienteDAO {
     public static void deletar(int id) throws SQLException {
         //deletar cliente
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-        String sql = "DELETE FROM cliente WHERE id_cliente = ?";
+        String sql = "UPDATE venda SET id_cliente = null WHERE id_cliente = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setInt(1, id);
+        stmt.execute();
+        sql = "DELETE FROM cliente WHERE id_cliente = ?";
+        stmt = conexao.prepareStatement(sql);
         stmt.setInt(1, id);
         stmt.execute();
         stmt.close();

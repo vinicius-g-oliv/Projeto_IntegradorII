@@ -5,10 +5,10 @@
 -- inserir item_venda;
 
 insert into cliente (nome, cpf, date, email, sexo, cep, endereco, numero, complemento, estadoCivil) values
-    ('João', '12345678910', '2000-01-01', 'email.joão@.com', 'Masculino', '12345678', 'Rua João', '123', 'Casa', 'Solteiro'),
-    ('Maria', '98765432198', '2000-01-01', 'email.maria@.com', 'Feminino', '12345678', 'Rua Maria', '123', 'Casa', 'Solteiro'),
-    ('Pedro', '98765432198', '2000-01-01', 'email.pedro@.com', 'Masculino', '12345678', 'Rua Pedro', '123', 'Casa', 'Solteiro'),
-    ('Ana', '98765432198', '2000-01-01', 'email.ana@.com', 'Feminino', '12345678', 'Rua Ana', '123', 'Casa', 'Solteiro');
+    ('João', '75858755410', '2000-01-01', 'email.joão@.com', 'Masculino', '12345678', 'Rua João', '123', 'Casa', 'Solteiro'),
+    ('Maria', '91814476989', '2000-01-01', 'email.maria@.com', 'Feminino', '12345678', 'Rua Maria', '123', 'Casa', 'Solteiro'),
+    ('Pedro', '82090142693', '2000-01-01', 'email.pedro@.com', 'Masculino', '12345678', 'Rua Pedro', '123', 'Casa', 'Solteiro'),
+    ('Ana', '03935086172', '2000-01-01', 'email.ana@.com', 'Feminino', '12345678', 'Rua Ana', '123', 'Casa', 'Solteiro');
 
 insert into produto (nome, preco, quantidade_estoque) values
     ('Advil', '12.00', '100'),

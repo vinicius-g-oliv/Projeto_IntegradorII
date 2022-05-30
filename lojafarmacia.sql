@@ -36,7 +36,7 @@ create table produto
 create table venda
 (
 	id_venda    int not null primary key auto_increment,
-	id_cliente  int not null, foreign key (id_cliente) references cliente (id_cliente),
+	id_cliente  int, foreign key (id_cliente) references cliente (id_cliente),
 	data_venda   date not null,
 	valor       numeric(18,2) default 0.00
 );

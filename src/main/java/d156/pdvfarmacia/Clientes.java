@@ -364,22 +364,23 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para deletar");
             return;
         }
-
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja deletar o(s) registro(s) selecionado(s)?", "Atenção", JOptionPane.YES_NO_OPTION);
         if(opcao == JOptionPane.NO_OPTION){
             return;
         }
         for(int i = 0; i < linhas_Selecionadas; i++){
-            int id_cliente = (int) modelo.getValueAt(jTblClientes.getSelectedRow(), 0);
+            Cliente cliente = new Cliente();
+            setClienteComValoresDaLinha(cliente, modelo, jTblClientes.getSelectedRow());
             try {
-                ClienteDAO.deletar(id_cliente);
+                ClienteDAO.deletar(cliente.getId_cliente());
+                JOptionPane.showMessageDialog(null, "Registro(s) deletado(s) com sucesso");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Erro ao deletar o registro");
                 e.printStackTrace();
             }
             modelo.removeRow(jTblClientes.getSelectedRow());
         }
-        JOptionPane.showMessageDialog(null, "Registro(s) deletado(s) com sucesso");
+        
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
