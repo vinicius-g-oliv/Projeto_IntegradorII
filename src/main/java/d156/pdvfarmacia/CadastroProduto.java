@@ -313,16 +313,33 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        //buscar através da produtoDAO
-        //mostrar os dados na tela
-        ArrayList<Model.Produto> produtos = new ArrayList<>();
-        try {
+        
+        String produto = txtProduto.getText();
+        String id = txtCodigo.getText();
+        ArrayList<Produto> produtos = new ArrayList<>();
+        
+        if (txtProduto.getText().length() > 0){
+            try {
+                produtos = ProdutoDAO.consultarPorNome(txtProduto.getText());
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if(txtCodigo.getText().length() > 0){
+            try {
+                produtos = ProdutoDAO.consultarPorCodigo(txtCodigo.getText());
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
             produtos = ProdutoDAO.consultar();
         } catch (ClassNotFoundException | SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         System.out.println(produtos.toString());
+        }
+        
+    
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
