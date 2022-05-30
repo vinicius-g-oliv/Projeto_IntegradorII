@@ -58,7 +58,7 @@ public class ProdutoDAO {
         
         try{
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-            String sql = "SELECT * FROM produto WHERE id_produto = ?";
+            String sql = "SELECT * FROM produto WHERE nome = ?";
             java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, nome); 
             java.sql.ResultSet rs = stmt.executeQuery();
