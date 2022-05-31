@@ -34,7 +34,8 @@ public class RelatorioAnaliticoDAO {
         instrucaoSQL = conexao.createStatement();
         Class.forName(DRIVER);
         ResultSet rs;            
-        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT iv.id_produto, iv.quantidade, v.id_cliente.nome, v.data FROM itemVenda as iv INNER JOIN venda as v on iv.id_venda = v.id_venda WHERE dataVenda BETWEEN ? AND ? ;");
+        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT iv.id_produto, iv.quantidade, v.data_venda, cli.nome \n" +
+"FROM item_venda as iv INNER JOIN venda as v on iv.id_venda = v.id_venda INNER JOIN cliente as cli on v.id_cliente = cli.id_cliente WHERE data_venda BETWEEN ? AND ? ;");
         if(rs != null) {
             while ( rs.next() ) {
                 RelatorioAnaliticoClasse rel = new RelatorioAnaliticoClasse();
