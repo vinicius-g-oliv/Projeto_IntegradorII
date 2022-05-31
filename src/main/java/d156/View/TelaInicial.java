@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package d156.pdvfarmacia;
+package d156.View;
 
 import DAO.ClienteDAO;
 import Model.Cliente;
@@ -18,6 +18,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -163,7 +164,6 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-        // TODO add your handling code here:
         Relatorios janelaModal = new Relatorios();
         janelaModal.setVisible(true);
     }//GEN-LAST:event_btnRelatorioActionPerformed
@@ -175,19 +175,16 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        // TODO add your handling code here:
         CadastroProduto janelaModal = new CadastroProduto();
         janelaModal.setVisible(true);
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
-        // TODO add your handling code here:
         TelaVendas janelaModal = new TelaVendas();
         janelaModal.setVisible(true);
     }//GEN-LAST:event_btnVendaActionPerformed
 
     private void btnRelatorioAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioAnaliticoActionPerformed
-        // TODO add your handling code here:
          RelatorioAnalitico janelaModal = new RelatorioAnalitico();
         janelaModal.setVisible(true);
     }//GEN-LAST:event_btnRelatorioAnaliticoActionPerformed

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package d156.pdvfarmacia;
+package d156.View;
 
 import DAO.RelatorioAnaliticoDAO;
 import Model.RelatorioAnaliticoClasse;
@@ -71,7 +71,7 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nome Cliente", "Data", "Produtos", "Quantidade"
+                "Nome Cliente", "Data", "Produto", "Quantidade"
             }
         ));
         jScrollPane3.setViewportView(jTblRelatorioAnalitico);
@@ -180,6 +180,10 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha os campos de data");
             return;
         }
+        if(máximoMensal() == false){
+            JOptionPane.showMessageDialog(null, "Data máxima permitida é de 30 dias");
+            return;
+        }
         try {
             java.sql.Date dtInicial = converterParaDate(dataInicial);
             java.sql.Date dtFinal = converterParaDate(dataFinal);
@@ -195,10 +199,30 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao buscar dados");
             return;
         }
-        txtDataInicial.setText("");
-        txtDataFinal.setText("");
-        
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private boolean máximoMensal() {
+        //verificar se o intervalo de início e fim equivalem a 30 dias
+        String dataInicial = txtDataInicial.getText();
+        String dataFinal = txtDataFinal.getText();
+        try {
+            java.sql.Date dtInicial = converterParaDate(dataInicial);
+            java.sql.Date dtFinal = converterParaDate(dataFinal);
+            long diferenca = dtFinal.getTime() - dtInicial.getTime();
+            long dias = diferenca / (24 * 60 * 60 * 1000);
+            if(dias > 30){
+                return false;
+            }
+        } catch (ParseException e) {
+            return false;
+        }
+        //verificar e o inicial é menor que o final
+        if(dataInicial.compareTo(dataFinal) > 0){
+            JOptionPane.showMessageDialog(null, "Data inicial maior que a data final");
+            return false;
+        }
+        return true;
+    }
 
     private java.sql.Date converterParaDate(String string) throws ParseException {
         // trocando de dd/MM/yyyy para yyyy-MM-dd
@@ -217,7 +241,24 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDataInicialActionPerformed
 
     private void btnValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorTotalActionPerformed
-        // TODO add your handling code here:
+        //JOptionPane com o valor total de todas as vendas com base na data de início e fim
+        String dataInicial = txtDataInicial.getText();
+        String dataFinal = txtDataFinal.getText();
+        try {
+            java.sql.Date dtInicial = converterParaDate(dataInicial);
+            java.sql.Date dtFinal = converterParaDate(dataFinal);
+            double valorTotal = RelatorioAnaliticoDAO.valorTotal(dtInicial, dtFinal);
+            JOptionPane.showMessageDialog(null, "Valor total: R$" + valorTotal);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Data inválida");
+            return;
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar dados");
+            return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar dados");
+            return;
+        }
     }//GEN-LAST:event_btnValorTotalActionPerformed
 
     /**

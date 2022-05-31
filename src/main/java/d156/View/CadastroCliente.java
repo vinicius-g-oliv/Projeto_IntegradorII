@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package d156.pdvfarmacia;
+package d156.View;
 
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -39,6 +40,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     public CadastroCliente(Cliente cliente) {
         initComponents();
         mostrarValores(cliente);
+        this.setLocationRelativeTo(null);
         this.btnConcluir.setText("Alterar");
         this.txtCPF.setEnabled(false);
     }
@@ -372,6 +374,10 @@ public class CadastroCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Data de nascimento inválida");
             return;
         }
+        if(valiarCPF() == false){
+            JOptionPane.showMessageDialog(null, "CPF inválido");
+            return;
+        }
 
         Model.Cliente cliente = new Model.Cliente();
         cliente = setCliente(cliente);
@@ -398,6 +404,19 @@ public class CadastroCliente extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnConcluirActionPerformed
+
+    private boolean valiarCPF() {
+        String cpf = txtCPF.getText();
+        cpf = cpf.replace(".", "");
+        cpf = cpf.replace("-", "");
+        if (cpf.length() != 11) {
+            return false;
+        }
+        if (cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222") || cpf.equals("33333333333") || cpf.equals("44444444444") || cpf.equals("55555555555") || cpf.equals("66666666666") || cpf.equals("77777777777") || cpf.equals("88888888888") || cpf.equals("99999999999")) {
+            return false;
+        }
+        return true;
+    }
 
     private boolean desejaAlterar() {
         //deseja alterar dadaos?

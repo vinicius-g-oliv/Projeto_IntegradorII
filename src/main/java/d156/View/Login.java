@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-package d156.pdvfarmacia;
+package d156.View;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;

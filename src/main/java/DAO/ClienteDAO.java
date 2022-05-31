@@ -29,7 +29,12 @@ public class ClienteDAO {
     static String SENHA = gc.getSENHA();
     static String URL = gc.getURL();
 
-    //Conecta ao banco de dados com utils.GerenciadorConexao
+    /**
+     * Cadastra um cliente no banco de dados
+     * @param cliente
+     * @return
+     * @throws SQLException
+     */
     public static void inserir(Cliente cliente) throws SQLException, ClassNotFoundException {
         if(clienteExistente(cliente) == true){
             throw new SQLException("Cliente já cadastrado");
@@ -55,6 +60,12 @@ public class ClienteDAO {
         stmt.close();
     }
 
+    /**
+     * Cadastra um cliente no banco de dados
+     * @param cliente
+     * @return
+     * @throws SQLException
+     */
     private static void cadastrarComoPrimeiro(Cliente cliente) throws SQLException {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         String sql = "INSERT INTO cliente (id_cliente, nome, cpf, date, email, sexo, endereco, cep, numero, complemento, estadoCivil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// 11 para
@@ -74,6 +85,12 @@ public class ClienteDAO {
         stmt.close();
     }
 
+    /**
+     * Verifica se o cliente já está cadastrado no banco de dados
+     * @param cliente
+     * @return
+     * @throws SQLException
+     */
     private static boolean primeiroCliente(Cliente cliente) throws SQLException {
         //se não houver linhas na tabela
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -86,6 +103,12 @@ public class ClienteDAO {
         return false;
     }
 
+    /**
+     * Verifica se o cliente já está cadastrado no banco de dados
+     * @param cliente
+     * @return true se o cliente estiver cadastrado, false caso contrário
+     * @throws SQLException
+     */
     private static boolean clienteExistente(Cliente cliente) throws SQLException {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         String sql = "SELECT * FROM cliente WHERE cpf = ?";
@@ -98,6 +121,12 @@ public class ClienteDAO {
         return false;
     }
 
+    /**
+     * Deleta um cliente do banco de dados
+     * @param cliente
+     * @return true se o cliente foi deletado, false caso contrário
+     * @throws SQLException
+     */
     public static ArrayList<Cliente> consultar(String nome, String cpf) throws SQLException{
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
         try {
@@ -130,6 +159,12 @@ public class ClienteDAO {
         return array_clientes;
     }
 
+    /**
+     * Deleta um cliente do banco de dados
+     * @param cliente
+     * @return true se o cliente foi deletado, false caso contrário
+     * @throws SQLException
+     */
     public static ArrayList<Cliente> consultar() throws SQLException{
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
         try {
@@ -160,6 +195,12 @@ public class ClienteDAO {
         return array_clientes;
     }
 
+    /**
+     * Deleta um cliente do banco de dados
+     * @param cliente
+     * @return true se o cliente foi deletado, false caso contrário
+     * @throws SQLException
+     */
     public static ArrayList<Cliente> consultarClientesCPF(String cpf) throws SQLException{
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
         try {
@@ -191,6 +232,12 @@ public class ClienteDAO {
         return array_clientes;
     }
 
+    /**
+     * Deleta um cliente do banco de dados
+     * @param cliente
+     * @return true se o cliente foi deletado, false caso contrário
+     * @throws SQLException
+     */
     public static Cliente consultarCPF(String cpf) throws SQLException{
         Cliente cliente = new Cliente();
         try {
@@ -220,6 +267,12 @@ public class ClienteDAO {
         return cliente;
     }
 
+    /**
+     * Deleta um cliente do banco de dados
+     * @param cliente
+     * @return true se o cliente foi deletado, false caso contrário
+     * @throws SQLException
+     */
     public static ArrayList<Cliente> consultarNOME(String nome) throws SQLException{
         ArrayList<Cliente> array_clientes = new ArrayList<Cliente>();
         try {
@@ -251,6 +304,12 @@ public class ClienteDAO {
         return array_clientes;
     }
 
+    /**
+     * Deleta um cliente do banco de dados
+     * @param cliente
+     * @return true se o cliente foi deletado, false caso contrário
+     * @throws SQLException
+     */
     public static void alterar(Cliente cliente) throws SQLException {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         String sql = "UPDATE cliente SET nome = ?, cpf = ?, date = ?, email = ?, sexo = ?, endereco = ?, cep = ?, numero = ?, complemento = ?, estadoCivil = ? WHERE cpf = ?";
@@ -270,6 +329,12 @@ public class ClienteDAO {
         stmt.close();
     }
 
+    /**
+     * Deleta um cliente do banco de dados
+     * @param cliente
+     * @return true se o cliente foi deletado, false caso contrário
+     * @throws SQLException
+     */
     public static void deletar(int id) throws SQLException {
         //deletar cliente
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -284,6 +349,12 @@ public class ClienteDAO {
         stmt.close();
     }
 
+    /**
+     * Deleta um cliente do banco de dados
+     * @param cliente
+     * @return true se o cliente foi deletado, false caso contrário
+     * @throws SQLException
+     */
     public static void alterarCPF(Cliente cliente, String novo_cpf) throws SQLException {
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         String sql = "UPDATE cliente SET nome = ?, cpf = ?, date = ?, email = ?, sexo = ?, endereco = ?, cep = ?, numero = ?, complemento = ?, estadoCivil = ? WHERE cpf = ?";

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package d156.pdvfarmacia;
+package d156.View;
 import DAO.RelatorioDAO;
 import Model.Relatorio;
 import scala.collection.mutable.ReusableBuilder;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -195,6 +196,10 @@ public class Relatorios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha os campos de data");
             return;
         }
+        if(maximoMensal() == false){
+            JOptionPane.showMessageDialog(null, "Data Inicial não pode ser maior que a data final");
+            return;
+        }
         try {
             java.sql.Date dtInicial = converterParaDate(dataInicial);
             java.sql.Date dtFinal = converterParaDate(dataFinal);
@@ -212,11 +217,30 @@ public class Relatorios extends javax.swing.JFrame {
         } catch (java.text.ParseException e) {
             JOptionPane.showMessageDialog(null, "Erro ao converter data");
         }
-        //limnpar campos
-        txtDataInicial.setText("");
-        txtDataFinal.setText("");
-
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private boolean maximoMensal() {
+        String dataInicial = txtDataInicial.getText();
+        String dataFinal = txtDataFinal.getText();
+        try {
+            java.sql.Date dtInicial = converterParaDate(dataInicial);
+            java.sql.Date dtFinal = converterParaDate(dataFinal);
+            long diferenca = dtFinal.getTime() - dtInicial.getTime();
+            long dias = diferenca / (24 * 60 * 60 * 1000);
+            if(dias > 30){
+                return false;
+            }
+        } catch (ParseException | java.text.ParseException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao converter data");
+            return false;
+        }
+        //verificar e o inicial é menor que o final
+        if(dataInicial.compareTo(dataFinal) > 0){
+            JOptionPane.showMessageDialog(null, "Data inicial maior que a data final");
+            return false;
+        }
+        return true;
+    }
 
     private void txtDataInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataInicialActionPerformed
         // TODO add your handling code here:
@@ -227,7 +251,8 @@ public class Relatorios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDataFinalActionPerformed
 
     private void btnRelatorioAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioAnaliticoActionPerformed
-        // TODO add your handling code here:
+        RelatorioAnalitico relatorioAnalitico = new RelatorioAnalitico();
+        relatorioAnalitico.setVisible(true);
     }//GEN-LAST:event_btnRelatorioAnaliticoActionPerformed
 
     /**

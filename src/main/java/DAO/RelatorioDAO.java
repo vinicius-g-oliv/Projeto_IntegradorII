@@ -36,6 +36,14 @@ public class RelatorioDAO {
         private static Connection conexao;
         static java.sql.Statement instrucaoSQL;
         
+    /**
+     * Método para consultar o relatório no banco de dados por data
+     * @param inicio
+     * @param fim
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public static ArrayList<Relatorio> buscar(String inicio, String fim) throws ClassNotFoundException, SQLException
     {
         ArrayList<Relatorio> listaRetorno = new ArrayList<Relatorio>();

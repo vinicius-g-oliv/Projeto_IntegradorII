@@ -115,7 +115,7 @@
                   <Table columnCount="4" rowCount="4">
                     <Column editable="true" title="Nome Cliente" type="java.lang.Object"/>
                     <Column editable="true" title="Data" type="java.lang.Object"/>
-                    <Column editable="true" title="Produtos" type="java.lang.Object"/>
+                    <Column editable="true" title="Produto" type="java.lang.Object"/>
                     <Column editable="true" title="Quantidade" type="java.lang.Object"/>
                   </Table>
                 </Property>

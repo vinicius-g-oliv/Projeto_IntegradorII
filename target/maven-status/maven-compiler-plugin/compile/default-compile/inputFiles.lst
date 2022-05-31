@@ -1,15 +1,17 @@
-C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\TelaInicialFarmacia.java
-C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\Relatorio.java
+C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\Relatorios.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\Model\Main.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\DAO\RelatorioDAO.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\DAO\VendaDAO.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\CadastroCliente.java
+C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\Model\RelatorioAnaliticoClasse.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\Login.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\Model\Relatorio.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\utils\GerenciadorConexao.java
+C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\utils\TestarConexao.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\DAO\ProdutoDAO.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\Model\Venda.java
-C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\RelatorioGeral.java
+C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\DAO\ItemVendaDAO.java
+C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\utils\TestarDataAtual.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\DAO\ClienteDAO.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\Clientes.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\RelatorioAnalitico.java
@@ -19,3 +21,4 @@ C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\TelaInicial
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\d156\pdvfarmacia\CadastroProduto.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\Model\Cliente.java
 C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\Model\ItemVenda.java
+C:\Arquivos-Java\Projeto_IntegradorII\src\main\java\DAO\RelatorioAnaliticoDAO.java

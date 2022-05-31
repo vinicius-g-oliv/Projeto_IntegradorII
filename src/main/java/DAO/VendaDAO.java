@@ -55,7 +55,7 @@ public class VendaDAO {
     }
 
     /**
-     * Método para inserir uma venda no banco de dados
+     * Método para consultar uma venda no banco de dados
      * @param venda
      * @return Venda
      * @throws SQLException
@@ -67,7 +67,7 @@ public class VendaDAO {
     }
 
     /**
-     * Método para inserir uma venda no banco de dados
+     * Método para consultar vendas no banco de dados
      * @param venda
      * @return ArrayList
      * @throws SQLException
@@ -83,6 +83,10 @@ public class VendaDAO {
         return vendas;
     }
 
+    /**
+     * Método para obter o id de uma venda no banco de dados
+     * @return int id
+     */
     public static int getIdVenda() {
         int idVenda = 0;
         String sql = "SELECT MAX(id_venda) FROM venda";

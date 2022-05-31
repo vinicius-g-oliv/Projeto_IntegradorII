@@ -29,6 +29,11 @@ public class ProdutoDAO {
         private static Connection conexao;
         static java.sql.Statement instrucaoSQL;
         
+    /**
+     * Método para consultar um produto no banco de dados
+     * @param produto
+     * @return ArrayList<Produto>
+     */
     public static ArrayList<Produto> consultar() throws ClassNotFoundException, SQLException
     {
         ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
@@ -50,6 +55,11 @@ public class ProdutoDAO {
         return listaRetorno;
     }
 
+    /**
+     * Método para consultar um produto no banco de dados
+     * @param produto
+     * @return Produto
+     */
     public static Produto consultarProduto(int id_produto) throws SQLException {
         if(verificarProdutoExistente(id_produto) == false){
             throw new SQLException("Produto Não Encontrado");
@@ -70,6 +80,11 @@ public class ProdutoDAO {
         return p;
     }
     
+    /**
+     * Método para verificar se um produto existe no banco de dados
+     * @param produto
+     * @return boolean false se não existir, true se existir
+     */
     private static boolean verificarProdutoExistente(int id_produto) throws SQLException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "SELECT * FROM produto WHERE id_produto = ?";
@@ -82,6 +97,11 @@ public class ProdutoDAO {
         return false;
     }
 
+    /**
+     * Método para consultar um produto no banco de dados por nome
+     * @param String nome
+     * @return ArrayList<Produto>
+     */
     public static ArrayList<Produto> consultarPorNome(String nome) throws ClassNotFoundException, SQLException
     {
         ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
@@ -108,6 +128,13 @@ public class ProdutoDAO {
         return listaRetorno;
     }
     
+    /**
+     * Método para consultar um produto no banco de dados por codigo (id_produto)
+     * @param id_produto
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public static ArrayList<Produto> consultarPorCodigo(int id_produto) throws ClassNotFoundException, SQLException
     {
         ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
@@ -134,6 +161,13 @@ public class ProdutoDAO {
         return listaRetorno;
     }
     
+    /**
+     * Método para consultar um produto no banco de dados por preço
+     * @param preco
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public static void inserir(Produto produto) throws SQLException, ClassNotFoundException {
         if(verificarProdutoExistente(produto.getCodigo())){
             throw new SQLException("Produto já existente\n"+"Se deseja alterar o produto, clique em \"ALTERAR\"");
@@ -148,7 +182,14 @@ public class ProdutoDAO {
         stmt.close();
     }
     
-     private static boolean verificarProdutoExistente(String id_produto) throws ClassNotFoundException, SQLException {
+    /**
+     * Método para verificar um produto no banco de dados
+     * @param id_produto
+     * @return boolean false se não existir, true se existir
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    private static boolean verificarProdutoExistente(String id_produto) throws ClassNotFoundException, SQLException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "SELECT * FROM produto WHERE id_produto = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -160,6 +201,11 @@ public class ProdutoDAO {
         return false; //se não existir, retorna false
     }
 
+    /**
+     * Método para deletar um produto no banco de dados
+     * @param int id_produto
+     * @throws SQLException
+     */
     public static void deletar(int id_produto) throws SQLException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "DELETE FROM produto WHERE id_produto = ?";
@@ -169,7 +215,13 @@ public class ProdutoDAO {
         stmt.close();
     }
      
-     public static Produto alterar(Produto produto) throws SQLException {
+    /**
+     * Método para alterar um produto no banco de dados
+     * @param Produto produto
+     * @return Produto
+     * @throws SQLException
+     */
+    public static Produto alterar(Produto produto) throws SQLException {
        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
        String sql = "UPDATE produto SET nome = ?, preco = ?, quantidade_estoque = ? WHERE id_produto = ?";
        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -182,6 +234,12 @@ public class ProdutoDAO {
        return produto;
     }
 
+    /**
+     * Método para consultar o último produto no banco de dados
+     * @return Produto
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public static Produto buscarUltimo() throws ClassNotFoundException, SQLException {
         Produto p = new Produto();
         try {
@@ -201,5 +259,38 @@ public class ProdutoDAO {
             throw new SQLException("Erro ao gerar id para produto: " + e.getMessage());
         }
         return p;
+    }
+
+    /**
+     * Método para atualizar um produto no banco de dados
+     * @param produto
+     * @throws SQLException
+     * @return void
+     */
+    public static void atualizarProduto(Produto produto) throws SQLException {
+        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
+        String sql = "UPDATE produto SET nome = ?, preco = ?, quantidade_estoque = ? WHERE id_produto = ?";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setString(1, produto.getNome());
+        stmt.setDouble(2, produto.getPreco());
+        stmt.setInt(3, produto.getQuantidadeEstoque());
+        stmt.setString(4, produto.getCodigo());
+        stmt.execute();
+        stmt.close();
+    }
+
+    /**
+     * Método para atualizar um estoque do produto no banco de dados
+     * @param produto
+     * @throws SQLException
+     */
+    public static void atualizarEstoque(Produto produto) throws SQLException {
+        conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
+        String sql = "UPDATE produto SET quantidade_estoque = ? WHERE id_produto = ?";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setInt(1, produto.getQuantidadeEstoque());
+        stmt.setString(2, produto.getCodigo());
+        stmt.execute();
+        stmt.close();
     }
 }

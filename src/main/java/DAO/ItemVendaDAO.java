@@ -11,13 +11,18 @@ import utils.GerenciadorConexao;
 public class ItemVendaDAO {
    
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
-        static utils.GerenciadorConexao gc = new GerenciadorConexao();
-        static String LOGIN = gc.getLOGIN();
-        static String SENHA = gc.getSENHA();
-        static String URL = gc.getURL();
-        private static Connection conexao;
-        static java.sql.Statement instrucaoSQL;
+    static utils.GerenciadorConexao gc = new GerenciadorConexao();
+    static String LOGIN = gc.getLOGIN();
+    static String SENHA = gc.getSENHA();
+    static String URL = gc.getURL();
+    private static Connection conexao;
+    static java.sql.Statement instrucaoSQL;
         
+    /**
+     * Método para consultar um item de venda no banco de dados
+     * @param itemVenda
+     * @return ArrayList<ItemVenda>
+     */
     public static ArrayList<ItemVenda> consultar() throws ClassNotFoundException, SQLException
     {
         ArrayList<ItemVenda> listaRetorno = new ArrayList<ItemVenda>();
@@ -39,6 +44,11 @@ public class ItemVendaDAO {
         return listaRetorno;
     }
     
+    /**
+     * Método para inserir um item de venda no banco de dados
+     * @param itemVenda
+     * @return ArrayList<ItemVenda>
+     */
     public static void inserir(ItemVenda itemVenda) throws SQLException, ClassNotFoundException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         // String sql1 = "SET FOREIGN_KEY_CHECKS = 0;";
@@ -54,7 +64,12 @@ public class ItemVendaDAO {
         stmt.close();
     }
     
-     public static void deletar(ItemVenda itemVenda) throws SQLException {
+    /**
+     * Método para deletar um item de venda no banco de dados
+     * @param itemVenda
+     * @return void
+     */
+    public static void deletar(ItemVenda itemVenda) throws SQLException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
         String sql = "DELETE FROM item_venda WHERE id_itemVenda = ?";
         java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
