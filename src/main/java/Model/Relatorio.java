@@ -71,7 +71,7 @@ public class Relatorio {
         this.nomeCliente = nomeCliente;
     }
     
-    public Date dataVenda(){
+    public Date getDataVenda(){
         return this.dataVenda;
     }
     

@@ -6,10 +6,19 @@ package d156.pdvfarmacia;
 
 import DAO.RelatorioAnaliticoDAO;
 import Model.RelatorioAnaliticoClasse;
+
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import com.google.protobuf.Internal.ListAdapter.Converter;
 
 /**
  * Classe representa a classe de geração do relatório analítico (mais detalhado) do PDV
@@ -23,6 +32,7 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
      */
     public RelatorioAnalitico() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -38,13 +48,9 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTblRelatorioAnalitico = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
@@ -52,83 +58,12 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
         txtDataFinal = new javax.swing.JFormattedTextField();
         btnValorTotal = new javax.swing.JButton();
 
-        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        jFrame1.setTitle("Cadastro de Produtos");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CADASTRO DE PRODUTOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 24))); // NOI18N
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"0001", "Advil", "R$"},
-                {"0002", "Allegra", "R$"},
-                {"0003", "Barra de Cereal", "R$"},
-                {"0004", "Chocolate Zero", "R$"},
-                {"0005", "Condicionador", "R$"},
-                {"0006", "Creme Hidratante", "R$"},
-                {"0007", "Delineador Preto", "R$"},
-                {"0008", "Dipirona", "R$"},
-                {"0009", "Epocler", "R$"},
-                {"0010", "Escova de Dente", "R$"},
-                {"0011", "Esmalte", "R$"},
-                {"0012", "Fini", "R$"},
-                {"0013", "Fralda", "R$"},
-                {"0014", "Halls", "R$"},
-                {"0015", "Lenço Umedecido", "R$"},
-                {"0016", "Manteiga de Cacau", "R$"},
-                {"0017", "Máscara para Cílios", "R$"},
-                {"0018", "Merthiolate", "R$"},
-                {"0019", "Monster", "R$"},
-                {"0020", "Novalgina", "R$"},
-                {"0021", "Óleo para Cabelo", "R$"},
-                {"0022", "Sabonete", "R$"},
-                {"0023", "Shampoo", "R$"},
-                {"0024", "Trident", "R$"}
-            },
-            new String [] {
-                "Código", "Nome", "Preço"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório Analítico");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Relatório Analítico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("AppleGothic", 1, 24))); // NOI18N
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTblRelatorioAnalitico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -139,7 +74,7 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
                 "Nome Cliente", "Data", "Produtos", "Quantidade"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jTblRelatorioAnalitico);
 
         jLabel3.setText("Data inicial:");
 
@@ -228,42 +163,62 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnValorTotal)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        ArrayList<RelatorioAnaliticoClasse> relatorio = new ArrayList<RelatorioAnaliticoClasse>();
-
-        if(txtDataInicial.getText().length() > 0 && txtDataFinal.getText().length() > 0){
-            try {
-                relatorio = RelatorioAnaliticoDAO.buscar();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex)    {
-                Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
-           
+        ArrayList<RelatorioAnaliticoClasse> relatorios = new ArrayList<RelatorioAnaliticoClasse>();
+        String dataInicial = txtDataInicial.getText();
+        String dataFinal = txtDataFinal.getText();
+        
+        if(txtDataInicial.getText().length() < 0 && txtDataFinal.getText().length() < 0){
+            JOptionPane.showMessageDialog(null, "Preencha os campos de data");
+            return;
         }
-        carregarJTable(relatorio);
-        //limnpar campos
+        try {
+            java.sql.Date dtInicial = converterParaDate(dataInicial);
+            java.sql.Date dtFinal = converterParaDate(dataFinal);
+            relatorios = RelatorioAnaliticoDAO.buscarPorData(dtInicial, dtFinal);
+            carregarJTable(relatorios);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Data inválida");
+            return;
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar dados");
+            return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar dados");
+            return;
+        }
         txtDataInicial.setText("");
         txtDataFinal.setText("");
         
-        }  
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnValorTotalActionPerformed
+    private java.sql.Date converterParaDate(String string) throws ParseException {
+        // trocando de dd/MM/yyyy para yyyy-MM-dd
+        string = 
+        string.substring(6, 10) + "-" +
+        string.substring(3, 5) + "-" +
+        string.substring(0, 2);
+        // converter para data
+        java.util.Date nova_data = new SimpleDateFormat("yyyy-MM-dd").parse(string);
+        java.sql.Date nova_data_sql = new java.sql.Date(nova_data.getTime());
+        return nova_data_sql;
+    }
 
     private void txtDataInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataInicialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataInicialActionPerformed
+
+    private void btnValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnValorTotalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,20 +259,25 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnValorTotal;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTblRelatorioAnalitico;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     // End of variables declaration//GEN-END:variables
 
     private void carregarJTable(ArrayList<RelatorioAnaliticoClasse> relatorio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DefaultTableModel modelo = (DefaultTableModel) jTblRelatorioAnalitico.getModel();
+        modelo.setNumRows(0);
+        for (RelatorioAnaliticoClasse relatorioAnaliticoClasse : relatorio) {
+            modelo.addRow(new Object[]{
+                relatorioAnaliticoClasse.getNomeCli(),
+                relatorioAnaliticoClasse.getData(),
+                relatorioAnaliticoClasse.getProdutos(),
+                relatorioAnaliticoClasse.getQuantidade(),
+            });
+        }
     }
 }

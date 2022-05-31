@@ -20,7 +20,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import utils.GerenciadorConexao;
 
@@ -30,7 +29,6 @@ import utils.GerenciadorConexao;
  */
 public class RelatorioDAO {
     
-  private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do Mysql 8.0
         static utils.GerenciadorConexao gc = new GerenciadorConexao();
         static String LOGIN = gc.getLOGIN();
         static String SENHA = gc.getSENHA();
@@ -38,20 +36,22 @@ public class RelatorioDAO {
         private static Connection conexao;
         static java.sql.Statement instrucaoSQL;
         
-    public static ArrayList<Relatorio> buscar() throws ClassNotFoundException, SQLException
+    public static ArrayList<Relatorio> buscar(String inicio, String fim) throws ClassNotFoundException, SQLException
     {
         ArrayList<Relatorio> listaRetorno = new ArrayList<Relatorio>();
         conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
         instrucaoSQL = conexao.createStatement();
-        Class.forName(DRIVER);
-        ResultSet rs;            
-        rs = ((java.sql.Statement) instrucaoSQL).executeQuery("SELECT c.nome, v.valorVenda, v.dataVenda FROM venda as v INNER JOIN clientes AS c ON v.id_cliente = c.id_cliente WHERE dataVenda BETWEEN ? AND ? ;");
+        String sql = "SELECT c.nome, v.valor, v.data_venda FROM venda as v INNER JOIN cliente AS c ON c.id_cliente = v.id_cliente WHERE data_venda BETWEEN ? AND ?;";
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
+        stmt.setString(1, inicio);
+        stmt.setString(2, fim);
+        ResultSet rs = stmt.executeQuery();
         if(rs != null) {
             while ( rs.next() ) {
                 Relatorio rel = new Relatorio();
-                rel.setNomeCliente(rs.getString("nomeCliente"));
-                rel.setValorVenda(rs.getFloat("valorVenda"));
-                rel.setDataVenda(rs.getDate("dataVenda"));
+                rel.setNomeCliente(rs.getString("c.nome"));
+                rel.setValorVenda(rs.getFloat("v.valor"));
+                rel.setDataVenda(rs.getDate("v.data_venda"));
                
                 listaRetorno.add(rel);
             }

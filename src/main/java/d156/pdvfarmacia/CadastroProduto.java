@@ -493,7 +493,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         model.setNumRows(0);
         for (Produto p : produtos) {
             model.addRow(new Object[]{
-                p.getCodigo(),//TODO: pegar id_cliente;
+                p.getCodigo(),
                 p.getNome(),
                 p.getQuantidadeEstoque(),
                 p.getPreco()

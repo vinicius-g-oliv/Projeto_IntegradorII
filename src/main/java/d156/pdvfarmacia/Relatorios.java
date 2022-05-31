@@ -5,10 +5,19 @@
 package d156.pdvfarmacia;
 import DAO.RelatorioDAO;
 import Model.Relatorio;
+import scala.collection.mutable.ReusableBuilder;
+import scala.util.hashing.Hashing.Default;
+
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import com.google.protobuf.TextFormat.ParseException;
 
 /**
  * Classe representa a classe de geração de relatório do PDV
@@ -22,6 +31,7 @@ public class Relatorios extends javax.swing.JFrame {
      */
     public Relatorios() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,13 +43,9 @@ public class Relatorios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTblRelatorio = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
@@ -47,83 +53,12 @@ public class Relatorios extends javax.swing.JFrame {
         txtDataFinal = new javax.swing.JFormattedTextField();
         btnRelatorioAnalitico = new javax.swing.JButton();
 
-        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        jFrame1.setTitle("Cadastro de Produtos");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CADASTRO DE PRODUTOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 24))); // NOI18N
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"0001", "Advil", "R$"},
-                {"0002", "Allegra", "R$"},
-                {"0003", "Barra de Cereal", "R$"},
-                {"0004", "Chocolate Zero", "R$"},
-                {"0005", "Condicionador", "R$"},
-                {"0006", "Creme Hidratante", "R$"},
-                {"0007", "Delineador Preto", "R$"},
-                {"0008", "Dipirona", "R$"},
-                {"0009", "Epocler", "R$"},
-                {"0010", "Escova de Dente", "R$"},
-                {"0011", "Esmalte", "R$"},
-                {"0012", "Fini", "R$"},
-                {"0013", "Fralda", "R$"},
-                {"0014", "Halls", "R$"},
-                {"0015", "Lenço Umedecido", "R$"},
-                {"0016", "Manteiga de Cacau", "R$"},
-                {"0017", "Máscara para Cílios", "R$"},
-                {"0018", "Merthiolate", "R$"},
-                {"0019", "Monster", "R$"},
-                {"0020", "Novalgina", "R$"},
-                {"0021", "Óleo para Cabelo", "R$"},
-                {"0022", "Sabonete", "R$"},
-                {"0023", "Shampoo", "R$"},
-                {"0024", "Trident", "R$"}
-            },
-            new String [] {
-                "Código", "Nome", "Preço"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Relatório", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("AppleGothic", 1, 24))); // NOI18N
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTblRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -134,7 +69,7 @@ public class Relatorios extends javax.swing.JFrame {
                 "Nome Cliente", "Data da venda", "Valor total"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jTblRelatorio);
 
         jLabel3.setText("Data inicial:");
 
@@ -201,8 +136,8 @@ public class Relatorios extends javax.swing.JFrame {
                     .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         btnRelatorioAnalitico.setText("Relatorio Analitico");
@@ -238,20 +173,45 @@ public class Relatorios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private java.sql.Date converterParaDate(String string) throws ParseException, java.text.ParseException {
+        // trocando de dd/MM/yyyy para yyyy-MM-dd
+        string = 
+        string.substring(6, 10) + "-" +
+        string.substring(3, 5) + "-" +
+        string.substring(0, 2);
+        // converter para data
+        java.util.Date nova_data = new SimpleDateFormat("yyyy-MM-dd").parse(string);
+        java.sql.Date nova_data_sql = new java.sql.Date(nova_data.getTime());
+        return nova_data_sql;
+    }
+
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
-        ArrayList<Relatorio> relatorio = new ArrayList<Relatorio>();
+        ArrayList<Relatorio> relatorios = new ArrayList<Relatorio>();
+        String dataInicial = txtDataInicial.getText();
+        String dataFinal = txtDataFinal.getText();
 
-        if(txtDataInicial.getText().length() > 0 && txtDataFinal.getText().length() > 0){
-            try {
-                relatorio = RelatorioDAO.buscar();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if(txtDataInicial.getText().length() < 0 && txtDataFinal.getText().length() < 0){
+            JOptionPane.showMessageDialog(null, "Preencha os campos de data");
+            return;
         }
-        carregarJTable(relatorio);
+        try {
+            java.sql.Date dtInicial = converterParaDate(dataInicial);
+            java.sql.Date dtFinal = converterParaDate(dataFinal);
+            relatorios = RelatorioDAO.buscar(dtInicial.toString(), dtFinal.toString());
+            carregarJTable(relatorios);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Data inválida");
+            return;
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar com o banco de dados");
+            return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar dados");
+            return;
+        } catch (java.text.ParseException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao converter data");
+        }
         //limnpar campos
         txtDataInicial.setText("");
         txtDataFinal.setText("");
@@ -309,21 +269,24 @@ public class Relatorios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRelatorioAnalitico;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTblRelatorio;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     // End of variables declaration//GEN-END:variables
 
     private void carregarJTable(ArrayList<Relatorio> relatorio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DefaultTableModel modelo = (DefaultTableModel) jTblRelatorio.getModel();
+        modelo.setNumRows(0);
+        for (Relatorio r : relatorio) {
+            modelo.addRow(new Object[]{
+                r.getNomeCliente(),
+                r.getDataVenda(),
+                r.getvalorVenda()
+            });
+        }
     }
-
- }
+}

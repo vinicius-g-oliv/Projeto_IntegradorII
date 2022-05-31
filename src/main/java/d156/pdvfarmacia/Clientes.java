@@ -27,12 +27,13 @@ public class Clientes extends javax.swing.JFrame {
      */
     public Clientes() {
         initComponents();
+        this.setLocationRelativeTo(null);
         try {
             carregarJTable();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar a tabela de clientes");
-            e.printStackTrace();
         }
+        
     }
 
     public void carregarJTable() throws SQLException {

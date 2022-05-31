@@ -41,11 +41,11 @@ public class ItemVendaDAO {
     
     public static void inserir(ItemVenda itemVenda) throws SQLException, ClassNotFoundException {
         conexao = DriverManager.getConnection(gc.getURL(), gc.getLOGIN(), gc.getSENHA());
-        String sql1 = "SET FOREIGN_KEY_CHECKS = 0;";
-        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql1);
-        stmt.execute(sql1);
+        // String sql1 = "SET FOREIGN_KEY_CHECKS = 0;";
+        // java.sql.PreparedStatement stmt = conexao.prepareStatement(sql1);
+        // stmt.execute(sql1);
         String sql = "INSERT INTO item_venda (id_venda, id_produto, quantidade, valor_unitario) VALUES (?, ?, ?, ?);";
-            stmt = conexao.prepareStatement(sql);
+        java.sql.PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setInt(1, itemVenda.getId_venda());
         stmt.setInt(2, itemVenda.getId_produto());
         stmt.setInt(3, itemVenda.getQuantidade());

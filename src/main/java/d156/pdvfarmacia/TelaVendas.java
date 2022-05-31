@@ -135,6 +135,11 @@ public class TelaVendas extends javax.swing.JFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("AppleGothic", 1, 24)); // NOI18N
         jLabel3.setText("TOTAL");
@@ -282,7 +287,6 @@ public class TelaVendas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
-        // TODO add your handling code here:
         CadastroCliente janelaModal = new CadastroCliente();
         janelaModal.setVisible(true);
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
@@ -307,13 +311,23 @@ public class TelaVendas extends javax.swing.JFrame {
         }
         SomarTotal(produto, quantidade);
         atualizarTabela(produto, quantidade);
-        limparCamposBuscaQuantidade();
+        txtBuscarProduto.setText("");
+        txtQuantidade.setText("");
         return;
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private void limparCamposBuscaQuantidade() {
+    private void resetarComponentes() {
+        lblTotal.setText("00,00");
+        txtBuscarCPF.setText("");
         txtBuscarProduto.setText("");
         txtQuantidade.setText("");
+        //limpar tabela
+        DefaultTableModel model = (DefaultTableModel) jTblCarrinho.getModel();
+        while(model.getRowCount() > 0){
+            model.removeRow(0);
+        }
+
+
     }
 
     private void SomarTotal(Produto produto, int quantidade) {
@@ -382,9 +396,9 @@ public class TelaVendas extends javax.swing.JFrame {
         if (resposta == JOptionPane.NO_OPTION) {
             return;
         }
-        if(cadastrarVenda() == true && cadastrarItem_Venda() == true){
-            JOptionPane.showMessageDialog(this, "Compra finalizada");
-        }
+        cadastrarVenda();
+        cadastrarItem_Venda();
+        resetarComponentes();
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
     private boolean cadastrarVenda() {
@@ -413,18 +427,20 @@ public class TelaVendas extends javax.swing.JFrame {
             valor_unitario = valor_unitario / quantidade;
             //set itemVenda
             item.setId_venda(VendaDAO.getIdVenda());
+            item.setId_produto(Integer.parseInt(jTblCarrinho.getValueAt(i, 0).toString()));
             item.setQuantidade(Integer.parseInt(jTblCarrinho.getValueAt(i, 2).toString()));
             item.setValorUnitario(valor_unitario);
             try {
                 ItemVendaDAO.inserir(item);
-                return true;
             } catch (ClassNotFoundException | SQLException e) {
                 JOptionPane.showMessageDialog(null, "Erro ao inserir item de venda:\n");
                 System.out.println(e);
                 return false;
             }
         }
-        return false;
+        JOptionPane.showMessageDialog(this, "Compra finalizada");
+        resetarComponentes();
+        return true;
     }
 
     private boolean verificarCliente() {
@@ -475,6 +491,10 @@ public class TelaVendas extends javax.swing.JFrame {
         model.removeRow(jTblCarrinho.getSelectedRow());
         SubtrairTotal();
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        resetarComponentes();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void SubtrairTotal() {
         Double total = 0.0;
