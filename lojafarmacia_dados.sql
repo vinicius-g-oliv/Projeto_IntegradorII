@@ -40,3 +40,4 @@ insert into venda (id_cliente, data_venda, valor) VALUES
     (2, '2000-01-01', '12.00'),
     (3, '2000-01-01', '12.00'),
     (4, '2000-01-01', '12.00');
+

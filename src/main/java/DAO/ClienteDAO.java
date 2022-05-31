@@ -302,7 +302,6 @@ public class ClienteDAO {
         stmt.execute();
         stmt.close();
     }
-
     
 }
 

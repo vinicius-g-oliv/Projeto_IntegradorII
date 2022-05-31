@@ -352,12 +352,11 @@ public class TelaVendas extends javax.swing.JFrame {
     }
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
-        buscarProduto();
-    }//GEN-LAST:event_btnBuscarProdutoActionPerformed
+        //abrir janela CadastroProduto
+        CadastroProduto janelaModal = new CadastroProduto();
+        janelaModal.setVisible(true);
 
-    private void buscarProduto() {
         if(txtBuscarProduto.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Digite o código do produto para buscar");
             return;
         }
         int cod_prod = Integer.parseInt(txtBuscarProduto.getText());
@@ -373,7 +372,7 @@ public class TelaVendas extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Produto não encontrado");
         }
-    }
+    }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
         if(verificarCliente() == false){
@@ -383,46 +382,54 @@ public class TelaVendas extends javax.swing.JFrame {
         if (resposta == JOptionPane.NO_OPTION) {
             return;
         }
-        cadastrarItem_Venda();
-        cadastrarVenda();
+        if(cadastrarVenda() == true && cadastrarItem_Venda() == true){
+            JOptionPane.showMessageDialog(this, "Compra finalizada");
+        }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
-    private void cadastrarVenda() {
+    private boolean cadastrarVenda() {
         Venda venda = new Venda();
-        venda.setId_cliente(Integer.parseInt(txtBuscarCPF.getText()));
-        venda.setValor(Double.parseDouble(lblTotal.getText()));
-        venda.setData(java.sql.Date.valueOf(LocalDate.now()));
+        Cliente cliente = new Cliente();
         try {
+            String cpf = txtBuscarCPF.getText().replace(".", "").replace("-", "");
+            cliente = ClienteDAO.consultarCPF(cpf);
+            venda.setId_cliente(cliente.getId_cliente());
+            Double valor_total = Double.parseDouble(lblTotal.getText().replace(",", "."));
+            venda.setValor(valor_total);
+            venda.setData(java.sql.Date.valueOf(LocalDate.now()));
             VendaDAO.inserir(venda);
-            JOptionPane.showMessageDialog(this, "Compra finalizada");
+            return true;
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar venda:\n"+e);
-            e.printStackTrace();
         }
+        return false;
     }
 
-    private void cadastrarItem_Venda() {
+    private boolean cadastrarItem_Venda() {
         for(int i = 0; i < jTblCarrinho.getRowCount(); i++){
             ItemVenda item = new ItemVenda();
             Double valor_unitario = Double.parseDouble(jTblCarrinho.getValueAt(i, 3).toString());
             int quantidade = Integer.parseInt(jTblCarrinho.getValueAt(i, 2).toString());
             valor_unitario = valor_unitario / quantidade;
-
-            item.setId_produto(Integer.parseInt(jTblCarrinho.getValueAt(i, 0).toString()));
+            //set itemVenda
+            item.setId_venda(VendaDAO.getIdVenda());
             item.setQuantidade(Integer.parseInt(jTblCarrinho.getValueAt(i, 2).toString()));
             item.setValorUnitario(valor_unitario);
             try {
                 ItemVendaDAO.inserir(item);
+                return true;
             } catch (ClassNotFoundException | SQLException e) {
-                JOptionPane.showMessageDialog(null, "Erro ao inserir item de venda:\n"+e);
-                return;
+                JOptionPane.showMessageDialog(null, "Erro ao inserir item de venda:\n");
+                System.out.println(e);
+                return false;
             }
         }
+        return false;
     }
 
     private boolean verificarCliente() {
         if(verificarCampoCPF() == false){
-            JOptionPane.showMessageDialog(null, "Digite o CPF do cliente para buscar");
+            JOptionPane.showMessageDialog(null, "Digite o CPF para Prosseguir");
             return false;
         }
         String string_cpf = txtBuscarCPF.getText().replace(".", "").replace("-", "").replace(" ", "");
